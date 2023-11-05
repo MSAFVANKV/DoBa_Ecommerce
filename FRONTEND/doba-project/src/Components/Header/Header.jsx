@@ -39,7 +39,7 @@ function Header() {
     <>
       <header className='bg-white h-[100px] sticky_header'>
         <div className='flex justify-between items-center'>
-          {/* log start==================== */}
+          {/* logo start==================== */}
           <div className='logo p-1 ms-9'>
             <img src={logo} alt='' />
           </div>

@@ -10,10 +10,6 @@
     border: 2px solid white;
     border-radius: 20px;
 }
-/* .wave{
-    position: relative;
-    background-color: #F26D1E;
-} */
 .page-container{
     display: flex;
     left: 0;
@@ -25,7 +21,7 @@
 .modal-container{
     display: flex;
     position: fixed;
-    z-index: 1;
+    z-index: 9999;
     left: 0;
     top: 0;
     width: 100%;
@@ -34,3 +30,20 @@
     justify-content: center;
     align-items: center;
 }
+
+input {
+    border: 1px solid #ccc; /* Add a border with a light gray color */
+    border-radius: 5px; /* Add rounded corners */
+    padding: 10px; /* Adjust padding for better spacing */
+    width: 100%; /* Make the input element take the full width of its container */
+    font-size: 16px; /* Set the font size */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Add smooth transitions for hover and focus effects */
+  }
+  
+  input:focus {
+    border-color: #007BFF; /* Change the border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.4); /* Add a stronger shadow on focus */
+    outline: none; /* Remove the default outline */
+  }
+  

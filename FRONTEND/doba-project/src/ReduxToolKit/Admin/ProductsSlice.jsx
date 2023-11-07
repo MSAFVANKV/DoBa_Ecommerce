@@ -1,0 +1,67 @@
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+import axios from 'axios'
+import { adminbaseURL } from '../../Base/Constent'
+
+export const getProducts = createAsyncThunk('admin/products', async () => {
+    const response = await axios.get(`${adminbaseURL}/allproducts`, { withCredentials: true });
+    console.log(response.data,"In productSlice");
+    return response.data;  // access the data property of the response
+});
+
+export const uploadProduct = createAsyncThunk('products/upload', async (formData) => {
+    try {
+        const res = await axios.post(`${adminbaseURL}/upload`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        return res.data;
+    } catch (error) {
+        throw Error(error.response?.data?.msg || "Upload failed");
+    }
+});
+
+const productSlice = createSlice({
+    name:'products',
+    initialState:{
+        products:[],
+        error: null,
+    },
+    reducers:{
+        setProducts: (state, action) => {
+            state.products = action.payload;
+        }
+    },
+    extraReducers: builder => {
+        builder
+            .addCase(uploadProduct.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(uploadProduct.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.products = action.payload.details;
+                state.error = null;
+            })
+            .addCase(uploadProduct.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            .addCase(getProducts.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getProducts.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.products = action.payload
+                state.error = null;
+            })
+            .addCase(getProducts.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            });
+        }
+})
+
+
+export const {setProducts} = productSlice.actions;
+
+export default productSlice.reducer;

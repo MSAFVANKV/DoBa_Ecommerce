@@ -27,6 +27,9 @@ app.use(session({
     }
 }));
 
+app.use('/Public', express.static(path.join(__dirname, 'Public')));
+
+
 mongoose.connect(process.env.MONGO_DB_CONNECTION)
 .then(()=>{
     console.log("mongodb connected");

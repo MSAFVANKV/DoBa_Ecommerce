@@ -21,6 +21,18 @@ export const loginAdmin = createAsyncThunk('admin/login', async ({ email, passwo
     }
 });
 
+// logout
+export const logoutAdmin = createAsyncThunk('admin/logout', async () => {
+    try {
+        await axios.get(`${adminbaseURL}/logout`, { withCredentials: true });
+        return true;
+    } catch (error) {
+        console.error("Error during logout:", error);
+        throw error;
+    }
+});
+
+
 
 export const adminSlice = createSlice({
     name:"admin",

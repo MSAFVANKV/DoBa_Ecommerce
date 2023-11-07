@@ -1,45 +1,61 @@
-import React, { useState } from 'react';
-import './Header.css';
+import React, { useState } from 'react'
+import '../Header/Header.css';
 import { NavLink, Link } from 'react-router-dom';
 
 // imported images
 import logo from '../images/doba_logo.png';
-
-// imported icons
 import { AiFillHome } from 'react-icons/ai';
-import HeaderItems from './HeaderItems';
-import SideBar from './SideBar';
+import HeaderItems from '../Header/HeaderItems';
+import SideBar from '../Header/SideBar';
+import { adminbaseURL } from '../../Base/Constent';
+import { logoutAdmin } from '../../ReduxToolKit/Admin/AdminLoginSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const navLinks = [
   {
     id: 1,
-    path: '/home',
-    display: 'HOME',
+    path: '/admin/dashboard',
+    display: 'DASHBOARD',
     icon: AiFillHome,
   },
   {
     id: 2,
-    path: '/products',
+    path: '/admin/products',
     display: 'PRODUCTS',
   },
   {
     id: 3,
-    path: '/aboutus',
+    path: '/admin/specialday',
     display: 'ABOUT US',
   },
 ];
 
-function Header() {
+function AdminHeader({onLogout}) {
+  const dispatch = useDispatch();
+  const [logoutError, setLogoutError] = useState(null);
   const [toggle, setToggle] = useState(false);
+  const isLoggedIn = useSelector((state) => state.admin.isLoggedIn);
+
+
   const toggleSidebar = () => {
     setToggle(!toggle);
   };
+//   const handleLogout = async () => {
+//     try {
+//         await dispatch(logoutAdmin());
+//         // Clear any previous logout errors
+//         setLogoutError(null);
+//     } catch (error) {
+//         // Handle logout error
+//         setLogoutError("Logout failed. Please try again.");
+//     }
+// };
 
   return (
     <>
       <header className='bg-white h-[100px] sticky_header'>
         <div className='flex justify-between items-center'>
-          {/* log start==================== */}
+          {/* logo start==================== */}
           <div className='logo p-1 ms-9'>
             <img src={logo} alt='' />
           </div>
@@ -53,7 +69,9 @@ function Header() {
             </ul>
           </div>
           <div className=''>
-            <button className='btn hidden sm:flex'>LOGIN</button>
+           <button className="btn hidden sm:flex" onClick={onLogout}>LOGOUT</button>
+
+            {logoutError && <p className="error">{logoutError}</p>}
           </div>
         
         </div>
@@ -70,7 +88,7 @@ function Header() {
          
           </div>
     </>
-  );
+  )
 }
 
-export default Header;
+export default AdminHeader

@@ -1,5 +1,6 @@
 const {Router} = require('express')
-const { adminLogin,createAdmin } = require('../Controller/AdminSide/adminLogin')
+const { adminLogin,createAdmin,logout } = require('../Controller/AdminSide/adminLogin')
+const sessionCheck = require('../Middleware/adminSession')
 
 const router = Router();
 
@@ -19,6 +20,10 @@ router
             return res.status(200).send({ isAuthenticated: false });
         }
     });
+
+    router
+    .route('/logout')
+    .get(logout);
 
 
 

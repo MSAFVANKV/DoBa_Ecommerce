@@ -62,3 +62,14 @@ module.exports.adminLogin = async (req, res) => {
         return res.status(500).json({ msg: "Internal server error." });
     }
 };
+
+module.exports.logout = (req, res) => {
+    try {
+      req.session.destroy();
+      console.log("Admin logged out successfully.");
+      res.status(200).send({ msg: "Admin logged out successfully" });
+    } catch (error) {
+      console.log("Error signing out admin: " + error);
+      return res.status(500).send({ msg: "Couldn't log out." });
+    }
+  };

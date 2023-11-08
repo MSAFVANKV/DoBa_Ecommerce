@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../Styles/Home.css'
 import Doba from '../../../assets/images/doba_product_2.jpeg';
 import Subtitle from '../../Shared/Subtitle';
@@ -15,9 +15,21 @@ import video1 from '../../../assets/videos/video-1.mp4'
 import video2 from '../../../assets/videos/video-2.mp4'
 import SearchBar from '../../Shared/SearchBar';
 import Sample from './Sample';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSlider } from '../../ReduxToolKit/Admin/SliderSlice';
+import { getProducts } from '../../ReduxToolKit/Admin/ProductsSlice';
 
 
 function Home() {
+  const dispatch = useDispatch();
+  const getProductSlice = useSelector((state) => state.products?.products);
+  const getSliderSlice = useSelector((state) => state.slider?.slider);
+
+
+  useEffect(() => {
+    dispatch(getSlider()); // Fetch products when the component mounts
+    dispatch(getProducts()); // Fetch products when the component mounts
+  }, [dispatch]);
   return (
     <>
       <section className='wave'>
@@ -59,8 +71,8 @@ function Home() {
         <img src={wave} alt="" />
       </section>
       <section>
-        {/* <Items/> */}
-        <Sample />
+        {getProductSlice && getProductSlice.length>0 ?<Items/> : null}
+        {getSliderSlice && getSliderSlice.length > 0 ? <Sample /> : null}
       </section>
                 {/* why us */}
                 <div className=' w-[100%] text-center'>

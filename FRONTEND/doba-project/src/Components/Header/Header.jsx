@@ -27,11 +27,11 @@ const navLinks = [
     path: '/aboutus',
     display: 'ABOUT US',
   },
-  {
-    id: 3,
-    path: '/sample',
-    display: 'SAMPLE',
-  },
+  // {
+  //   id: 3,
+  //   path: '/sample',
+  //   display: 'SAMPLE',
+  // },
 ];
 
 function Header() {

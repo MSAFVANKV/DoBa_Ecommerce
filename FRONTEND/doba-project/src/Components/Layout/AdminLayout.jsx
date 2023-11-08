@@ -6,12 +6,12 @@ import { useLocation } from 'react-router-dom';
 
 function AdminLayout() {
   const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith('/home');
+  const isAdminRoute = location.pathname.startsWith('/admin');
   return (
     <div>
-        {/* <AdminHeader/> */}
-      { !isAdminRoute && <AdminRouter/>}
-        {/* <Footer/> */}
+        {/* {isAdminRoute && <AdminHeader />} */}
+      {isAdminRoute && <AdminRouter />}
+      {/* {isAdminRoute && <Footer />} */}
     </div>
   )
 }

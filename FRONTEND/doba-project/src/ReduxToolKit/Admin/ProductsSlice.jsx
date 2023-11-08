@@ -21,6 +21,7 @@ export const uploadProduct = createAsyncThunk('products/upload', async (formData
     }
 });
 
+
 const productSlice = createSlice({
     name:'products',
     initialState:{

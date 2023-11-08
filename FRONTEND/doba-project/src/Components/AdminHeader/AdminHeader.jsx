@@ -26,7 +26,12 @@ const navLinks = [
   {
     id: 3,
     path: '/admin/specialday',
-    display: 'ABOUT US',
+    display: 'FESTIVALS',
+  },
+  {
+    id: 4,
+    path: '/admin/slider',
+    display: 'SLIDER',
   },
 ];
 

@@ -13,6 +13,7 @@ function ModalProducts({ closeModal }) {
         productName: "",
         price: "",
         file: null, // For storing the selected image file
+        description:"",
         category: "dosa", // Default category
     });
 
@@ -32,24 +33,9 @@ function ModalProducts({ closeModal }) {
         });
     };
 
-    // const validateForm =() => {
-    //     if(productInfo.productName && productInfo.price && productInfo.file && productInfo.category){
-    //         setError("")
-    //         return true
-    //     }
-    //     else{
-    //         let errorFilds = []
-    //         for(const [key, value] of Object.entries(productInfo)){
-    //             if(!value){
-    //                 errorFilds.push(key)
-    //             }
-    //         }
-    //         setError(errorFilds.join(', '))
-    //         return false
-    //     }
-    // }
+    
     const validateForm = () => {
-        const { productName, price, image, category } = productInfo;
+        const { productName, price, image, category, description } = productInfo;
         const errors = [];
     
         if (!productName) {
@@ -62,6 +48,10 @@ function ModalProducts({ closeModal }) {
     
         if (!image) {
             errors.push('Product Image');
+        }
+
+        if (!description) {
+            errors.push('Product Category');
         }
     
         if (!category) {
@@ -87,6 +77,7 @@ function ModalProducts({ closeModal }) {
         formData.append('productname',productInfo.productName)
         formData.append('price',productInfo.price)
         formData.append('image',productInfo.image)
+        formData.append('description',productInfo.description)
         formData.append('category',productInfo.category)
 
         dispatch(uploadProduct(formData))
@@ -95,6 +86,7 @@ function ModalProducts({ closeModal }) {
                 productName: "",
                 price: "",
                 image: null,
+                description:"",
                 category: "dosa",
             });
             closeModal()
@@ -106,8 +98,8 @@ function ModalProducts({ closeModal }) {
 
     return (
         <div className="modal-container" onClick={(e) => { if (e.target.className === 'modal-container') closeModal() }}>
-            <div className="pt-10 sm:w-[50%] w-[80%] h-[500px] sm:max-h-[600px] bg-white justify-center items-center flex rounded-lg overflow-y-auto">
-                <form onSubmit={upload} className="flex flex-col gap-5 text-start  p-4 w-[70%]">
+            <div className="pt-10 sm:w-[50%] w-[80%] h-[500px] sm:max-h-[600px]  bg-white justify-center items-center flex rounded-lg overflow-y-auto">
+                <form onSubmit={upload} className="flex flex-col gap-5 text-start mt-[15rem] p-4 w-[70%]">
                     <span className="font-bold text-[1.3rem] mb-2">ADD DETAILS: PRODUCT CARDS</span>
                     {error && <div className='p-5 bg-red-200 m-auto my-2 rounded-lg text-[#ca4747] font-bold'>{`incluse the field: ${error}`}</div> }
                     <div className="flex flex-col">
@@ -146,6 +138,16 @@ function ModalProducts({ closeModal }) {
                             id="productImage"
                             name="image" 
                             onChange={handleImageUpload} />
+
+                    </div>
+                    <div className="flex flex-col">
+                        <label htmlFor="description" className="font-bold">
+                            Add Product Description
+                        </label>
+                        <textarea name="description" id="description" cols="30" rows="5"
+                        value={productInfo.description}
+                         onChange={handleInputChange} 
+                         className='p-2'/>  
 
                     </div>
                     <div className="flex flex-col">

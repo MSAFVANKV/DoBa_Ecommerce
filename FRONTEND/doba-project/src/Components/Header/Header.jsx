@@ -27,6 +27,11 @@ const navLinks = [
     path: '/aboutus',
     display: 'ABOUT US',
   },
+  {
+    id: 3,
+    path: '/sample',
+    display: 'SAMPLE',
+  },
 ];
 
 function Header() {
@@ -37,7 +42,7 @@ function Header() {
 
   return (
     <>
-      <header className='bg-white h-[100px] sticky_header'>
+      <header className='bg-white h-[100px] sticky_header shadow-md'>
         <div className='flex justify-between items-center'>
           {/* logo start==================== */}
           <div className='logo p-1 ms-9'>
@@ -53,7 +58,7 @@ function Header() {
             </ul>
           </div>
           <div className=''>
-            <button className='btn hidden sm:flex'>LOGIN</button>
+            {/* <button className='btn hidden sm:flex'>LOGIN</button> */}
           </div>
         
         </div>

@@ -8,6 +8,7 @@ import Register from '../Pages/UserSide/Register'
 import SearchBarPage from '../Pages/UserSide/SearchBarPage'
 import Products from '../Pages/UserSide/Products'
 import AboutUs from '../Pages/UserSide/AboutUs'
+import Sample from '../Pages/UserSide/Sample'
 
 
 function Routers() {
@@ -20,6 +21,9 @@ function Routers() {
         <Route path='/products' element={<Products/>} />
         <Route path='/products/search' element={<SearchBarPage/>} />
         <Route path='/aboutus' element={<AboutUs/>} />
+        <Route path='/sample' element={<Sample/>} />
+
+
     </Routes>
   )
 }

@@ -1,7 +1,8 @@
 const {Router} = require('express')
 const { adminLogin,createAdmin,logout } = require('../Controller/AdminSide/adminLogin')
 const sessionCheck = require('../Middleware/adminSession')
-const {uploadFile, getAllProducts, deleteFile} = require('../Controller/AdminSide/products')
+const {uploadFile, getAllProducts, deleteFile} = require('../Controller/AdminSide/products');
+const {getAllslider, uploadSlider, deleteSlider} = require('../Controller/AdminSide/slider')
 const upload = require('../Utilities/imageUpload')
 
 const router = Router();
@@ -38,10 +39,27 @@ router
     .route('/product/delete/:_id')
     .delete(deleteFile);
 
-    router
+// slider uploaders
+
+router
+   .route("/upload/slider")
+   .post( upload.fields([
+      { name: "image", maxCount: 1 },
+    ]),uploadSlider);
+
+router
+    .route('/allslider')
+    .get(getAllslider)
+
+router
+    .route('/slider/delete/:_id')
+    .delete(deleteSlider);
+
+
+
+router
     .route('/logout')
     .get(logout);
-
 
 
 module.exports=router;

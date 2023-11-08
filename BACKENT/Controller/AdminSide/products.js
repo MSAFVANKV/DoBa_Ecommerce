@@ -48,6 +48,8 @@ module.exports.uploadFile = async (req, res) => {
                 productName: req.body.productname, // Use productInfo to access the product name
                 price: productInfo.price, // Use productInfo to access the price
                 category: productInfo.category, 
+                description: productInfo.description, 
+
             });
 
             await newProduct.save();

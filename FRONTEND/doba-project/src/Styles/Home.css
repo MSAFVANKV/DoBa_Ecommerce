@@ -47,3 +47,18 @@ input {
     outline: none; /* Remove the default outline */
   }
   
+  textarea {
+    border: 1px solid #ccc; /* Add a border with a light gray color */
+    border-radius: 5px; /* Add rounded corners */
+    padding: 10px; /* Adjust padding for better spacing */
+    width: 100%; /* Make the input element take the full width of its container */
+    font-size: 16px; /* Set the font size */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Add smooth transitions for hover and focus effects */
+  }
+  
+  textarea:focus {
+    border-color: #007BFF; /* Change the border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.4); /* Add a stronger shadow on focus */
+    outline: none; /* Remove the default outline */
+  }

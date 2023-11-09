@@ -14,8 +14,22 @@ function Products() {
   const productsList = useSelector(state => state.products?.products);
 
   const [modalOpen, setModalOpen] = useState(false)
-  const openProductModal = () => {
-    setModalOpen(!modalOpen);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  // const openProductModal = () => {
+  //   setModalOpen(!modalOpen);
+  // };
+  const openProductModal = (product) => {
+    setSelectedProduct(product);
+    setModalOpen(true);
+  };
+  const closeProductModal = () => {
+    setSelectedProduct(null);
+    setModalOpen(false);
+  };
+  const openAddProductModal = () => {
+    setSelectedProduct(null); // Reset selectedProduct for adding a new product
+    setModalOpen(true);
   };
 
   useEffect(() => {
@@ -46,7 +60,7 @@ const columns = [
       cell: row => (
           <img
               src={`${mainURL}/Public/ProductsImages/${row.file}`}
-              alt={row.productname}
+              alt={row.productName}
               style={{ width: '50px', height: '50px' }}
           />
       ),
@@ -76,7 +90,7 @@ const columns = [
       ignoreRowClick: true,
       cell: (row) => (
           <>
-              {/* <button onClick={() => handleEdit(row)}>Edit</button> */}
+               <button className='mx-3 border ' onClick={() => openProductModal(row)}>Edit</button>
               <button onClick={() => removeProduct(row._id)}><AiFillDelete/></button>
           </>
       ),
@@ -87,9 +101,9 @@ const columns = [
     <div className=' bg-slate-100 mx-auto'>
     <div className='flex flex-col justify-center items-center '>
         <div className="">
-        <button className='bg-[#F26D1E] text-white font-bold p-3 rounded-xl m-5' onClick={openProductModal}>ADD</button>
+        <button className='bg-[#F26D1E] text-white font-bold p-3 rounded-xl m-5' onClick={openAddProductModal}>ADD</button>
         </div>
-         {modalOpen && <ModalProducts closeModal={() => setModalOpen(false)} />}
+         {modalOpen && <ModalProducts closeModal={closeProductModal} selectedProduct={selectedProduct}/>}
        <div className="container mb-5">
        <DataTable
                     title="Add items"

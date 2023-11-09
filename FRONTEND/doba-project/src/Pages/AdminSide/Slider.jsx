@@ -8,6 +8,7 @@ import axios from 'axios';
 // icons
 import { AiFillDelete } from 'react-icons/ai'
 import { IoCloseCircleSharp } from 'react-icons/io5'
+import { getProducts } from '../../ReduxToolKit/Admin/ProductsSlice';
 
 
 
@@ -22,7 +23,9 @@ function Slider() {
         description: "",
     });
     const [error, setError] = useState("")
-
+    useEffect(() => {
+        dispatch(getSlider()); // Fetch products when the component mounts
+      }, [dispatch]);
 // it helps for open and close slide Modal
     const openSliderModal = () => {
         setOpenSlider(!openSlider);
@@ -88,6 +91,8 @@ function Slider() {
                     description: "",
                 });
                 openSliderModal(false)
+                dispatch(getSlider());
+
             })
     }
     // fetch data to sliderslice

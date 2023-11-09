@@ -21,12 +21,27 @@ export const uploadProduct = createAsyncThunk('products/upload', async (formData
     }
 });
 
+export const editProduct = createAsyncThunk('products/edit', async (formData) => {
+    try {
+      const res = await axios.put(`${adminbaseURL}/product/edit`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return res.data;
+    } catch (error) {
+      throw Error(error.response?.data?.msg || 'Edit failed');
+    }
+  });
+  
+
 
 const productSlice = createSlice({
     name:'products',
     initialState:{
         products:[],
         error: null,
+        updateId: null,
     },
     reducers:{
         setProducts: (state, action) => {
@@ -63,6 +78,8 @@ const productSlice = createSlice({
 })
 
 
-export const {setProducts} = productSlice.actions;
+export const {setProducts, setUpdateId} = productSlice.actions;
+export const selectUpdateId = (state) => state.products.updateId;
+
 
 export default productSlice.reducer;

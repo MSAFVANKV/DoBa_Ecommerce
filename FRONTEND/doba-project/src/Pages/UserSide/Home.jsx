@@ -71,7 +71,7 @@ function Home() {
         <img src={wave} alt="" />
       </section>
       <section>
-        {getProductSlice && getProductSlice.length>0 ?<Items/> : null}
+        {getProductSlice && getProductSlice.length > 0 ?<Items/> : null}
         {getSliderSlice && getSliderSlice.length > 0 ? <Sample /> : null}
       </section>
                 {/* why us */}

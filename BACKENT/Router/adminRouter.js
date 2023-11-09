@@ -1,7 +1,7 @@
 const {Router} = require('express')
 const { adminLogin,createAdmin,logout } = require('../Controller/AdminSide/adminLogin')
 const sessionCheck = require('../Middleware/adminSession')
-const {uploadFile, getAllProducts, deleteFile} = require('../Controller/AdminSide/products');
+const {uploadFile, getAllProducts, deleteFile, editFile} = require('../Controller/AdminSide/products');
 const {getAllslider, uploadSlider, deleteSlider} = require('../Controller/AdminSide/slider')
 const upload = require('../Utilities/imageUpload')
 
@@ -55,6 +55,9 @@ router
     .route('/slider/delete/:_id')
     .delete(deleteSlider);
 
+    router
+    .route('/product/edit')
+    .put(upload.fields([{ name: 'image', maxCount: 1 }]), editFile);
 
 
 router

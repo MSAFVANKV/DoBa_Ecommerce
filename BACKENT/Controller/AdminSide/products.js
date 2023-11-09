@@ -45,7 +45,7 @@ module.exports.uploadFile = async (req, res) => {
             
             const newProduct = new productsCollection({
                 file: productImages,
-                productName: req.body.productname, // Use productInfo to access the product name
+                productName: req.body.productName, // Use productInfo to access the product name
                 price: productInfo.price, // Use productInfo to access the price
                 category: productInfo.category, 
                 description: productInfo.description, 
@@ -85,3 +85,76 @@ module.exports.deleteFile = async (req, res) => {
         res.status(500).send({ error: error.message, msg: "Internal Server Error deleting product" });
     }
 }
+
+// module.exports.editFile = async (req, res) => {
+//     const { _id } = req.body;
+
+//     try {
+//         const updatedProduct = { ...req.body };
+
+//         // Check if there's a new image file
+//         if (req.files && req.files['image']) {
+//             const productImage = `${updatedProduct.productName}_DoBa_${Date.now()}.png`;
+
+//             await sharp(req.files['image'][0].buffer)
+//                 .toFormat("png")
+//                 .png({ quality: 100 })
+//                 .toFile(`Public/ProductsImages/${productImage}`);
+
+//             updatedProduct.file = productImage;
+//         }
+
+//         // Update the product
+//         const product = await productsCollection.findByIdAndUpdate(_id, updatedProduct, {
+//             new: true,
+//         });
+
+//         if (!product) {
+//             console.log('Product not found.');
+//             return res.status(404).send({ msg: 'Product not found.' });
+//         }
+
+//         console.log('Edited successfully');
+//         res.send({ msg: 'Edited successfully', product });
+//     } catch (error) {
+//         console.error('Error editing product:', error);
+//         res.status(500).send({ error: error.message, msg: 'Internal Server Error editing product' });
+//     }
+// };
+
+  // Backend editFile route
+module.exports.editFile = async (req, res) => {
+    const { _id } = req.body;
+
+    try {
+        const updatedProduct = { ...req.body };
+
+        // Check if there's a new image file
+        if (req.files && req.files['image']) {
+            const productImage = `${updatedProduct.productName}_DoBa_${Date.now()}.png`;
+
+            await sharp(req.files['image'][0].buffer)
+                .toFormat("png")
+                .png({ quality: 100 })
+                .toFile(`Public/ProductsImages/${productImage}`);
+
+            updatedProduct.file = productImage;
+        }
+
+        // Update the product
+        const product = await productsCollection.findByIdAndUpdate(_id, updatedProduct, {
+            new: true,
+        });
+
+        if (!product) {
+            console.log('Product not found.');
+            return res.status(404).send({ msg: 'Product not found.' });
+        }
+
+        console.log('Edited successfully');
+        res.send({ msg: 'Edited successfully', product });
+    } catch (error) {
+        console.error('Error editing product:', error);
+        res.status(500).send({ error: error.message, msg: 'Internal Server Error editing product' });
+    }
+};

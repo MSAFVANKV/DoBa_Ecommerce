@@ -5,6 +5,8 @@ const dotenv = require('dotenv')
 const cors = require('cors');
 const path = require('path')
 const adminRouter = require('./Router/adminRouter')
+const userRouter = require('./Router/userRouter')
+
 const mongoose = require('mongoose')
 
 
@@ -45,6 +47,8 @@ app.use(cors({
 }));
 
 app.use('/admin',adminRouter)
+app.use('/api',userRouter)
+
 
 // Backend Server
 app.listen(PORT, () => {

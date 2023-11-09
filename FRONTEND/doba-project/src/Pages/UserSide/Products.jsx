@@ -2,6 +2,10 @@ import React from 'react'
 import Items from './Items'
 
 import poster from '../../../assets/images/DoBa_produts_poster_01.jpg'
+import texture_1 from '../../../assets/images/texture-1.jpg'
+import texture_2 from '../../../assets/images/texture-2.jpg'
+
+
 
 function Products() {
   return (
@@ -16,11 +20,17 @@ function Products() {
 
         </div>
         <div className="lg:w-[50%] w-[100%] hidden md:flex justify-center items-center bg-cover bg-center bg-no-repeat" >
-          <div className="lg:w-[300px] md:w-[250px] lg:h-[300px] md:h-[250px] bg- bg-contain rounded-full" style={{backgroundImage:`url(${poster})`}}></div>
+           {/* rounded image start */}
+        <div className="lg:w-[350px] md:w-[270px] md:flex justify-center items-center lg:h-[350px] md:h-[270px] rounded-image bg- bg-contain rounded-full" style={{backgroundImage:`url(${texture_2})`}}>
+        <div className="lg:w-[300px] md:w-[250px] lg:h-[300px] md:h-[250px] bg- bg-contain rounded-full shadow-2xl" style={{backgroundImage:`url(${poster})`}}></div>
+
+        </div>
+              {/* rounded image ends */}
+
         </div>
       </div>
       {/*  */}
-      <div className="mt-5 ">
+      <div className="mt-[8rem] ">
           <Items/>
           
       </div>

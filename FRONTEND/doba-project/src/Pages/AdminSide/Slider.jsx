@@ -6,7 +6,9 @@ import { adminbaseURL, mainURL } from '../../Base/Constent';
 import axios from 'axios';
 
 // icons
-import {AiFillDelete} from 'react-icons/ai'
+import { AiFillDelete } from 'react-icons/ai'
+import { IoCloseCircleSharp } from 'react-icons/io5'
+
 
 
 function Slider() {
@@ -21,7 +23,7 @@ function Slider() {
     });
     const [error, setError] = useState("")
 
-
+// it helps for open and close slide Modal
     const openSliderModal = () => {
         setOpenSlider(!openSlider);
     };
@@ -66,6 +68,7 @@ function Slider() {
         setError('');
         return true;
     };
+    // main part for upload form and file to sliderSlice and backend
     const upload = (e) => {
         e.preventDefault();
         if (!validateForm()) {
@@ -90,23 +93,23 @@ function Slider() {
     // fetch data to sliderslice
     useEffect(() => {
         axios.get(`${adminbaseURL}/allslider`, { withCredentials: true })
-          .then((response) => {
-            dispatch(setslider(response.data));
-            console.log(response.data);
-          })
-      }, [dispatch]);
+            .then((response) => {
+                dispatch(setslider(response.data));
+                console.log(response.data);
+            })
+    }, [dispatch]);
 
     //   delete table items
-    
-  const removeProduct = (id) => {
-    axios.delete(`${adminbaseURL}/slider/delete/${id}`)
-        .then((res) => {
-            dispatch(getSlider()); // Fetch updated tasks
-        });
-}
 
+    const removeProduct = (id) => {
+        axios.delete(`${adminbaseURL}/slider/delete/${id}`)
+            .then((res) => {
+                dispatch(getSlider()); // Fetch updated tasks
+            });
+    }
 
-      const columns = [
+// this columns data is using in data table
+    const columns = [
         {
             name: 'Itm.No',
             selector: (row, index) => index + 1,
@@ -143,28 +146,47 @@ function Slider() {
             cell: (row) => (
                 <>
                     {/* <button onClick={() => handleEdit(row)}>Edit</button> */}
-                    <button onClick={() => removeProduct(row._id)}><AiFillDelete/></button>
+                    <button onClick={() => removeProduct(row._id)}><AiFillDelete /></button>
                 </>
             ),
         }
-      ];
+    ];
+
+    //   this is for checking anything is in form fields before clode
+    const handleClose = () => {
+        if (sliderInfo.title || sliderInfo.description || sliderInfo.image) {
+            const result = window.confirm("You have unsaved changes. Are you sure you want to close?");
+            if (result) {
+                setSliderInfo({
+                    title: "",
+                    image: null,
+                    description: "",
+                });
+                setOpenSlider();
+            }
+            return
+        }
+        setOpenSlider()
+    }
+
 
     return (
         <div>
             <div className="flex flex-col justify-center items-center">
                 <span className="my-5 font-bold">Add slider here</span>
-                <button
-                    onClick={openSliderModal}
-                    className="bg-[#F26D1E] p-2 hover:bg-[#fd9559] rounded-xl text-white font-bold"
-                >
+
+                {/* modal slider button */}
+                <button onClick={openSliderModal}
+                    className="bg-[#F26D1E] p-2 hover:bg-[#fd9559] rounded-xl text-white font-bold">
                     ADD SLIDER
                 </button>
             </div>
+            {/* madal for slider open here */}
             {openSlider && (
                 <div
                     className="modal-container"
                     onClick={(e) => {
-                        if (e.target.className === 'modal-container') setOpenSlider(false);
+                        if (e.target.className === 'modal-container') handleClose(false);
                     }}
                 >
                     <div className="w-[700px] h-[70%] bg-white">
@@ -174,8 +196,15 @@ function Slider() {
                                 padding: '20px', // Add padding for better content spacing
                             }}
                         >
+                            {/* close Icon start*/}
+                            <IoCloseCircleSharp className='float-right text-[2rem] cursor-pointer' onClick={handleClose}/>
+                            {/* close Icon end*/}
+
+                            {/* form field start */}
+
                             {error && <div className='p-5 bg-red-200 m-auto my-2 rounded-lg text-[#ca4747] font-bold'>{`incluse the field: ${error}`}</div>}
-                            <form onSubmit={upload} className="flex flex-col justify-center items-center gap-4">
+                            <form onSubmit={upload} className="flex flex-col justify-center mt-5 sm:mt-6 items-center gap-4">
+
                                 <span className='font-bold text-[1.6rem]'>ADD DETAILS: SLIDER</span>
                                 <div className="">
                                     <label htmlFor="productName" className="font-bold">
@@ -216,26 +245,33 @@ function Slider() {
                                     className="bg-[#F26D1E] p-2 hover:bg-[#fd9559] rounded-xl text-white font-bold"
                                 > ADD SLIDER </button>
                             </form>
+                            {/* form field end */}
+
                         </div>
                     </div>
                 </div>
             )}
-             <div className="container m-auto mb-5">
-       <DataTable
+            {/* Data table start */}
+
+            <div className="container m-auto mb-5">
+                <DataTable
                     title="Add items"
                     columns={columns}
                     // data={productsList || []} 
-                    data={sliderList} 
+                    data={sliderList}
                     pagination
                     highlightOnHover
                     customStyles={customStyles}
                     subHeader
 
                 />
-       </div>
+            </div>
+            {/* Data table end */}
+
         </div>
     );
 }
+// Styling for Data table react
 const customStyles = {
     headCells: {
         style: {
@@ -251,5 +287,5 @@ const customStyles = {
             fontWeight: 'bold',
         },
     },
-  };
+};
 export default Slider;

@@ -97,6 +97,8 @@ function Items() {
                <div className='absolute inset-0 bg-black opacity-5 group-hover:opacity-20 rounded-xl'/>
                <div className="relative flex flex-col gap-3">
                 <p className='lg:text-[18px] font-bold'>{item.productName}</p>
+                <p className='lg:text-[18px] font-bold'>{item.price}</p>
+
                </div>
                {/* <RxArrowTopRight className='absolute bottom-5 left-5 w-[35px] h-[35px] text-black 
                group-hover:text-blue-600 group-hover:rotate-45 duration-100'/> */}

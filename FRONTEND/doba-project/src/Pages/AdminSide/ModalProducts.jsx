@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { getProducts, uploadProduct } from '../../ReduxToolKit/Admin/ProductsSlice';
 
 import { adminbaseURL } from '../../Base/Constent';
+import {IoCloseCircleSharp} from 'react-icons/io5'
 
 function ModalProducts({ closeModal }) {
 
@@ -93,14 +94,30 @@ function ModalProducts({ closeModal }) {
         })
     }
     
-
+    const handleClose = () => {
+        if( productInfo.productName || productInfo.description || productInfo.file  ){
+            const result = window.confirm("You have unsaved changes. Are you sure you want to close?");
+            if (result) {
+                closeModal();
+            }
+            return
+        }
+        closeModal()
+    }
     
 
     return (
-        <div className="modal-container" onClick={(e) => { if (e.target.className === 'modal-container') closeModal() }}>
+        <div className="modal-container" onClick={(e) => { if (e.target.className === 'modal-container') handleClose() }}>
             <div className="pt-10 sm:w-[50%] w-[80%] h-[500px] sm:max-h-[600px]  bg-white justify-center items-center flex rounded-lg overflow-y-auto">
+
                 <form onSubmit={upload} className="flex flex-col gap-5 text-start mt-[15rem] p-4 w-[70%]">
-                    <span className="font-bold text-[1.3rem] mb-2">ADD DETAILS: PRODUCT CARDS</span>
+                    {/* madal close icon */}
+                    <div className="">
+                    <IoCloseCircleSharp className='float-right text-[2rem] cursor-pointer' onClick={handleClose}/>
+                    </div>
+                    {/* madal close icon end*/}
+
+                    <span className="font-bold lg:text-[1.3rem] mb-2">ADD DETAILS: PRODUCT CARDS</span>
                     {error && <div className='p-5 bg-red-200 m-auto my-2 rounded-lg text-[#ca4747] font-bold'>{`incluse the field: ${error}`}</div> }
                     <div className="flex flex-col">
                         <label htmlFor="productName" className="font-bold">

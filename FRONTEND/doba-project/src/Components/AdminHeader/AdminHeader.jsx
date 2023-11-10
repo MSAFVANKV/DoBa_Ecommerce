@@ -26,7 +26,7 @@ const navLinks = [
   {
     id: 3,
     path: '/admin/specialday',
-    display: 'FESTIVALS',
+    display: 'BANNER',
   },
   {
     id: 4,

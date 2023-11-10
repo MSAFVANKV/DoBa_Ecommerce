@@ -25,3 +25,21 @@ body{
   border-radius: 10rem;
   margin-right: 10px;
 }
+
+/* input[type="file"]{
+  display: none;
+} */
+
+.label_banner{
+  color: black;
+  height: 60px;
+  border: black dotted 1px;
+  background-color: #fff;
+  position: absolute;
+  margin: auto;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

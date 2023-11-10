@@ -31,7 +31,7 @@
     align-items: center;
 }
 
-input {
+input[type='text'], input[type='file'] {
     border: 1px solid #ccc; /* Add a border with a light gray color */
     border-radius: 5px; /* Add rounded corners */
     padding: 10px; /* Adjust padding for better spacing */

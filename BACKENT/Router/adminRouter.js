@@ -3,7 +3,14 @@ const { adminLogin,createAdmin,logout } = require('../Controller/AdminSide/admin
 const sessionCheck = require('../Middleware/adminSession')
 const {uploadFile, getAllProducts, deleteFile, editFile} = require('../Controller/AdminSide/products');
 const {getAllslider, uploadSlider, deleteSlider} = require('../Controller/AdminSide/slider')
+const { uploadBanner, getAllbanner, create } = require('../Controller/AdminSide/banner')
+
+
 const upload = require('../Utilities/imageUpload')
+const fileUpload = require('../Utilities/fileUpload')
+const videoUpload = require('../Utilities/videoupload')
+
+
 
 const router = Router();
 
@@ -43,7 +50,7 @@ router
 
 router
    .route("/upload/slider")
-   .post( upload.fields([
+   .post( fileUpload.fields([
       { name: "image", maxCount: 1 },
     ]),uploadSlider);
 
@@ -63,6 +70,29 @@ router
 router
     .route('/logout')
     .get(logout);
+
+// banner
+
+   router
+   .route("/upload/banner")
+   .post( fileUpload.fields([
+      { name: "image", maxCount: 1 },
+    ]),uploadBanner);
+
+    router
+   .route("/upload/bannervideo")
+   .post( videoUpload.fields([
+      { name: "video", maxCount: 1 },
+    ]),create);
+
+
+// router
+//     .route('/allbanner')
+//     .get(getAllbanner)
+
+// router
+//     .route('/banner/delete/:_id')
+//     .delete(deleteBanner);
 
 
 module.exports=router;

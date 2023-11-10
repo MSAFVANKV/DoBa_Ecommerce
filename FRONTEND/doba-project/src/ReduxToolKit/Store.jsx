@@ -24,6 +24,8 @@ import storage from 'redux-persist/lib/storage'; // Use local storage
 import adminReducer from './Admin/AdminLoginSlice';
 import productReducer from './Admin/ProductsSlice';
 import sliderReducer from './Admin/SliderSlice';
+import bannerReducer from './Admin/bannerSlice';
+
 
 const persistConfig = {
   key: 'root', // Root key for persisting the entire store
@@ -36,6 +38,7 @@ const persistedReducer = persistReducer(persistConfig, combineReducers({
   admin: adminReducer,
   products: productReducer,
   slider: sliderReducer,
+  banner:bannerReducer,
 }));
 
 const store = configureStore({

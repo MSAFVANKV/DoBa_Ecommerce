@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react';
-import { LuImagePlus } from 'react-icons/lu';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getBanner, uploadBanner, uploadBannerVideo } from '../../ReduxToolKit/Admin/bannerSlice';
+import { getBanner, uploadBanner } from '../../ReduxToolKit/Admin/bannerSlice';
+import {  getVideos,  uploadVideo } from '../../ReduxToolKit/Admin/videoSlice';
 
 function SpecialDay() {
   const dispatch = useDispatch()
@@ -10,9 +10,15 @@ function SpecialDay() {
 
   const [bannerInfo, setBannerInfo] = useState({
     bannerName: "",
+    // videoName:"",
     file: null,
+    // videoFile:null
+  })
+  const [videos, setVideos] = useState({
+    videoName:"",
     videoFile:null
   })
+  // const [videos, setVideos] = useState([]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,22 +40,22 @@ function SpecialDay() {
     const selectedFile = e.target.files[0];
     setBannerInfo({
       ...bannerInfo,
-      [fileType === 'video' ? 'video' : 'image']: selectedFile,
+      [fileType === 'video' ? 'videoFile' : 'file']: selectedFile,
     });
   };
 
 
   const upload = (e) => {
     e.preventDefault();
-    if (!bannerInfo.bannerName || !bannerInfo.image) {
-      const result = window.confirm("Banner name and image are required.");
-      if (result) {
-        return;
-      }
-    }
+    // if (!bannerInfo.bannerName || !bannerInfo.image) {
+    //   const result = window.confirm("Banner name and image are required.");
+    //   if (result) {
+    //     return;
+    //   }
+    // }
     const formData = new FormData();
     formData.append('bannerName', bannerInfo.bannerName)
-    formData.append('image', bannerInfo.image)
+    formData.append('image', bannerInfo.file)
 
     dispatch(uploadBanner(formData))
       .then(res => {
@@ -61,25 +67,21 @@ function SpecialDay() {
       })
   }
 // =========================================
-  const uploadVideo = (e) => {
+  const uploadVideoFile = (e) => {
     e.preventDefault();
-    // if (!bannerInfo.bannerName || !bannerInfo.image) {
-    //   const result = window.confirm("Banner name and image are required.");
-    //   if (result) {
-    //     return;
-    //   }
-    // }
     const formData = new FormData();
-    formData.append('bannerName', bannerInfo.bannerName)
-    formData.append('video', bannerInfo.video)
+    formData.append('videoName', bannerInfo.videoName)
+    for (let key in videos) {
+      formData.append("videos", videos[key]);
+    }
 
-    dispatch(uploadBannerVideo(formData))
+    dispatch(uploadVideo(formData))
       .then(res => {
-        setBannerInfo({
-          bannerName: "",
-          video: null,
+        setVideos({
+          videoName: "",
+          videoFile: null,
         });
-        dispatch(getBanner());
+        dispatch(getVideos());
       })
   }
 
@@ -134,27 +136,30 @@ function SpecialDay() {
       </form>
       // =============  video section  ========================
     ) : fileType === "video" ? (
-      <form onSubmit={uploadVideo} className='bg-slate-400 w-[300px] h-[350px]'>
+      <form onSubmit={uploadVideoFile} className='bg-slate-400 w-[300px] h-[350px]'>
         <input
           type="text"
-          id="bannerName"
-          name="bannerName"
+          id="videoName"
+          name="videoName"
           className="p-2 border rounded-md my-3"
           placeholder="Add your product's name"
-          value={bannerInfo.bannerName}
+          value={bannerInfo.videoName}
           onChange={handleInputChange}
         />
         <div className="mt-5">
           <label htmlFor="bannerVideo" className="font-bold w-[300px] label_banner ">
             Add banner video
           </label>
+          {/* video input */}
           <input
             type="file"
             id="bannerVideo"
-            name="video"
-            accept="video/*"
-            className="p-2"
-            onChange={handleFileUpload}
+            name="videos"
+            accept=".mp4, .mkv"
+            className=""
+            onChange={(e) => {
+              setVideos(e.target.files);
+            }}
           />
         </div>
         <div className="flex justify-center mt-10">

@@ -3,7 +3,9 @@ const { adminLogin,createAdmin,logout } = require('../Controller/AdminSide/admin
 const sessionCheck = require('../Middleware/adminSession')
 const {uploadFile, getAllProducts, deleteFile, editFile} = require('../Controller/AdminSide/products');
 const {getAllslider, uploadSlider, deleteSlider} = require('../Controller/AdminSide/slider')
-const { uploadBanner, getAllbanner, create } = require('../Controller/AdminSide/banner')
+const { uploadBanner, getAllbanner } = require('../Controller/AdminSide/banner')
+const { getVideos, create } = require('../Controller/AdminSide/videocontroller')
+
 
 
 const upload = require('../Utilities/imageUpload')
@@ -79,17 +81,23 @@ router
       { name: "image", maxCount: 1 },
     ]),uploadBanner);
 
+
+router
+    .route('/allbanner')
+    .get(getAllbanner)
+
+    // videoos
+
     router
-   .route("/upload/bannervideo")
-   .post( videoUpload.fields([
-      { name: "video", maxCount: 1 },
-    ]),create);
+    .route("/upload/video")
+    .post( videoUpload.fields([
+       { name: "videos", maxCount: 5 },
+     ]),create);
+ 
 
-
-// router
-//     .route('/allbanner')
-//     .get(getAllbanner)
-
+    router
+    .route('/videos')
+    .get(getVideos)
 // router
 //     .route('/banner/delete/:_id')
 //     .delete(deleteBanner);

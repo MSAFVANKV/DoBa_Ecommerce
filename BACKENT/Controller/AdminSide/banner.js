@@ -1,12 +1,13 @@
 
 const bannerCollection = require('../../Modal/Admin/bannerModal'); // Import your Mongoose model
+
 const sharp = require('sharp')
 
 
 // Fetch all banner
 module.exports.getAllbanner = async (req, res) => {
     try {
-      const banner = await bannerCollection.find({});
+      const banner = await bannerCollection.find({}).sort({_id:-1})
       res.status(200).send(banner);
     } catch (error) {
       console.error("Error fetching banner:", error);
@@ -60,29 +61,3 @@ module.exports.uploadBanner = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error adding banner' });
     }
 }
-
-exports.create = async (req, res) => {
-    const { name } = req.body;
-    let videosPaths = [];
-  
-    if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
-      for (let video of req.files.videos) {
-        videosPaths.push("/" + video.path);
-      }
-    }
-  
-    try {
-        const newBanner = new bannerCollection({
-            bannerName: req.body.bannerName, // Use bannerInfo to access the banner name
-            videos:videosPaths
-        });
-
-        await newBanner.save();
-
-        const banner = await bannerCollection.find({});
-        res.status(200).json({ details: banner, newBanner });
-    } catch (error) {
-      console.log(error);
-      res.status(400).json(error);
-    }
-  };

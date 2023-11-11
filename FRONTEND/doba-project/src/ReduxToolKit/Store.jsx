@@ -25,6 +25,8 @@ import adminReducer from './Admin/AdminLoginSlice';
 import productReducer from './Admin/ProductsSlice';
 import sliderReducer from './Admin/SliderSlice';
 import bannerReducer from './Admin/bannerSlice';
+import videoReducer from './Admin/videoSlice';
+
 
 
 const persistConfig = {
@@ -39,6 +41,8 @@ const persistedReducer = persistReducer(persistConfig, combineReducers({
   products: productReducer,
   slider: sliderReducer,
   banner:bannerReducer,
+  video:videoReducer,
+
 }));
 
 const store = configureStore({

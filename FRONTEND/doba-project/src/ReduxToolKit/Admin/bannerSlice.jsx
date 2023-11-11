@@ -19,20 +19,6 @@ export const uploadBanner = createAsyncThunk('banner/upload' ,async (formData) =
     }
 })
 
-export const uploadBannerVideo = createAsyncThunk('banner/upload' ,async (formData) => {
-    try {
-        const res = await axios.post(`${adminbaseURL}/upload/bannervideo` , formData,{
-            headers:{
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-        return res.data
-        
-    } catch (error) {
-        throw Error(error.response?.data?.msg || "Upload failed");
-        
-    }
-})
 
 export const getBanner = createAsyncThunk('admin/banner', async () => {
     const response = await axios.get(`${adminbaseURL}/allbanner`, { withCredentials: true });

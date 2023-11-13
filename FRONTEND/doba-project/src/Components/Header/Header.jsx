@@ -53,7 +53,7 @@ function Header() {
           <div className='hidden sm:flex'>
             <ul className='flex gap-5 items-center'>
               {navLinks.map((items, index) => (
-                <HeaderItems items={items} Icon={items.icon} index={index} />
+                <HeaderItems items={items} Icon={items.icon} index={index} key={index}/>
               ))}
             </ul>
           </div>

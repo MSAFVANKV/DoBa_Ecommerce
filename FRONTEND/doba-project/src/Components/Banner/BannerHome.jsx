@@ -3,7 +3,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode, Pagination } from 'swiper/modules';
+import { FreeMode, Pagination, Autoplay } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBanner, setBanner } from '../../ReduxToolKit/Admin/bannerSlice';
 import { adminbaseURL, mainURL } from '../../Base/Constent';
@@ -40,7 +40,13 @@ function BannerHome() {
           pagination={{
             clickable: true,
           }}
-          modules={[FreeMode, Pagination]}
+          modules={[FreeMode, Pagination, Autoplay]}
+          autoplay={{ // Configure autoplay settings
+            delay: 3000, // Delay between slides in milliseconds (e.g., 3000ms = 3 seconds)
+            disableOnInteraction: false, // Allow user interaction (e.g., clicking) to stop autoplay
+          }}
+          // loop={false}
+          speed={1000}
           className="w-[100%] lg:w-[100%]"
         >
           {getBannerSlice && getBannerSlice.length > 0 && getBannerSlice.map((item) => (

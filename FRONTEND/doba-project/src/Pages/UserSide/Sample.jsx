@@ -52,13 +52,13 @@ function Sample({ items }) {
             <SwiperSlide key={item.id}>
 
               <div className="flex flex-col gap-6 group mb-20 relative  shadow-lg text-white hover:shadow-2xl
-              rounded-xl px-6 py-8 h-[250px] w-[215px] lg:h-[400px] lg:w-[350px] cursor-pointer">
+              rounded-xl px-6 py-8 h-[250px] w-[215px] lg:h-[450px] lg:w-[350px] cursor-pointer">
                 {/* <div 
                className="absolute inset-0 bg-cover bg-center rounded-xl" 
                style={{backgroundImage:`url(${mainURL}/Public/ProductsImages/${item.file})`}} 
                /> */}
                 <div
-                  className="absolute inset-0 bg-cover bg-center rounded-xl"
+                  className="absolute inset-0 bg-cover bg-no-repeat bg-center rounded-xl"
                   style={{ backgroundImage: `url(${mainURL}/Public/Slider/${item.file})` }}
                 />
 

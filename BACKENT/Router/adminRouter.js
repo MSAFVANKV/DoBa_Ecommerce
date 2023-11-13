@@ -44,6 +44,11 @@ router
     .route('/allproducts')
     .get(getAllProducts)
 
+    
+router
+    .route('/product/edit')
+    .put(upload.fields([{ name: 'image', maxCount: 1 }]), editFile);
+
 router
     .route('/product/delete/:_id')
     .delete(deleteFile);
@@ -64,9 +69,6 @@ router
     .route('/slider/delete/:_id')
     .delete(deleteSlider);
 
-    router
-    .route('/product/edit')
-    .put(upload.fields([{ name: 'image', maxCount: 1 }]), editFile);
 
 
 router

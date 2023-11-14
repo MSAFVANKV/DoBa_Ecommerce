@@ -16,11 +16,11 @@ function SearchBar() {
   return (
     <div>
         <form action="" className=' relative'>
-            <div className="relative">
-                <input type="search" placeholder='type here' className='ms-7 sm:ms-0 sm:w-full w-[80%] p-4 rounded-full bg-white'
+            <div className="relative md:block flex justify-center ">
+                <input type="search" placeholder='type here' className=' md:w-full w-[80%] sm:p-4 p-2 rounded-full bg-white'
                 onChange={(e)=> handleSearch(e)}/>
             </div>
-            <button className='absolute sm:right-1 right-10 top-1/2 -translate-y-1/2 p-4 bg-[#F26D1E] rounded-full text-white
+            <button className='absolute md:right-1 sm:right-[4.8rem] right-9 top-1/2 -translate-y-1/2 sm:p-4 p-2 bg-[#F26D1E] rounded-full text-white
             font-extrabold'><CiSearch/></button>
             {
                 activeSearch.length > 0 && (

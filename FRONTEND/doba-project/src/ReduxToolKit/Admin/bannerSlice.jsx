@@ -36,7 +36,10 @@ const bannerSlice = createSlice({
     reducers:{
         setBanner:(state, action) => {
             state.banner = action.payload
-        }
+        },
+        setError: (state, action) => {
+            state.error = action.payload;
+        },
     },
     extraReducers: builder => {
         builder
@@ -68,6 +71,6 @@ const bannerSlice = createSlice({
 })
 
 
-export const { setBanner } = bannerSlice.actions;
+export const { setBanner, setError  } = bannerSlice.actions;
 
 export default bannerSlice.reducer

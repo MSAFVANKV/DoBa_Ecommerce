@@ -25,11 +25,11 @@ function Sample({ items }) {
 
   return (
     <>
-      <div className="text-center w-[100%]">
+      <div className="text-center sm:w-[100%]">
         <span className='font-bold text-[2rem] '>EXPLORE</span>
 
       </div>
-      <div className="flex items-center justify-center flex-col h-screen ">{/*bg-[#6334af] */}
+      <div className="flex items-center justify-center sm:flex-col sm:h-screen ">{/*bg-[#6334af] */}
         <Swiper
           breakpoints={{
             340: {
@@ -64,8 +64,8 @@ function Sample({ items }) {
 
                 <div className='absolute inset-0 bg-black opacity-5 group-hover:opacity-50 rounded-xl' />
                 <div className="relative flex flex-col gap-3">
-                  <p className='lg:text-[20px] font-bold text-white capitalize'>{item.title}</p>
-                  <p className='lg:text-[18px] font-semibold text-white capitalize'>{item.description}</p>
+                  <p className='lg:text-[20px] font-bold text-black sm:text-white capitalize'>{item.title}</p>
+                  <p className='lg:text-[18px] font-semibold text-black sm:text-white capitalize'>{item.description}</p>
                 </div>
                 <RxArrowTopRight className='absolute bottom-5 left-5 w-[35px] h-[35px] text-black 
                group-hover:text-blue-600 group-hover:rotate-45 duration-100'/>

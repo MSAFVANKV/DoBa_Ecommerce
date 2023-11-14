@@ -3,8 +3,8 @@ const { adminLogin,createAdmin,logout } = require('../Controller/AdminSide/admin
 const sessionCheck = require('../Middleware/adminSession')
 const {uploadFile, getAllProducts, deleteFile, editFile} = require('../Controller/AdminSide/products');
 const {getAllslider, uploadSlider, deleteSlider} = require('../Controller/AdminSide/slider')
-const { uploadBanner, getAllbanner } = require('../Controller/AdminSide/banner')
-const { getVideos, create } = require('../Controller/AdminSide/videocontroller')
+const { uploadBanner, getAllbanner, deleteBanner } = require('../Controller/AdminSide/banner')
+const { getVideos, create, deleteVideos } = require('../Controller/AdminSide/videocontroller')
 
 
 
@@ -88,6 +88,10 @@ router
     .route('/allbanner')
     .get(getAllbanner)
 
+    router
+    .route('/banner/delete/:_id')
+    .delete(deleteBanner);
+
     // videoos
 
     router
@@ -100,6 +104,10 @@ router
     router
     .route('/videos')
     .get(getVideos)
+
+    router
+    .route('/videos/delete/:_id')
+    .delete(deleteVideos);
 // router
 //     .route('/banner/delete/:_id')
 //     .delete(deleteBanner);

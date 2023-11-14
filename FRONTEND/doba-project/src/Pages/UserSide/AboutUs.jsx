@@ -62,7 +62,7 @@ function AboutUs() {
           </div>
           {/* First div end */}
           <div className="flex justify-end p-5 md:hidden">
-            <GiHamburgerMenu onClick={openAboutDeatail} className='text-[1.5rem]'/>
+            <GiHamburgerMenu onClick={openAboutDeatail} className='text-[1.5rem] cursor-pointer' />
             {openDetail && <div className="modal-container" onClick={(e) => { if (e.target.className === 'modal-container' || e.target.id === 'close') openAboutDeatail() }}>
               <div className="h-[300px] bg-white opacity-90 sm:w-[50%] w-[250px]">
                 <div className="h-[50px] bg-red-600 justify-center flex items-center">
@@ -92,9 +92,55 @@ function AboutUs() {
                   <div className="p-5">
                     <p className='text-red-600 uppercase font-bold text-[1.2rem] my-5'>{item.author}</p>
                     {/* <p className='leading-8'>{item.quote}</p> */}
-                    {item.quote.map((quoteItem, index) => (
-                      <p key={index} className="leading-6">{quoteItem}</p>
-                    ))}
+
+                    {/* team section */}
+                    {item.id === 3 ? (
+                      // Render team section only for item with id 3
+                      <div className="md:flex gap-2">
+                      <div className="md:w-[50%] mb-5">
+                      <span className='text-red-600 uppercase font-bold text-[1.2rem] my-5'>{item.manager1}
+                      <span className='text-gray-500'> (Manager)</span></span>
+
+                      { item.quote1.map((quote1Item,index) => (
+                          <div className="">
+                          <div className="">{quote1Item}</div>
+                        </div>
+                        ))
+                        }
+                      </div>
+                      <div className="md:w-[50%] mb-5">
+                      <span className='text-red-600 uppercase font-bold text-[1.2rem] my-5'>{item.manager2}
+                          <span className='text-gray-500'> (Manager)</span> </span>
+                      { item.quote2.map((quote1Item,index) => (
+                          <div className="">
+                          <div className="lg:text-[1rem] text-[0.8rem]">{quote1Item}</div>
+                        </div>
+                        ))
+                        }
+                      </div>
+                      </div>
+                    ) : null}
+
+                          {/* certification quality details show here */}
+                          { item.quality &&
+                            item.quality.map((qual,index) => (
+                              <div className="" key={index}>
+                                <p className='my-5'>{qual}</p>
+                              </div>
+                            ))
+                          }
+                           {item.id === 2 ? 
+                        <span className='text-red-600 uppercase font-bold text-[1.2rem] my-5'>{item.author}</span> : null  
+                        }
+                    {item.id === 1 || item.id === 2 ? (
+                      item.quote.map((quoteItem, index) => (
+                        <div className="" key={index}>
+                         
+                          <p className="leading-6 lg:text-[1rem] text-[0.8rem]">{quoteItem}</p>
+                        </div>
+                      ))
+                    ) : null}
+
                   </div>
                 </div>
               ))}

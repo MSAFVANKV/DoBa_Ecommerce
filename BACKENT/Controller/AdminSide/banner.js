@@ -61,3 +61,25 @@ module.exports.uploadBanner = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error adding banner' });
     }
 }
+
+module.exports.deleteBanner = async (req, res) => {
+    const { _id } = req.params;
+
+    if(!_id) {
+        return res.status(400).send({ msg: "Product ID not provided." });
+    }
+    
+    try {
+        const banner = await bannerCollection.findByIdAndDelete(_id);
+
+        if (!banner) {
+            console.log('banner not found.');
+            return res.status(404).send({ msg: "banner not found." });
+        }
+        console.log('Deleted successfully');
+        res.send({ msg: 'Deleted successfully', banner });
+    } catch (error) {
+        console.error("Error deleting banner:", error);
+        res.status(500).send({ error: error.message, msg: "Internal Server Error deleting banner" });
+    }
+}

@@ -11,7 +11,7 @@ function Products() {
   return (
     <div className=''>
       {/*  */}
-      <div className="w-[100%] h-[70vh] md:flex">
+      <div className="w-[100%] h-[200px] sm:h-[70vh] md:flex">
         <div className="lg:w-[50%] w-[100%] h-[100%] bg-slate-200 rounded-e-xl relative flex justify-center items-center">
           <span className='sm:w-[250px] w-[150px]  font-comforter sm:text-[2rem]'>"Is your day starting with a fresh start? Your day will be grateful."</span>
           <div className="bg-slate-400 h-[100%] w-[1rem] hidden md:block absolute right-0 rounded-e-2xl"></div>
@@ -22,7 +22,7 @@ function Products() {
         <div className="lg:w-[50%] w-[100%] hidden md:flex justify-center items-center bg-cover bg-center bg-no-repeat" >
            {/* rounded image start */}
         <div className="lg:w-[350px] md:w-[270px] md:flex justify-center items-center lg:h-[350px] md:h-[270px] rounded-image bg- bg-contain rounded-full" style={{backgroundImage:`url(${texture_2})`}}>
-        <div className="lg:w-[300px] md:w-[250px] lg:h-[300px] md:h-[250px] bg- bg-contain rounded-full shadow-2xl" style={{backgroundImage:`url(${poster})`}}></div>
+        <div className="lg:w-[300px] md:w-[250px] lg:h-[300px] md:h-[250px] bg-contain rounded-full shadow-2xl" style={{backgroundImage:`url(${poster})`}}></div>
 
         </div>
               {/* rounded image ends */}
@@ -30,7 +30,7 @@ function Products() {
         </div>
       </div>
       {/*  */}
-      <div className="mt-[8rem] ">
+      <div className="sm:mt-[8rem] mt-[1rem]">
           <Items/>
           
       </div>

@@ -5,6 +5,8 @@ import Subtitle from '../../Shared/Subtitle';
 
 // images
 import wave from '../../../assets/images/wave_2.svg'
+import waveTop from '../../../assets/images/wave_white.svg'
+
 import chef from '../../../assets/images/chef-1.png'
 import nature from '../../../assets/images/rice-icon.png'
 
@@ -38,48 +40,59 @@ function Home() {
   }, [dispatch]);
   return (
     <>
-      <section className='wave'>
-      <BannerHome/>
-        <div className="sm:grid md:grid-cols-8 grid-col justify-center">
+      <section className='wave bg-[#F26D1E]'>
+
+        <BannerHome />
+        {/* ======================================================================== */}
+        {/* <div className="sm:grid md:grid-cols-8 grid-col justify-center"> */}
+        <div className="">
+          <img src={waveTop} className='' alt="" />
+
+        </div>
+        <div className="md:flex sm:p-[2rem] justify-center">
+
+
           {/* col-1 start ======================================*/}
-          <div className="bg-[#F26D1E]"></div>
-          <div className="bg-[#F26D1E] col-span-3 col-start-2">
-            <div className="hero_subtitle md:flex ">
+          {/* <div className="bg-[#F26D1E]">
+
+          </div> */}
+          <div className="">
+            <div className="hero_subtitle md:flex justify-center">
               {/* home image ================ */}
-              <div className="bg-[#F26D1E] rounded-2xl drop sm:ms-0 flex justify-center lg:mt-5">
-                <img src={Doba} alt="" className='w-[11rem] h-[11rem] border rounded-full mt-2' />
+              <div className=" rounded-2xl drop sm:ms-0 flex justify-center ">
+                <img src={Doba} alt="" className='w-[11rem] h-[11rem] border rounded-full' />
               </div>
               {/* subtitle============= */}
               <Subtitle subtitle={'Idly and Dosa batter'} />
             </div>
             <div className="w-[100%] flex">
-              <span className='text-white font-extrabold sm:text-[2rem] text-center'>This batter is made fresh with rich organic ingredients and fermented naturally</span>
+              <span className='text-white font-semibold m-2 sm:text-[2rem] font-comforter2 text-center'>This batter is made fresh with rich organic ingredients and fermented naturally</span>
             </div>
             <div className="lg:m-8 mt-5 flex flex-col justify-center max-m-lg">
               <SearchBar />
             </div>
           </div>
           {/* videoss start && col-2 start ====*/}
-          <div className="bg-[#F26D1E] lg:pt-0 pt-3 sm:col-span-4 sm:w-[100%] grid sm:flex justify-center items-center home_video-box gap-5">
+          <div className=" lg:pt-0 pt-3 sm:col-span-4 sm:w-[100%] grid sm:flex justify-center items-center home_video-box gap-5">
             {/* ================= */}
             {getVideosSlice && getVideosSlice.length > 0 && (
-                getVideosSlice.slice(0, 3).map((media) => {
-                  return (
-                    <div key={media._id}>
-                      <div className="flex justify-center font-comforter2 font-bold">
+              getVideosSlice.slice(0, 3).map((media) => {
+                return (
+                  <div key={media._id}>
+                    <div className="flex justify-center font-comforter2 font-bold">
                       <p className='absolute'>{media.videoName}</p>
-                      </div>
-                      {media.videos.map((video, index) => (
-                        <div key={index}>
-                          <video preload="auto" width="100%" controls muted controlsList='nodownload'>
-                            <source src={`${mainURL}${video}`} />
-                          </video>
-                        </div>
-                      ))}
                     </div>
-                  );
-                })
-              )}
+                    {media.videos.map((video, index) => (
+                      <div key={index}>
+                        <video preload="auto" width="100%" controls muted controlsList='nodownload'>
+                          <source src={`${mainURL}${video}`} />
+                        </video>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })
+            )}
 
 
             {/* ===================== */}
@@ -97,9 +110,13 @@ function Home() {
           {/* videoss end && col-2 end ====*/}
 
         </div>
-        <img src={wave} alt="" />
+        {/* ===================================Section end===================================== */}
+
       </section>
+      <img src={wave} className='' alt="" />
+
       <section>
+
         {/* {getProductSlice && getProductSlice.length > 0 ?<Items/> : null} */}
         <h2 className='text-center text-[1.9rem] font-bold'>OUR PRODUCTS</h2>
         <div className='flex flex-wrap justify-center items-center gap-5 mx-10 my-10'>
@@ -107,8 +124,9 @@ function Home() {
             getProductSlice.slice(0, 4).map((item, index) => (
               <Link to={`/product/${item._id}`} key={item._id}>
 
-                <div className="flex flex-col gap-6 group mb-20 relative shadow-lg text-black hover:shadow-2xl
-              rounded-xl px-6 py-8 h-[250px] w-[215px] lg:h-[200px] lg:w-[250px] cursor-pointer">
+
+                <div className="flex flex-col gap-6 group relative shadow-lg text-black hover:shadow-2xl
+              rounded-xl md:px-6 py-8 w-[100px] h-[110px] sm:h-[180px] sm:w-[200px] md:h-[200px] md:w-[215px] lg:h-[200px] lg:w-[250px] cursor-pointer">
                   <div
                     className="absolute gap inset-0 bg-cover bg-center rounded-xl"
                     style={{ backgroundImage: `url(${mainURL}/Public/ProductsImages/${item.file})` }}
@@ -116,11 +134,13 @@ function Home() {
 
                   <div className=' absolute inset-0 bg-black opacity-5 group-hover:opacity-20 rounded-xl' />
                   <div className="relative flex flex-col text-black p-3 border bg-white opacity-50 group-hover:opacity-80 gap-2">
-                    <p className='lg:text-[18px] font-bold'>{item.productName}</p>
-                    <p className='lg:text-[18px] font-bold'>₹{item.price}</p>
+                    <p className='lg:text-[18px] md:text-[15px] text-[12px] font-bold'>{item.productName.length > 8
+                      ? `${item.productName.slice(0, 8)}...`
+                      : item.productName}</p>
+                    <p className='lg:text-[18px] md:text-[15px] text-[12px]  font-bold'>₹{item.price}</p>
 
                   </div>
-                  <LiaExternalLinkAltSolid className='absolute bottom-5 left-5 w-[35px] h-[35px] text-black 
+                  <LiaExternalLinkAltSolid className='sm:block absolute hidden bottom-5 left-5 sm:w-[35px] sm:h-[35px] text-black 
                group-hover:text-blue-600 group-hover:rotate-45 duration-100'/>
                 </div>
                 {/* <ProductDetail product={item} /> */}
@@ -141,7 +161,7 @@ function Home() {
       {/* why us */}
       <div className=' w-[100%] text-center'>
         <div className="my-5">
-          <span className='text-[2rem] font-bold '>WHY DOBA</span>
+          <span className='text-[2rem] font-bold'>WHY DoBa</span>
         </div>
         <div className="flex justify-center h-[700px] lg:h-[250px]">
           <div className="md:grid md:grid-cols-2  w-[80%] h-[250px]  gap-5">

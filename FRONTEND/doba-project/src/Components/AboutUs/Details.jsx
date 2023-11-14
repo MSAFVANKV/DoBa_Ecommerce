@@ -22,6 +22,12 @@ export const about_Us = [
     display: 'CERTIFICATION',
     image: certification1,
     author: "CERTIFICATION",
+    quality:[
+      "Attaining an FSSAI (Food Safety and Standards Authority of India) certificate for our company underscores our unwavering commitment to ensuring the safety and quality of the food products we provide to our valued customers. This certification serves as a testament to our adherence to stringent food safety standards mandated by the FSSAI, assuring consumers that their well-being is our top priority. \
+      By proudly displaying the FSSAI certificate, we communicate transparency and reliability, instilling confidence in our customers about the safety and authenticity of our offerings.",
+      
+      "Securing pollution certificates for our food flour company is a testament to our commitment to environmental responsibility and sustainability. These certificates ensure that our manufacturing processes adhere to stringent environmental standards, emphasizing our dedication to minimizing the ecological footprint of our operations. By prioritizing pollution control measures, we not only comply with regulatory requirements but also demonstrate a proactive approach to safeguarding the environment"
+    ],
     quote: [
       "Udyam registration certificate",
       "Fssai certificate",
@@ -35,9 +41,22 @@ export const about_Us = [
     id: 3,
     display: 'TEAM',
     image: inspiring,
+    manager1:"JASNA",
+    manager2:"ASHRAF",
     quote: [
-      "Quote 1",
-      "Quote 2",
+      "",
+      ""
+    ],
+    quote1: [
+      "I was interested in making foods from childhood more than eating for myself I like is that when others eat what I make and when they compliment me a joy of happiness is filled in my heart \
+      I was a house wife I had lot of time \
+      First step was I started to make some sweet and snacks I sell it for near tea shops that was a big success for me and then my husband was working in abroad and then I shifted to there even if I was there I wish to make something and that dream was along with me there the famous food is idle and dosa.", 
+      "Many women sells idle dosa batter it was not seen in my hometown then I studied more about it I worked with them I wanted to bring one in my hometown that was my aim I then went  to agropark (food business incubation and sustainable entrepreneurship devolepment) I completed my course THE BEST QUALITY IDLE RICE , MAHARAJA URAD DAL, FENUGREEK , RO PURIFIED WATER this are the raw materials used traditionally we grind and pack",
+     
+    ],
+    quote2: [
+        "a",
+        "b"
     ],
   },
 ];

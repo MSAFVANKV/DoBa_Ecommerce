@@ -45,3 +45,26 @@ exports.create = async (req, res) => {
         res.status(400).json(error);
       }
     };
+
+
+    module.exports.deleteVideos = async (req, res) => {
+      const { _id } = req.params;
+  
+      if(!_id) {
+          return res.status(400).send({ msg: "Product ID not provided." });
+      }
+      
+      try {
+          const videos = await videoCollection.findByIdAndDelete(_id);
+  
+          if (!videos) {
+              console.log('videos not found.');
+              return res.status(404).send({ msg: "videos not found." });
+          }
+          console.log('Deleted successfully');
+          res.send({ msg: 'Deleted successfully', videos });
+      } catch (error) {
+          console.error("Error deleting videos:", error);
+          res.status(500).send({ error: error.message, msg: "Internal Server Error deleting videos" });
+      }
+  }

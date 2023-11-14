@@ -9,6 +9,7 @@
     height: 350px;
     border: 2px solid white;
     border-radius: 20px;
+    object-fit: cover;
 }
 .page-container{
     display: flex;

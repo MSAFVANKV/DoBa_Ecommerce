@@ -33,6 +33,11 @@ const navLinks = [
     path: '/admin/slider',
     display: 'SLIDER',
   },
+  {
+    id: 4,
+    path: '/admin/messages',
+    display: 'MESSAGES',
+  },
 ];
 
 function AdminHeader({onLogout}) {

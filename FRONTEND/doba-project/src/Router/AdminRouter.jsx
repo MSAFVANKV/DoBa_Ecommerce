@@ -11,6 +11,7 @@ import AdminHeader from '../Components/AdminHeader/AdminHeader'
 import { useDispatch } from 'react-redux'
 import Footer from '../Components/Footer/Footer'
 import Slider from '../Pages/AdminSide/Slider'
+import Messages from '../Pages/AdminSide/Messages'
 
 function AdminRouter() {
   const dispatch = useDispatch()
@@ -56,6 +57,7 @@ function AdminRouter() {
         <Route path='/admin/specialday' element={isAdminLogin ?<SpecialDay/>: <Navigate to={'/admin'}/>} />
         <Route path='/admin/products' element={isAdminLogin ?<Products/>: <Navigate to={'/admin'}/>} />
         <Route path='/admin/slider' element={isAdminLogin ?<Slider/>: <Navigate to={'/admin'}/>} />
+        <Route path='/admin/messages' element={isAdminLogin ?<Messages/>: <Navigate to={'/admin'}/>} />
 
 
     </Routes>

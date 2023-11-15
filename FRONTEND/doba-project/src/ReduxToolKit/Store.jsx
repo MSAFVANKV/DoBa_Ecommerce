@@ -6,6 +6,8 @@ import productReducer from './Admin/ProductsSlice';
 import sliderReducer from './Admin/SliderSlice';
 import bannerReducer from './Admin/bannerSlice';
 import videoReducer from './Admin/videoSlice';
+import singleFormReducer from './User/SingleFormSlice';
+
 
 
 const store = configureStore({
@@ -15,6 +17,8 @@ const store = configureStore({
     slider:sliderReducer,
     banner:bannerReducer,
   video:videoReducer,
+  form:singleFormReducer,
+
   }, 
 });
 

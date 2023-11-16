@@ -21,16 +21,37 @@ export const getUserSingleForm = createAsyncThunk('user/form', async () => {
     }
 });
 
+export const markMessageAsRead = createAsyncThunk(
+    'user/mark-as-read',
+    async (messageId, { dispatch }) => {
+      try {
+        await axios.patch(`${userURL}/singleform/${messageId}/mark-as-read`);
+        // Dispatch a separate action to update the read status in the store
+        dispatch(markMessageAsReadLocally(messageId));
+      } catch (error) {
+        console.error('Error marking message as read:', error);
+        throw new Error('Error marking message as read');
+      }
+    }
+  );
 
 export const SingleFormSlice = createSlice({
     name:"form",
     initialState: {
         form:null,
     },
+
     reducers: {
         formsingle: (state, action) => {
             state.form = action.payload; // Update the form field in the state
-        }
+        },
+        markMessageAsReadLocally: (state, action) => {
+            const messageId = action.payload;
+            const updatedForm = state.form.map((message) =>
+              message._id === messageId ? { ...message, read: true } : message
+            );
+            state.form = updatedForm;
+          },
     },
     extraReducers: builder => {
         builder
@@ -45,11 +66,14 @@ export const SingleFormSlice = createSlice({
         .addCase(singleFormEnquiry.rejected, (state, action) => {
             state.status = 'failed';
             state.error = action.payload; // Store the error message from the server
-        });
+        })
+        .addCase(markMessageAsRead.fulfilled, (state, action) => {
+            // This case will be handled by markMessageAsReadLocally reducer
+          });
     }
 })
 
-export const { formsingle } = SingleFormSlice.actions
+export const { formsingle, markMessageAsReadLocally  } = SingleFormSlice.actions
 
 export const selectSigleForm = (state) => state.form.form;
 

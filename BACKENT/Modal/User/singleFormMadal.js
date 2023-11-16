@@ -20,7 +20,15 @@ const singleForm = new mongoose.Schema({
     command:{
         type: String,
         require:true
-    }
+    },
+    read: {
+        type: Boolean,
+        default: false,
+      },
+      sentAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 module.exports = mongoose.model("singleProductForm",singleForm)

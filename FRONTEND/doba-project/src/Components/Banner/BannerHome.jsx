@@ -52,13 +52,13 @@ function BannerHome() {
         >
           {getBannerSlice && getBannerSlice.length > 0 && getBannerSlice.map((item) => (
             <SwiperSlide key={item.id}>
-              <div className="flex flex-col gap-6 group relative shadow-lg text-white hover:shadow-2xl px-6 py-8 h-[250px] lg:h-[410px] w-[100%] cursor-pointer">
+              <div className="flex flex-col gap-6 group relative shadow-lg text-white hover:shadow-2xl px-6 py-8 h-[170px] md:h-[320px] lg:h-[410px] w-[100%] cursor-pointer">
                 {/* <div
                   className="absolute inset-0 bg-cover bg-no-repeat bg-center w-[100%] h-[100%]"
                   style={{ backgroundImage: `url(${mainURL}/Public/Banner/${item.file})` }}
                 /> */}
                 <img src={`${mainURL}/Public/Banner/${item.file}`} alt="" width={'100%'} height={'100%'}
-                className='absolute inset-0 object-cover object-left-top w-[100%] h-[100%]'/>
+                className='absolute inset-0 sm:object-cover sm:object-center w-[100%] h-[100%]'/>
                 <div className='absolute inset-0 bg-black opacity-5 group-hover:opacity-50' />
                 <div className="relative flex flex-col gap-3">
                   <p className='lg:text-[20px] font-bold text-white capitalize'>{item.bannerName}</p>

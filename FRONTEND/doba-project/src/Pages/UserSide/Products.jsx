@@ -18,7 +18,7 @@ function Products() {
           <span className='sm:w-[250px] w-[150px]  font-comforter sm:text-[2rem]'>"Is your day starting with a fresh start? Your day will be grateful."</span>
           <div className="bg-slate-400 h-[100%] w-[1rem] hidden md:block absolute right-0"></div>
           <div className="bg-slate-400 h-[1rem] w-[100%] md:hidden block absolute bottom-0 rounded-b-2xl"></div>
-          <img src={waveside} className='w-[70vh] absolute -right-[16.5rem] -rotate-90 ' alt="" />
+          <img src={waveside} className='w-[70vh] sm:block hidden absolute -right-[16.5rem] -rotate-90 ' alt="" />
           <div className="md:hidden block w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] gap-4 bg- bg-contain rounded-full" style={{backgroundImage:`url(${poster})`}}></div>
 
         </div>

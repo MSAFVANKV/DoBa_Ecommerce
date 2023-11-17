@@ -41,48 +41,39 @@ const navLinks = [
   },
 ];
 
-function AdminHeader({onLogout}) {
-  const dispatch = useDispatch();
-  const [logoutError, setLogoutError] = useState(null);
-  const [toggle, setToggle] = useState(false);
-  const isLoggedIn = useSelector((state) => state.admin.isLoggedIn);
-
-
-  const toggleSidebar = () => {
-    setToggle(!toggle);
-  };
-//   const handleLogout = async () => {
-//     try {
-//         await dispatch(logoutAdmin());
-//         // Clear any previous logout errors
-//         setLogoutError(null);
-//     } catch (error) {
-//         // Handle logout error
-//         setLogoutError("Logout failed. Please try again.");
-//     }
-// };
-
+function AdminSideBar({onLogout}) {
+    const dispatch = useDispatch();
+    const [logoutError, setLogoutError] = useState(null);
+    const [toggle, setToggle] = useState(false);
+    const isLoggedIn = useSelector((state) => state.admin.isLoggedIn);
+  
+  
+    const toggleSidebar = () => {
+      setToggle(!toggle);
+    };
   return (
-    <>
-      <header className='bg-white h-[100px] sticky_header sm:hidden '>
-        <div className='flex justify-between items-center'>
+    <div className='w-[220px] left-0 h-[100%] bg-white fixed  z-50 m-0'>
+        {/* j */}
+        <header className='p-5'>
+        <div className='flex flex-col'>
           {/* logo start==================== */}
           <div className='logo p-1 ms-9'>
             <img src={logo} alt='' />
           </div>
           {/* log end==================== */}
           {/* Menu sart================== */}
-          <div className='hidden sm:flex'>
-            <ul className='flex gap-5 items-center'>
+          <div className='flex flex-col'>
+            <ul className='flex flex-col items-start p-5 gap-3'>
               {navLinks.map((items, index) => (
                 <AdHeaderItem items={items} Icon={items.icon} index={index} />
               ))}
+           <button className=" hidden sm:flex" onClick={onLogout}>LOGOUT</button>
+
             </ul>
           </div>
           <div className=''>
-           <button className="btn hidden sm:flex" onClick={onLogout}>LOGOUT</button>
 
-            {logoutError && <p className="error">{logoutError}</p>}
+            {/* {logoutError && <p className="error">{logoutError}</p>} */}
           </div>
         
         </div>
@@ -98,8 +89,8 @@ function AdminHeader({onLogout}) {
 
          
           </div>
-    </>
+    </div>
   )
 }
 
-export default AdminHeader
+export default AdminSideBar

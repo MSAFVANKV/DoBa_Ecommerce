@@ -176,13 +176,15 @@ function Slider() {
 
 
     return (
-        <div>
+        <div className='bg-slate-100 mx-auto'>
             <div className="flex flex-col justify-center items-center">
-                <span className="my-5 font-bold">Add slider here</span>
+
+            <div className="flex flex-col justify-center items-center">
+                <span className="mt-10 font-bold">Add slider here</span>
 
                 {/* modal slider button */}
                 <button onClick={openSliderModal}
-                    className="bg-[#F26D1E] p-2 hover:bg-[#fd9559] rounded-xl text-white font-bold">
+                    className="bg-[#F26D1E] p-2 my-6 hover:bg-[#fd9559] rounded-xl text-white font-bold">
                     ADD SLIDER
                 </button>
             </div>
@@ -258,7 +260,7 @@ function Slider() {
             )}
             {/* Data table start */}
 
-            <div className="container m-auto mb-5">
+            <div className=" w-[95%] mb-5">
                 <DataTable
                     title="Add items"
                     columns={columns}
@@ -271,6 +273,7 @@ function Slider() {
 
                 />
             </div>
+            </div>
             {/* Data table end */}
 
         </div>
@@ -281,14 +284,14 @@ const customStyles = {
     headCells: {
         style: {
             backgroundColor: '#e2e8f0',
-            fontSize: '20px',
+            fontSize: '19px',
             fontWeight: 'bold',
         },
     },
     cells: {
         style: {
-            padding: '16px',
-            fontSize: '13px',
+            padding: '12px',
+            fontSize: '12px',
             fontWeight: 'bold',
         },
     },

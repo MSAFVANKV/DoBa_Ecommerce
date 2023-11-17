@@ -12,11 +12,23 @@ import { useDispatch } from 'react-redux'
 import Footer from '../Components/Footer/Footer'
 import Slider from '../Pages/AdminSide/Slider'
 import Messages from '../Pages/AdminSide/Messages'
+import AdminSideBar from '../Components/AdminHeader/AdminSideBar'
+import '../Styles/adminStyle.css'
+import AdminFooter from '../Components/AdminFooter/AdminFooter'
+
+// icons
+import { RiMenu2Line } from "react-icons/ri";
+
 
 function AdminRouter() {
   const dispatch = useDispatch()
 
     const [isAdminLogin, setIsAdminLoggedIn] =useState(false);
+    const [isSideBar,setSideBar] = useState(false);
+
+    const openSideBar = () => {
+      setSideBar(!isSideBar)
+    }
 
     const handleAdminSignup = () => {
         setIsAdminLoggedIn(true);
@@ -48,7 +60,13 @@ function AdminRouter() {
 
   return (
     <div> 
+      <div className="">
       { isAdminLogin && <AdminHeader onLogout={handleLogout}/>}
+      <div className="sm:block hidden">
+      { isAdminLogin && isSideBar && <AdminSideBar onLogout={handleLogout}/>}
+      </div>
+      <div className={`  relative ${isSideBar ?'ps-[220px] transition-all duration-300' : 'ms-0'}`}>
+        {isAdminLogin && <button className=' fixed sm:block hidden p-5' onClick={openSideBar}><RiMenu2Line className='text-[1.5rem]'/> </button>}
 
     <Routes>
         <Route path='/admin' element={isAdminLogin ?<Navigate to="/admin/dashboard" /> : <AdminLogin onAdminLoginSuccess={handleAdminLoginSuccess}/>} />
@@ -62,7 +80,9 @@ function AdminRouter() {
 
     </Routes>
 
-    { isAdminLogin && <Footer onLogout={handleLogout}/>}
+    { isAdminLogin && <AdminFooter onLogout={handleLogout}/>}
+    </div>
+    </div>
     </div>
   )
 }

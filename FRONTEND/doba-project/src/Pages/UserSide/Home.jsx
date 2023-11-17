@@ -73,7 +73,7 @@ function Home() {
             </div>
           </div>
           {/* videoss start && col-2 start ====*/}
-          <div className=" lg:pt-0 pt-3 sm:col-span-4 sm:w-[100%] grid sm:flex justify-center items-center home_video-box gap-5">
+          <div className=" lg:pt-0 pt-3 sm:col-span-4 sm:w-[100%] grid sm:flex justify-center items-center  home_video-box gap-5">
             {/* ================= */}
             {getVideosSlice && getVideosSlice.length > 0 && (
               getVideosSlice.slice(0, 3).map((media) => {
@@ -84,7 +84,15 @@ function Home() {
                     </div>
                     {media.videos.map((video, index) => (
                       <div key={index}>
-                        <video preload="auto" width="100%" controls muted controlsList='nodownload'>
+                        <video
+                         preload="auto"
+                          controls
+                          muted 
+                          // height={'220px'}
+                          controlsList='nodownload'
+                          className='video_size'
+                          // style={{height:"220px"}}
+                          >
                           <source src={`${mainURL}${video}`} />
                         </video>
                       </div>
@@ -118,7 +126,7 @@ function Home() {
       <section>
 
         {/* {getProductSlice && getProductSlice.length > 0 ?<Items/> : null} */}
-        <h2 className='text-center text-[1.9rem] font-bold'>OUR PRODUCTS</h2>
+        <h2 className='text-center sm:text-[2rem] text-[1.5rem] font-bold'>OUR PRODUCTS</h2>
         <div className='flex flex-wrap justify-center items-center gap-5 mx-10 my-10'>
           {
             getProductSlice.slice(0, 4).map((item, index) => (
@@ -161,30 +169,30 @@ function Home() {
       {/* why us */}
       <div className=' w-[100%] text-center'>
         <div className="my-5">
-          <span className='text-[2rem] font-bold'>WHY DoBa</span>
+          <span className='sm:text-[2rem] text-[1.5rem] font-bold'>WHY DoBa</span>
         </div>
         <div className="flex justify-center h-[700px] lg:h-[250px]">
           <div className="md:grid md:grid-cols-2  w-[80%] h-[250px]  gap-5">
             <div className="bg-[#FFAE79] rounded-xl shadow-xl ">
-              <span className='text-[1.6rem] font-bold '>QUALITY</span>
+              <span className='sm:text-[1.6rem] text-[1.2rem]  font-bold '>QUALITY</span>
               <div className="lg:grid lg:grid-cols-3">
                 <div className="flex items-center justify-center">
-                  <img src={chef} alt="chef" className="lg:h-[70%] h-[100px]" />
+                  <img src={chef} alt="chef" className="lg:h-[70%] h-[80px]" />
                 </div>
-                <div className="flex capitalize font-extralight text-[1.1rem] items-center text-start p-3  col-span-2">
+                <div className="flex capitalize font-extralight sm:text-[1.1rem] items-center text-start p-3  col-span-2">
                   <p>"We make sure that every batch of production undergoes international
                     quality processes without fail. All processes are done by our machines."</p>
                 </div>
               </div>
             </div>
             {/* 2nd col */}
-            <div className="bg-[#BBD8FF] rounded-xl shadow-xl mt-6 lg:mt-0">
-              <span className='text-[1.6rem] font-bold uppercase lg:mt-5'>NATURE</span>
+            <div className="bg-[#BBD8FF] rounded-xl shadow-xl mt-6 md:mt-0">
+              <span className='sm:text-[1.6rem] text-[1.2rem] font-bold uppercase lg:mt-5'>NATURE</span>
               <div className="lg:grid lg:grid-cols-3">
                 <div className="flex items-center justify-center">
-                  <img src={nature} alt="chef" className="lg:h-[70%] h-[100px]" />
+                  <img src={nature} alt="chef" className="lg:h-[70%] h-[80px]" />
                 </div>
-                <div className="flex lg:mt-8 capitalize font-extralight text-[1.1rem] items-center text-start p-3  col-span-2">
+                <div className="flex lg:mt-8 capitalize font-extralight sm:text-[1.1rem] items-center text-start p-3  col-span-2">
                   <p>We believe in the power of natural ingredients..You won't find any artificial additives
                     or preservatives in our products. Zero Chemicals, Zero Compromises"</p>
                 </div>

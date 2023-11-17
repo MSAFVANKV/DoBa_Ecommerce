@@ -9,7 +9,7 @@ function UserForm({ product }) {
     email: '',
     fullName: '',
     productName: product.productName,
-    command: '',
+    commends: '',
   });
   const [error, setError] = useState('');
 
@@ -31,7 +31,7 @@ function UserForm({ product }) {
       formState.number &&
       formState.email &&
       formState.fullName &&
-      formState.command
+      formState.commends
     ) {
       setError('');
       return true;
@@ -58,7 +58,7 @@ function UserForm({ product }) {
         email: '',
         fullName: '',
         productName: product.productName,
-        command: '',
+        commends: '',
       });
     }).catch((error) => {
       console.error('form adding error:', error);
@@ -67,13 +67,14 @@ function UserForm({ product }) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className='w-[500px] h-[500px] border p-5 rounded-3xl '>
+      <form onSubmit={handleSubmit} className='sm:w-[500px sm:h-[500px] sm:border p-5 rounded-3xl '>
         <span className='text-[1.3rem]  font-bold'>Approach us for this Item</span>
-        <div className='flex my-5 gap-2'>
+        <div className='sm:flex sm:my-0 my-5 gap-2'>
           <input
             type='email'
             placeholder='email here'
             name='email'
+            className='w-[100%] p-3  border rounded-md shadow-sm my-3'
             value={formState.email}
             onChange={handleChange}
           />
@@ -81,6 +82,7 @@ function UserForm({ product }) {
             type='number' 
             placeholder='Phone Number'
             name='number'
+            className='w-[100%] p-3  border rounded-md shadow-sm my-3'
             value={formState.number}
             onChange={handleChange}
           />
@@ -106,9 +108,11 @@ function UserForm({ product }) {
         </div>
         <div className='flex flex-col my-5'>
           <textarea
-            name='command'
-            value={formState.command}
+            name='commends'
+            placeholder='How can we help you'
+            value={formState.commends}
             onChange={handleChange}
+            className='p-2'
           />
         </div>
         {error && (

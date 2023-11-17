@@ -35,7 +35,7 @@ function AboutUs() {
 
   return (
     <div className=''>
-      <div className=" font-bold text-[2rem] text-white lg:h-[180px] sm:h-[120px] h-[100px] flex justify-center items-center"
+      <div className=" font-bold sm:text-[2rem] text-[1.5rem] text-white lg:h-[180px] sm:h-[120px] h-[100px] flex justify-center items-center"
         style={{ backgroundImage: `url(${texture_3})` }}>
         {/* <img src={texture_3} className='object-cover h-[100%]' alt="" /> */}
         <span>ABOUT</span>

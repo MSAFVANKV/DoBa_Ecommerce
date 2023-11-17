@@ -104,7 +104,7 @@ const columns = [
         <button className='bg-[#F26D1E] text-white font-bold p-3 rounded-xl m-5' onClick={openAddProductModal}>ADD</button>
         </div>
          {modalOpen && <ModalProducts closeModal={closeProductModal} selectedProduct={selectedProduct}/>}
-       <div className="container mb-5">
+       <div className="w-[95%] mb-5">
        <DataTable
                     title="Add items"
                     columns={columns}
@@ -128,14 +128,14 @@ const customStyles = {
   headCells: {
       style: {
           backgroundColor: '#e2e8f0',
-          fontSize: '20px',
+          fontSize: '19px',
           fontWeight: 'bold',
       },
   },
   cells: {
       style: {
-          padding: '16px',
-          fontSize: '13px',
+          padding: '10px',
+          fontSize: '12px',
           fontWeight: 'bold',
       },
   },

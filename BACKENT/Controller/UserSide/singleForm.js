@@ -25,7 +25,7 @@ exports.uploadSingleForm = async (req, res) => {
             email:formState.email,
             fullName:formState.fullName,
             productName:formState.productName,
-            command:formState.command,
+            command:formState.commends,
             read: false,
             sentAt: new Date(),
 

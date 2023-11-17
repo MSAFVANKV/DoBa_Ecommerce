@@ -87,7 +87,7 @@ function Items() {
   };
   return (
     <div className="">
-      <h2 className='text-center sm:text-[1.9rem] font-bold'>WHAT WE HAVE</h2>
+      <h2 className='text-center sm:text-[2rem] text-[1.5rem] font-bold'>WHAT WE HAVE</h2>
       <div className='flex flex-wrap justify-center items-center gap-5 mx-10 my-5 sm:my-10'>
         {getProductSlice.map((item, index) => (
           <Link to={`/product/${item._id}`} key={item._id}>

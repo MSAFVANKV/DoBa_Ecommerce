@@ -11,6 +11,26 @@
     border-radius: 20px;
     object-fit: cover;
 }
+/* Media query for small screens (sm) */
+@media screen and (max-width: 640px) {
+  .home_video-box video {
+    height: 300px;
+    border: 2px solid white;
+    border-radius: 20px;
+    object-fit: cover;
+    
+  }
+}
+/* Media query for small screens (sm) */
+@media screen and (max-width: 320px) {
+  .home_video-box video {
+    height: 250px;
+    border: 2px solid white;
+    border-radius: 20px;
+    object-fit: cover;
+    
+  }
+}
 .page-container{
     display: flex;
     left: 0;
@@ -32,7 +52,7 @@
     align-items: center;
 }
 
-input[type='text'], input[type='file'], input[type='email'],input[type='number'],input[type='mobile'] {
+input[type='text'], input[type='file'],input[type='mobile'] {
     border: 1px solid #ccc; /* Add a border with a light gray color */
     border-radius: 5px; /* Add rounded corners */
     padding: 10px; /* Adjust padding for better spacing */

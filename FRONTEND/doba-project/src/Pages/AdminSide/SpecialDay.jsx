@@ -136,7 +136,7 @@ const uploadVideoFile = async (e) => {
 
 
   return (
-    <div className="w-[100%] mt-5 h-[100%] flex flex-col items-center">
+    <div className="w-[100%] pt-3 h-[100%] flex flex-col items-center">
       <div className="flex gap-2 mb-3">
         Register as
         <input

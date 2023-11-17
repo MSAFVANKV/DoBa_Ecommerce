@@ -26,12 +26,7 @@ const navLinks = [
     id: 3,
     path: '/aboutus',
     display: 'ABOUT US',
-  },
-  // {
-  //   id: 3,
-  //   path: '/sample',
-  //   display: 'SAMPLE',
-  // },
+  }
 ];
 
 function Header() {
@@ -42,11 +37,11 @@ function Header() {
 
   return (
     <>
-      <header className='bg-white h-[100px] sticky_header shadow-md'>
+      <header className='bg-white sm:h-[90px] h-[70px] sticky_header shadow-md'>
         <div className='flex justify-between items-center'>
           {/* logo start==================== */}
-          <div className='logo p-1 ms-9'>
-            <img src={logo} alt='' />
+          <div className='sm:w-[90px] w-[70px] p-1 sm:ms-9 m-1'>
+           <a href="/"> <img src={logo} alt='' /></a>
           </div>
           {/* log end==================== */}
           {/* Menu sart================== */}

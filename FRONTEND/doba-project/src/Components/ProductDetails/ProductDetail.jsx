@@ -11,7 +11,8 @@ import UserForm from '../UserForm/UserForm';
 const ProductDetail = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
-
+  const [showForm, setShowForm] = useState(false);
+  
   useEffect(() => {
     // Fetch product details using the productId `${adminbaseURL}/allproducts`
     axios.get(`${userURL}/product/${productId}`)
@@ -20,8 +21,15 @@ const ProductDetail = () => {
     window.scrollTo(0, 0);
   }, [productId]);
 
+  // ======
+  const openForm = () => {
+    setShowForm(!showForm)
+  }
+
   if (!product) {
-    return <div className='text center font-bold text-[1.6rem] text-green-600'>Product Not Found</div>;
+    return <div className='flex justify-center h-[300px] items-center font-bold text-[1.6rem] text-blue-500'>
+      <span>Loging..</span>
+    </div>;
   }
 
   return (
@@ -43,15 +51,18 @@ const ProductDetail = () => {
             <p>Price: ₹{product.price}</p>
             <p>{product.description}</p>
           </div>
-          <div className="flex justify-center items-center sm:hidden  bg-black">
-            <button className='btn'>ioo</button>
+          <div className="flex justify-center items-center sm:hidden  rounded-2xl">
+            <button className='p-2 border-r-4 border-t shadow-md border-s border-[#F26D1E] rounded-2xl sm:my-0 my-5' onClick={openForm}>Enquiry For This item</button>
           </div>
         </div>
 
       </div>
       <div className="sm:flex hidden justify-center ">
-        <UserForm product={product}/>
+       {!showForm && <UserForm product={product}/>}
       </div>
+      {
+        showForm && <UserForm product={product}/>
+      }
 
       {/* Add more details as needed */}
     </div>

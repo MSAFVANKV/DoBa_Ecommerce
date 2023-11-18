@@ -8,6 +8,7 @@ import Products from '../Pages/UserSide/Products';
 import AboutUs from '../Pages/UserSide/AboutUs';
 import Sample from '../Pages/UserSide/Sample';
 import { ProductDetail } from '../Components/ProductDetails/ProductDetail';
+import Contact from '../Pages/UserSide/Contact';
 
 function Routers() {
   return (
@@ -21,6 +22,8 @@ function Routers() {
       <Route path="/aboutus" element={<AboutUs />} />
       <Route path="/sample" element={<Sample />} />
       <Route path="/product/:productId" element={<ProductDetail />} />
+      <Route path="/contact" element={<Contact />} />
+
     </Routes>
   );
 }

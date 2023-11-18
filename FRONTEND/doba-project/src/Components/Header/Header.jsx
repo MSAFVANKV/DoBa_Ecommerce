@@ -26,6 +26,11 @@ const navLinks = [
     id: 3,
     path: '/aboutus',
     display: 'ABOUT US',
+  },
+  {
+    id: 4,
+    path: '/contact',
+    display: 'CONTACT',
   }
 ];
 

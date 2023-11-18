@@ -7,19 +7,23 @@ import sliderReducer from './Admin/SliderSlice';
 import bannerReducer from './Admin/bannerSlice';
 import videoReducer from './Admin/videoSlice';
 import singleFormReducer from './User/SingleFormSlice';
+import enquiryFormReducer from './User/EnquirySlice';
+
 
 
 
 const store = configureStore({
   reducer: {
     admin: adminReducer,
-    products:productReducer,
-    slider:sliderReducer,
-    banner:bannerReducer,
-  video:videoReducer,
-  form:singleFormReducer,
+    products: productReducer,
+    slider: sliderReducer,
+    banner: bannerReducer,
+    video: videoReducer,
+    form: singleFormReducer,
+    enquiry: enquiryFormReducer,
 
-  }, 
+
+  },
 });
 
 export default store;

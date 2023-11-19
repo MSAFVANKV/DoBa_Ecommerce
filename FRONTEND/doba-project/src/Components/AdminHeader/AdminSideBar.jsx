@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import '../Header/Header.css';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
+import HeaderItems from '../Header/HeaderItems';
+import SideBar from '../Header/SideBar';
 
 // imported images
 import logo from '../images/doba_logo.png';
+import dashboard from '../../../assets/images/dashboard.png';
+import slider from '../../../assets/images/slider.png';
+import sms from '../../../assets/images/sms.png';
+import banner from '../../../assets/images/banner.png';
+import products from '../../../assets/images/products.png';
+import logout from '../../../assets/images/logout.png';
+
+
 import { AiFillHome } from 'react-icons/ai';
-import HeaderItems from '../Header/HeaderItems';
-import SideBar from '../Header/SideBar';
+
 import { adminbaseURL } from '../../Base/Constent';
 import { logoutAdmin } from '../../ReduxToolKit/Admin/AdminLoginSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,79 +27,76 @@ const navLinks = [
     path: '/admin/dashboard',
     display: 'DASHBOARD',
     icon: AiFillHome,
+    src: dashboard,
   },
   {
     id: 2,
     path: '/admin/products',
     display: 'PRODUCTS',
+    src: products,
+
   },
   {
     id: 3,
     path: '/admin/specialday',
     display: 'BANNER',
+    src: banner,
   },
   {
     id: 4,
     path: '/admin/slider',
     display: 'SLIDER',
+    src: slider,
   },
   {
     id: 4,
     path: '/admin/messages',
     display: 'MESSAGES',
+    src: sms,
+    gap:true,
+
   },
 ];
 
-function AdminSideBar({onLogout}) {
-    const dispatch = useDispatch();
-    const [logoutError, setLogoutError] = useState(null);
-    const [toggle, setToggle] = useState(false);
-    const isLoggedIn = useSelector((state) => state.admin.isLoggedIn);
+function AdminSideBar({ onLogout, open }) {
+  const dispatch = useDispatch();
+  const [logoutError, setLogoutError] = useState(null);
+  const [toggle, setToggle] = useState(false);
+  const isLoggedIn = useSelector((state) => state.admin.isLoggedIn);
+
+  const navigate = useNavigate();
   
-  
-    const toggleSidebar = () => {
-      setToggle(!toggle);
-    };
+  const handleImageClick = (path) => {
+    navigate(path); // Use navigate to navigate to the specified path
+  };
+
   return (
-    <div className='w-[220px] left-0 h-[100%] bg-white fixed  z-50 m-0'>
-        {/* j */}
-        <header className='p-5'>
-        <div className='flex flex-col'>
-          {/* logo start==================== */}
-          <div className='logo p-1 ms-9'>
-            <img src={logo} alt='' />
-          </div>
-          {/* log end==================== */}
-          {/* Menu sart================== */}
-          <div className='flex flex-col'>
-            <ul className='flex flex-col items-start p-5 gap-3'>
-              {navLinks.map((items, index) => (
-                <AdHeaderItem items={items} Icon={items.icon} index={index} />
-              ))}
-           <button className=" hidden sm:flex" onClick={onLogout}>LOGOUT</button>
-
-            </ul>
-          </div>
-          <div className=''>
-
-            {/* {logoutError && <p className="error">{logoutError}</p>} */}
-          </div>
-        
+    <>
+      <div className="flex gap-x-4 items-center">
+        <img src={logo} alt='' className={`cursor-pointer w-14 duration-500 rounded-full ${open && 'rotate-[360deg]'}`} />
+        <h1 className={`text-white origin-left font-medium text-xl duration-300 ${!open && 'scale-0'}`}>DoBa </h1>
+      </div>
+      <ul className='pt-6'>
+        {navLinks.map((item, index) => (
+          <li key={item.id} className={`flex items-center text-gray-300 gap-x-4
+          cursor-pointer p-2 hover:bg-light-white rounded-md ${item.gap ? 'mb-9': 'mb-2'}`}
+          onClick={() => handleImageClick(item.path)}>
+           
+            <img src={item.src} alt={item.display} className="w-6 h-6 mr-2" />
+            <NavLink to={item.path} className="text-white" >
+              <span className={`${!open && 'hidden'} origin-left duration-200`} >{item.display}</span>
+            </NavLink>
+          </li>
+        ))}
+        <div className="flex items-center text-gray-300 gap-x-4
+          cursor-pointer p-2 hover:bg-light-white rounded-md" onClick={onLogout}>
+          <img src={logout} alt="" className="w-6 h-6 mr-2"/> 
+          <span className={`${!open && 'hidden'} origin-left duration-200`}>LOGOUT</span>
         </div>
-      </header>
-      <div className="">
-      <div
-          id='toggle'
-          className={`bgtheme flex sm:hidden ${toggle ? 'active' : ''}`}
-          onClick={toggleSidebar}
-        ></div>
-          
-          {toggle && <SideBar items={navLinks} closeToggle={() => setToggle(false)} />}
-
-         
-          </div>
-    </div>
-  )
+        <button className="" ></button>
+      </ul>
+    </>
+  );
 }
 
-export default AdminSideBar
+export default AdminSideBar;

@@ -18,6 +18,7 @@ import AdminFooter from '../Components/AdminFooter/AdminFooter'
 
 // icons
 import { RiMenu2Line } from "react-icons/ri";
+import { IoIosArrowForward } from 'react-icons/io'
 
 
 function AdminRouter() {
@@ -25,6 +26,7 @@ function AdminRouter() {
 
     const [isAdminLogin, setIsAdminLoggedIn] =useState(false);
     const [isSideBar,setSideBar] = useState(false);
+    const [open, setOpen] = useState(false)
 
     const openSideBar = () => {
       setSideBar(!isSideBar)
@@ -60,15 +62,25 @@ function AdminRouter() {
 
   return (
     <div> 
-      <div className="">
-      { isAdminLogin && <AdminHeader onLogout={handleLogout}/>}
-      <div className="sm:block hidden">
+      <div className="flex ">
+      {/* { isAdminLogin && <AdminHeader onLogout={handleLogout}/>} */}
+      {/* <div className="sm:block hidden">
       { isAdminLogin && isSideBar && <AdminSideBar onLogout={handleLogout}/>}
-      </div>
-      <div className={`  relative ${isSideBar ?'ps-[220px] transition-all duration-300' : 'ms-0'}`}>
-        {isAdminLogin && <button className=' fixed sm:block hidden p-5' onClick={openSideBar}><RiMenu2Line className='text-[1.5rem]'/> </button>}
+      </div> */}
+      {/* <div className={`  relative ${isSideBar ?'ps-[220px] transition-all duration-300' : 'ms-0'}`}>
+        {isAdminLogin && <button className=' fixed sm:block hidden p-5' onClick={openSideBar}><RiMenu2Line className='text-[1.5rem]'/> </button>} */}
+{ isAdminLogin  &&
+<div className={` ${open ?'w-72' : 'w-20'} duration-300 h-screen z-50 p-5 pt-8 bg-blue-600 sm:relative fixed`}> 
+    <IoIosArrowForward 
+        className={`absolute cursor-pointer -right-3 top-9 text-[1.75rem] border rounded-full duration-300 border-blue-600 ${open && 'rotate-180'}`}
+        onClick={()=> setOpen(!open)}/>
+       <AdminSideBar onLogout={handleLogout} open={open} />
 
-    <Routes>
+     </div>
+}
+
+   <div className="flex-1">
+   <Routes>
         <Route path='/admin' element={isAdminLogin ?<Navigate to="/admin/dashboard" /> : <AdminLogin onAdminLoginSuccess={handleAdminLoginSuccess}/>} />
         <Route path="/admin/signup" element={<SignUp adminSignup={handleAdminSignup} />} />
         <Route path='/admin/dashboard'element={ isAdminLogin ?<Dashboard setIsAdminLoggedIn={setIsAdminLoggedIn}/> : <Navigate to={'/admin'}/>} />
@@ -80,8 +92,9 @@ function AdminRouter() {
 
     </Routes>
 
-    { isAdminLogin && <AdminFooter onLogout={handleLogout}/>}
-    </div>
+    {/* { isAdminLogin && <AdminFooter onLogout={handleLogout}/>} */}
+   </div>
+    {/* </div> */}
     </div>
     </div>
   )

@@ -25,7 +25,7 @@ export const markMessageAsRead = createAsyncThunk(
     'user/mark-as-read',
     async (messageId, { dispatch }) => {
       try {
-        await axios.patch(`${userURL}/singleform/${messageId}/mark-as-read`);
+        await axios.patch(`${userURL}/form/enquiy/${messageId}/mark-as-read`);
         // Dispatch a separate action to update the read status in the store
         dispatch(markMessageAsReadLocally(messageId));
       } catch (error) {

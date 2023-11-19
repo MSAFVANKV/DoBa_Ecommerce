@@ -10,15 +10,25 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { AiFillDelete } from 'react-icons/ai';
 import { MdOutlineDeleteSweep } from 'react-icons/md';
 import { SlRefresh } from "react-icons/sl";
+import EnquirySMS from './AllMessages/EnquirySMS';
+import { IoIosArrowForward } from "react-icons/io";
+// img
+import logo from '../../../assets/images/doba_logo.png';
+
 
 function Messages() {
+  const dispatch = useDispatch();
+
   const [enquiry1, setEnquiry1] = useState(true);
   const [enquiry2, setEnquiry2] = useState(false);
   const [showMessages, setShowMessages] = useState(false);
+  const [showEnquiryMessages, setShowEnquiryMessages] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState(null);
   const [checked, setChecked] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
-  const dispatch = useDispatch();
+
+  // sidebar
+  const [open, setOpen] = useState(true)
   // =================================
 
   const SingleFormCollections = useSelector(state => state.form.form);
@@ -49,12 +59,17 @@ function Messages() {
     setEnquiry1(true);
     setEnquiry2(false);
     setShowMessages(false);
+    setShowEnquiryMessages(false)
+
   };
 
+
+  
   const enquiyForm = () => {
     setEnquiry1(false);
     setEnquiry2(true);
     setShowMessages(false);
+    setShowEnquiryMessages(false)
   };
 
   // const showSingleMessage = (message) => {
@@ -150,7 +165,17 @@ function Messages() {
   };
   return (
     <div className="">
-      <div className="w-[100%] sm:flex bg-[#F6F8FC] p-5">
+      {/* ppppppp */}
+      {/* <div className={` ${open ?'w-72' : 'w-20'} duration-300 h-screen relative bg-blue-600`}> 
+      <IoIosArrowForward 
+          className={`absolute cursor-pointer -right-3 top-9 text-[1.75rem] border rounded-full duration-300 border-blue-600 ${open && 'rotate-180'}`}
+          onClick={()=> setOpen(!open)}/>
+       </div> */}
+      {/* <div className="p-7 text-2xl font-semibold flex-1 bg-slate-600 h-screen">
+          second
+        </div> */}
+      {/* ppppppp */}
+      <div className="w-[100%] pt-10 sm:flex bg-[#F6F8FC] p-5">
         <div className="w-[20%] md:block hidden">
           <div className="w-[80%] ">
             {/* selection list */}
@@ -167,7 +192,7 @@ function Messages() {
                 )}
               </li>
               <li
-                className={`p-2 font-light hover:bg-slate-200 cursor-pointer rounded-lg ${enquiry2 ? 'bg-slate-300 hover:bg-slate-300' : ''}`}
+                className={`p-2 font-light hover:bg-slate-200 cursor-pointer rounded-lg ${enquiry2 || showEnquiryMessages ? 'bg-slate-300 hover:bg-slate-300' : ''}`}
                 onClick={enquiyForm}
               >
                 Enquiry Form
@@ -258,11 +283,10 @@ function Messages() {
 
           {showMessages && <SinglePurchase selectedItem={selectedMessage} />}
 
-          {enquiry2 && (
-            <div className="w-[100%] bg-white rounded-2xl">
-              enquiry2
-            </div>
-          )}
+          <EnquirySMS enquiry2={enquiry2} setEnquiry2={setEnquiry2} handleEnquiyForm={enquiyForm} 
+          showEnquiryMessages={showEnquiryMessages} setShowEnquiryMessages={setShowEnquiryMessages} />
+
+          
         </div>
       </div>
     </div>

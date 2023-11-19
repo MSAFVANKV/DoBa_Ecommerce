@@ -85,7 +85,7 @@ function Dashboard({ setIsAdminLoggedIn }) {
   return (
     <div className="container mx-auto">
       <div className="page-container justify-center">
-        <div className="grid grid-cols-2 md:grid-cols-3 h-[25%] lg:grid-cols-4 text-center rounded-xl m-10 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 h-[25%] lg:grid-cols-4 text-center rounded-xl m-10 gap-10">
           {/* Products */}
           <div className="bg-red-400 relative col-span-1 p-6 flex flex-col justify-center font-bold w-[200px] rounded-xl">
             PRODUCTS

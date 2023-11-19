@@ -93,6 +93,7 @@ const handleSubmit = async (e) => {
             type="number"
             placeholder="Contact Number"
             name='contactNumber'
+            className='email'
             value={formState.contactNumber}
             onChange={handleChange}
           />

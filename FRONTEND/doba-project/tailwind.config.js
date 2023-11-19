@@ -10,6 +10,10 @@ export default {
       fontFamily:{
         comforter:['Comforter Brush', 'cursive'],
         comforter2:['Edu TAS Beginner', 'cursive']
+      },
+      colors:{
+        "dark-purple":"#081a51",
+        "light-white":"rgba(255,255,255,0.17)"
       }
     },
   },

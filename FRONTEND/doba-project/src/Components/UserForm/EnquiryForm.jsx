@@ -80,7 +80,7 @@ const handleSubmit = async (e) => {
   return (
     <form onSubmit={handleSubmit} className='min-w-full p-5'>
 
-        <div className="my-10 sm:flex gap-5">
+        <div className="sm:my-10 sm:flex gap-5">
           <input
             type="email"
             name='email'
@@ -145,7 +145,7 @@ const handleSubmit = async (e) => {
           </div>
         )}
         <div className="sm:flex justify-center">
-        <button type="submit" className='btn'>Submit</button>
+        <button type="submit" className='btn w-[200px] font-bold my-3'>Submit</button>
         </div>
    
     </form>

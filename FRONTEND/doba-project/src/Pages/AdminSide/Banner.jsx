@@ -88,7 +88,7 @@ const removeBanner = (id) => {
       
 
   return (
-    <div>
+    <div className='sm:w-[90%] w-screen'>
         
         <DataTable
         title="Banner"

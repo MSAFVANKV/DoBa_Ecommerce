@@ -3,6 +3,8 @@ import '../Header/Header.css';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import HeaderItems from '../Header/HeaderItems';
 import SideBar from '../Header/SideBar';
+import '../Header/Header.css';
+
 
 // imported images
 import logo from '../images/doba_logo.png';
@@ -49,16 +51,17 @@ const navLinks = [
     src: slider,
   },
   {
-    id: 4,
+    id: 5,
     path: '/admin/messages',
     display: 'MESSAGES',
     src: sms,
     gap:true,
 
   },
+  
 ];
 
-function AdminSideBar({ onLogout, open }) {
+function AdminSideBar({ onLogout, open, setOpen }) {
   const dispatch = useDispatch();
   const [logoutError, setLogoutError] = useState(null);
   const [toggle, setToggle] = useState(false);
@@ -68,6 +71,11 @@ function AdminSideBar({ onLogout, open }) {
   
   const handleImageClick = (path) => {
     navigate(path); // Use navigate to navigate to the specified path
+    setOpen(!open)
+  };
+
+    const toggleSidebar = () => {
+    setToggle(!toggle);
   };
 
   return (
@@ -95,6 +103,17 @@ function AdminSideBar({ onLogout, open }) {
         </div>
         <button className="" ></button>
       </ul>
+      {/* <div className="sm:hidden block">
+      <div
+          id='toggle'
+          className={`bgtheme flex sm:hidden ${toggle ? 'active' : ''}`}
+          onClick={toggleSidebar}
+        ></div>
+          
+          {toggle && <SideBar items={navLinks} closeToggle={() => setToggle(false)} />}
+
+         
+          </div> */}
     </>
   );
 }

@@ -3,6 +3,9 @@ import contact1 from '../../../assets/images/contact1.png';
 import EnquiryForm from '../../Components/UserForm/EnquiryForm';
 import Feedback from '../../Components/UserForm/Feedback';
 
+import { TiWorld } from "react-icons/ti";
+import { IoIosCall } from "react-icons/io";
+
 function Contact() {
   const scrollRef = useRef();
   const [activeIndex, setActiveIndex] = useState(null);
@@ -12,21 +15,44 @@ function Contact() {
     if (itemRef) {
       itemRef.scrollIntoView({ behavior: 'auto' });
       setActiveIndex(index);
-      window.scrollTo(0, 0);
+      window.scrollTo(0, 300);
 
     }
   };
 
   return (
     <div>
-      <div className="w-full sm:flex justify-center bg-white ">
-        <div className=" sm:w-[80%] sm:grid grid-cols-3 overflow-x-auto border mt-[6rem]">
+          <div className=" sm:h-[50vh] h-[30vh] sm:mt-0 mt-10 flex flex-col justify-center items-center relative">
+          <span className='md:text-[3rem]  sm:text-[2.5rem] text-[2rem] font-comforter2 font-semibold '>CONTACT US </span>
+          <span className='md:text-[2rem] sm:text-[1.8rem] text-[1.5rem] sm:w-fit w-[90%] font-comforter2 sm:font-semibold '>
+          "In the world of endless choices, choosing us is the best one you'll make today. Let's talk!"
+          </span>
+          {/* <span className='translate-x-3 transition-all'><IoIosCall /></span> */}
+        <div className="w-[2px] h-[65%] -bottom-[6rem] absolute bg-red-400"></div>
+        <div className="w-[10px] h-[10px] rounded-full -bottom-[6.4rem] absolute bg-blue-500"></div>
+        </div>
+      <div className="w-full sm:flex justify-center bg-white">
+        {/*======  */}
+    
+        {/*======  */}
+
+        <div className=" sm:w-[80%] sm:grid grid-cols-3 overflow-x-auto rounded-3xl  sm:shadow-slate-400 sm:shadow-xl  mb-10 border mt-[6rem]">
           <div className="bg-blue-600 flex flex-col items-center  py-10">
             <div className="w-20 h-20 rounded-full flex justify-center items-center bg-white mb-2">
               <img src={contact1} alt="contact img" className="" />
             </div>
             <div className="font-bold font-comforter2 text-white text-[2rem]">
               <span>CONNECT US</span>
+            </div>
+            <div className=" my-10">
+              <ul className='text-white font-comforter2 text-[1.2rem]'>
+                <li className='flex items-center'><IoIosCall />9747543802</li>
+                <li className='flex items-center'><TiWorld />DoBa Food Products</li>
+                <li className='ps-4'> Near Post office</li>
+                <li className='ps-4'> Kattangal rd, Mavoor</li>
+                <li className='ps-4'>Calicut - 673661</li>
+              </ul>
+              
             </div>
           </div>
           {/* second col included all form sections start here */}

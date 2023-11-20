@@ -12,8 +12,10 @@ import { MdOutlineDeleteSweep } from 'react-icons/md';
 import { SlRefresh } from "react-icons/sl";
 import EnquirySMS from './AllMessages/EnquirySMS';
 import { IoIosArrowForward } from "react-icons/io";
+import { MdOutlineArrowDropDown } from "react-icons/md";
 // img
 import logo from '../../../assets/images/doba_logo.png';
+import { enquiryForm } from '../../ReduxToolKit/User/EnquirySlice';
 
 
 function Messages() {
@@ -26,18 +28,25 @@ function Messages() {
   const [selectedMessage, setSelectedMessage] = useState(null);
   const [checked, setChecked] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
-
-  // sidebar
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] =useState(false)
   // =================================
 
   const SingleFormCollections = useSelector(state => state.form.form);
+  const enquiryFormCollections = useSelector(state => state.enquiry.enquiry);
+
   // console.log(SingleFormCollections, 'SingleFormCollections');
 
   useEffect(() => {
     axios.get(`${userURL}/singleform/getall`, { withCredentials: true })
       .then((response) => {
         dispatch(formsingle(response.data));
+        console.log(response.data);
+      })
+  }, [dispatch]);
+  useEffect(() => {
+    axios.get(`${userURL}/form/enquiy/getall`, { withCredentials: true })
+      .then((response) => {
+        dispatch(enquiryForm(response.data));
         console.log(response.data);
       })
   }, [dispatch]);
@@ -62,7 +71,6 @@ function Messages() {
     setShowEnquiryMessages(false)
 
   };
-
 
   
   const enquiyForm = () => {
@@ -175,7 +183,39 @@ function Messages() {
           second
         </div> */}
       {/* ppppppp */}
-      <div className="w-[100%] pt-10 sm:flex bg-[#F6F8FC] p-5">
+        {/* sm: sms menu bar menu ======================================================[?]*/}
+
+      <div className=" pt-10 sm:flex bg-[#F6F8FC] p-5">
+        <div className={` ${open?'h-20 my-6':'h-1 w-[15%]'} w-[100%] flex justify-center sm:hidden m-auto duration-300 rounded-md  bg-dark-purple`}>
+        <MdOutlineArrowDropDown onClick={()=> setOpen(!open)} className='absolute  top-[1.8rem] text-[2rem]'/>
+        {/*  */}
+        <ul className={`${!open && 'hidden'} origin-left duration-200`}>
+              <li
+                className={`text-white p-2 cursor-pointer rounded-lg ${enquiry1 || showMessages ? 'font-bold' : 'font-light'}`}
+                onClick={openSingeForm}
+              >
+                SinglePurchase
+                {SingleFormCollections && SingleFormCollections.length > 0 && (
+                  <span className=" w-5 h-5 text-center ms-2 rounded-full bg-red-500 float-right ">
+                    {SingleFormCollections.length.toLocaleString()}
+                  </span>
+                )}
+              </li>
+              <li
+                className={`text-white p-2 cursor-pointer rounded-lg ${enquiry2 || showEnquiryMessages ? 'font-bold' : 'font-light'}`}
+                onClick={enquiyForm}
+              >
+                Enquiry Form
+                {enquiryFormCollections && enquiryFormCollections.length > 0 && (
+                  <span className=" w-5 h-5 text-center ms-2 rounded-full bg-red-500 float-right ">
+                    {enquiryFormCollections.length.toLocaleString()}
+                  </span>
+                )}
+              </li>
+            </ul>
+            {/*  */}
+        </div>
+        {/* sm: sms menu bar menu ======================================================[?]*/}
         <div className="w-[20%] md:block hidden">
           <div className="w-[80%] ">
             {/* selection list */}
@@ -209,7 +249,7 @@ function Messages() {
                 {/* all selection */}
                 <div className="m-5 pb-5 border-b flex justify-between">
                   {/* refresh pagestart */}
-                  <div className="hover:bg-slate-200 rounded-full p-2 transition-all duration-500">
+                  <div className="hover:bg-slate-200 rounded-full w-7 h-7 flex justify-center items-center  transition-all duration-500">
                     <SlRefresh className=' cursor-pointer  ' onClick={refreshMessages} />
                   </div>
 
@@ -280,10 +320,14 @@ function Messages() {
               </ul>
             </div>
           )}
+  
+  
+          {showMessages && <SinglePurchase 
+            openSingeForm={openSingeForm}
+             selectedItem={selectedMessage} 
+             />}
 
-          {showMessages && <SinglePurchase selectedItem={selectedMessage} />}
-
-          <EnquirySMS enquiry2={enquiry2} setEnquiry2={setEnquiry2} handleEnquiyForm={enquiyForm} 
+          <EnquirySMS enquiyForm={enquiyForm} enquiry2={enquiry2} setEnquiry2={setEnquiry2} handleEnquiyForm={enquiyForm} 
           showEnquiryMessages={showEnquiryMessages} setShowEnquiryMessages={setShowEnquiryMessages} />
 
           

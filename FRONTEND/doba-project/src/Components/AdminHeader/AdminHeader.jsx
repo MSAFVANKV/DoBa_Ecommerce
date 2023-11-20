@@ -12,7 +12,7 @@ import { logoutAdmin } from '../../ReduxToolKit/Admin/AdminLoginSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import AdHeaderItem from './AdHeaderItem';
 
-const navLinks = [
+export const navLinks = [
   {
     id: 1,
     path: '/admin/dashboard',

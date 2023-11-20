@@ -136,9 +136,10 @@ const uploadVideoFile = async (e) => {
 
 
   return (
-    <div className="w-[100%] pt-3 h-[100%] flex flex-col items-center">
+    <div className=" pt-3 h-[100%] flex flex-col items-center">
+      <h1 className='my-10 font-semibold text-[1.5rem]'>Upload your Banner</h1>
       <div className="flex gap-2 mb-3">
-        Register as
+        Upload as
         <input
           type="radio"
           name="UserType"
@@ -167,7 +168,7 @@ const uploadVideoFile = async (e) => {
           />
           <div className="mt-5">
             <label htmlFor="bannerImage" className="font-bold w-[282px] label_banner ">
-              Add slider Image
+              Add Banner Image
             </label>
             <input
               type="file"
@@ -179,8 +180,8 @@ const uploadVideoFile = async (e) => {
             />
             {error && <div className='text-red-500 p-5'>{error}</div>}
             <div className="flex justify-center pt-5">
-            {bannerInfo.file ? (
-              <img src={URL.createObjectURL(bannerInfo.file)} alt="" width="70px" />
+            {bannerInfo.image ? (
+              <img src={URL.createObjectURL(bannerInfo.image)} alt="" width="70px" />
             ) : null}
             </div>
           </div>

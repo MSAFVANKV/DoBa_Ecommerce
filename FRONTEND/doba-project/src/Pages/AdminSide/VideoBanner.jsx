@@ -86,7 +86,7 @@ const removeVideos = (id) => {
       
 
   return (
-    <div>
+    <div className='sm:w-fit w-[100%] sm:mb-0 mb-10'>
         <DataTable
         title="Banner"
         columns={columns}

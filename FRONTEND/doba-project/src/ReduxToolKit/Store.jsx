@@ -8,7 +8,7 @@ import bannerReducer from './Admin/bannerSlice';
 import videoReducer from './Admin/videoSlice';
 import singleFormReducer from './User/SingleFormSlice';
 import enquiryFormReducer from './User/EnquirySlice';
-
+import feedbackFormReducer from './User/FeedBackSlice';
 
 
 
@@ -21,6 +21,7 @@ const store = configureStore({
     video: videoReducer,
     form: singleFormReducer,
     enquiry: enquiryFormReducer,
+    feedback: feedbackFormReducer,
 
 
   },

@@ -98,14 +98,14 @@ const columns = [
 ];
 
   return (
-    <div className=' bg-slate-100 mx-auto'>
-    <div className='flex flex-col justify-center items-center '>
-        <div className="">
-        <button className='bg-[#F26D1E] text-white font-bold p-3 rounded-xl m-5' onClick={openAddProductModal}>ADD</button>
-        </div>
-         {modalOpen && <ModalProducts closeModal={closeProductModal} selectedProduct={selectedProduct}/>}
-       <div className="w-[95%] mb-5">
-       <DataTable
+ 
+  <div className="pt-10 h-[100vh] sm:w-[100%] w-screen bg-[#F6F8FC] p-5">
+    <div className=" flex justify-center items-center">
+    <button className='bg-[#F26D1E] text-white font-bold p-3 rounded-xl m-5' onClick={openAddProductModal}>ADD PRODUCTS</button>
+    </div>
+    {modalOpen && <ModalProducts closeModal={closeProductModal} selectedProduct={selectedProduct}/>}
+      <div className=" sm:w-[95%]">
+      <DataTable
                     title="Add items"
                     columns={columns}
                     // data={productsList || []} 
@@ -116,10 +116,9 @@ const columns = [
                     subHeader
 
                 />
-       </div>
-    </div>
-    
+      </div>
   </div>
+
   )
 }
 

@@ -93,7 +93,7 @@ function Dashboard({ setIsAdminLoggedIn }) {
               {productsList && productsList.length > 0 && (
                 <span>{productsList.length} Nos</span>
               )}
-              <FaOpencart className="text-[4rem] bottom-0 text-white absolute hover:translate-x-8 transition-all" />
+              <FaOpencart className="md:text-[4rem] text-[2.5rem] bottom-0 text-white absolute hover:translate-x-8 transition-all" />
             </div>
           </div>
 
@@ -104,7 +104,7 @@ function Dashboard({ setIsAdminLoggedIn }) {
               {sliderList && sliderList.length > 0 && (
                 <span>{sliderList.length} Nos</span>
               )}
-              <TfiLayoutSlider className="text-[3.5rem] bottom-0 hover:translate-x-2 transition-all text-white absolute" />
+              <TfiLayoutSlider className="md:text-[3.5rem] text-[2.5rem] bottom-0 hover:translate-x-2 transition-all text-white absolute" />
             </div>
           </div>
 
@@ -118,7 +118,7 @@ function Dashboard({ setIsAdminLoggedIn }) {
                {getVideosList && getVideosList.length > 0 && (
                 <span>{getVideosList.length} vids</span>
               )}
-              <GiTatteredBanner className="text-[4rem] bottom-0 text-white absolute hover:rotate-6" />
+              <GiTatteredBanner className="md:text-[4rem] text-[2.5rem] bottom-0 text-white absolute hover:rotate-6" />
             </div>
           </div>
 
@@ -129,7 +129,7 @@ function Dashboard({ setIsAdminLoggedIn }) {
               {SingleFormCollections && SingleFormCollections.length > 0 ? (
                 <span>{SingleFormCollections.length} SMS</span>
               ):<span>0 SMS</span>}
-              <RingingIcon />
+              <RingingIcon className='text-[2rem]'/>
             </div>
           </div>
         </div>

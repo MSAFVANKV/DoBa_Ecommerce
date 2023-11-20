@@ -126,9 +126,9 @@ function ModalProducts({ closeModal, selectedProduct }) {
 
     return (
         <div className="modal-container" onClick={(e) => { if (e.target.className === 'modal-container') handleClose() }}>
-            <div className="pt-10 sm:w-[50%] w-[80%] h-[500px] sm:max-h-[600px]  bg-white justify-center items-center flex rounded-lg overflow-y-auto">
+            <div className={`${error ? 'sm:pt-36 pt-60' : 'pt-10'} sm:w-[50%] w-[80%] h-[90%] sm:max-h-[600px] bg-white justify-center items-center flex rounded-lg overflow-y-auto`}>
 
-                <form onSubmit={upload} className="flex flex-col gap-5 text-start mt-[15rem] p-4 w-[70%]">
+                <form onSubmit={upload} className="flex flex-col gap-5 text-start mt-[15rem] p-4 w-[100%]">
                     {/* madal close icon */}
                     <div className="">
                         <IoCloseCircleSharp className='float-right text-[2rem] cursor-pointer' onClick={handleClose} />
@@ -141,7 +141,7 @@ function ModalProducts({ closeModal, selectedProduct }) {
                         </span>
                     </span>
                     {/* ========== */}
-                    {error && <div className='p-5 bg-red-200 m-auto my-2 rounded-lg text-[#ca4747] font-bold'>{`incluse the field: ${error}`}</div>}
+                   
                     <div className="flex flex-col">
                         <label htmlFor="productName" className="font-bold">
                             Product Name
@@ -205,8 +205,9 @@ function ModalProducts({ closeModal, selectedProduct }) {
                             <option value="idly">IDLY</option>
                         </select>
                     </div>
+                    {error && <div className='p-5 bg-red-200 m-auto my-2 rounded-lg text-[#ca4747] sm:text-[1rem] text-[0.8rem] font-bold'>{`incluse the field: ${error}`}</div>}
 
-                    <button type="submit" className="bg-[#F26D1E] p-2 my-5 border rounded-xl text-white font-bold">
+                    <button type="submit" className="bg-[#F26D1E] p-2 my-5 border rounded-xl  text-white font-bold">
                         {selectedProduct ? 'Edit' : 'Submit'}
                     </button>
                 </form>

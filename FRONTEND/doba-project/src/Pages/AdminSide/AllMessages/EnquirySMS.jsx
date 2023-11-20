@@ -10,9 +10,8 @@
   import { SlRefresh } from 'react-icons/sl';
   import SinglePurchase from './SinglePurchase';
 import { AiFillDelete } from 'react-icons/ai';
-
   // =======================================================================================================
-  function EnquirySMS({enquiry2, setEnquiry2, handleEnquiyForm,showEnquiryMessages ,setShowEnquiryMessages}) {
+  function EnquirySMS({enquiry2, setEnquiry2, enquiyForm,showEnquiryMessages ,setShowEnquiryMessages}) {
 
     const dispatch = useDispatch();
 
@@ -22,11 +21,11 @@ import { AiFillDelete } from 'react-icons/ai';
     const [selectAll, setSelectAll] = useState(false);
     const enquiryFormCollections = useSelector(state => state.enquiry.enquiry);
 
-useEffect(() => {
-  if(handleEnquiyForm){
-    setShowEnquiryMessages(false)
-  }
-},[])
+// useEffect(() => {
+//   if(handleEnquiyForm){
+//     setShowEnquiryMessages(false)
+//   }
+// },[])
     
     useEffect(() => {
       axios.get(`${userURL}/form/enquiy/getall`, { withCredentials: true })
@@ -132,7 +131,7 @@ useEffect(() => {
                   {/* all selection */}
                   <div className="m-5 pb-5 border-b flex justify-between">
                     {/* refresh pagestart */}
-                    <div className="hover:bg-slate-200 rounded-full p-2 transition-all duration-500">
+                    <div className="hover:bg-slate-200 rounded-full w-7 h-7 flex justify-center items-center transition-all duration-500">
                       <SlRefresh className=' cursor-pointer  ' onClick={refreshEnquiryMessages} />
                     </div>
             
@@ -150,7 +149,7 @@ useEffect(() => {
                   </div>
                   {enquiryFormCollections && enquiryFormCollections.length === 0 && (
                     <div className="flex justify-center items-center">
-                      <p className=''>No messages yet</p>
+                      <p className=''>No Enquiry messages yet</p>
                     </div>
                   )}
                   {enquiryFormCollections && enquiryFormCollections.length > 0 &&
@@ -203,7 +202,10 @@ useEffect(() => {
                 </ul>
               </div>
             )}
-            {showEnquiryMessages && <SinglePurchase selectedEnquiryItem={selectedEnquiryMessage} />}
+            {showEnquiryMessages && <SinglePurchase selectedEnquiryItem={selectedEnquiryMessage} 
+enquiyForm={enquiyForm}
+            
+            />}
 
       </>
   

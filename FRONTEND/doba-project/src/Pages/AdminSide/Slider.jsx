@@ -4,11 +4,12 @@ import DataTable from 'react-data-table-component';
 import { getSlider, setslider, uploadSlider } from '../../ReduxToolKit/Admin/SliderSlice';
 import { adminbaseURL, mainURL } from '../../Base/Constent';
 import axios from 'axios';
+import { getProducts } from '../../ReduxToolKit/Admin/ProductsSlice';
 
 // icons
 import { AiFillDelete } from 'react-icons/ai'
 import { IoCloseCircleSharp } from 'react-icons/io5'
-import { getProducts } from '../../ReduxToolKit/Admin/ProductsSlice';
+import { CiCircleAlert } from "react-icons/ci";
 
 
 
@@ -176,11 +177,12 @@ function Slider() {
 
 
     return (
-        <div className='bg-slate-100 mx-auto'>
+        <div className='bg-slate-100 mx-auto sm:w-[90%] w-screen'>
             <div className="flex flex-col justify-center items-center">
 
             <div className="flex flex-col justify-center items-center">
-                <span className="mt-10 font-bold">Add slider here</span>
+            <h1 className='my-10 font-semibold text-[1.5rem]'>Upload your slider</h1>
+
 
                 {/* modal slider button */}
                 <button onClick={openSliderModal}
@@ -189,6 +191,10 @@ function Slider() {
                 </button>
             </div>
             {/* madal for slider open here */}
+            <div className="flex sm:items-center mb-5 sm:text-[1rem] text-[0.8rem]">
+                <CiCircleAlert className='sm:w-10 w-6'/>
+            Sliders section (EXPLORE) only show in home page if sliders are available !!
+            </div>
             {openSlider && (
                 <div
                     className="modal-container"

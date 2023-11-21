@@ -20,6 +20,8 @@ import { AiFillDelete } from 'react-icons/ai';
     const [checkedEnquiry, setCheckedEnquiry] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
     const enquiryFormCollections = useSelector(state => state.enquiry.enquiry);
+  const [selectAllChecked, setSelectAllChecked] = useState(false);
+    const [filterOption, setFilterOption] = useState('all');
 
 // useEffect(() => {
 //   if(handleEnquiyForm){
@@ -67,7 +69,24 @@ import { AiFillDelete } from 'react-icons/ai';
     dispatch(markMessageAsRead(message._id));
 
   };
+  // ========================
+  const filteredMessages = enquiryFormCollections.filter((message) => {
+    if (filterOption === 'read') {
+      return message.read;
+    } else if (filterOption === 'unread') {
+      return !message.read;
+    } else {
+      return true; // 'all' option
+    }
+  });
   // =================================
+  const handleSelectAll = (isAllChecked) => {
+    setSelectAllChecked(isAllChecked);
+
+    // Update the state of individual checkboxes
+    const newChecked = enquiryFormCollections.map(() => isAllChecked);
+    setCheckedEnquiry(newChecked);
+  };
 
     // delte sms
     const handleDeleteAllEnquiry = () => {
@@ -137,7 +156,27 @@ import { AiFillDelete } from 'react-icons/ai';
                     </div>
             
                     {/* refresh ends */}
-            
+                    <div className="">
+                    <input
+                      type="checkbox"
+                      name="selectallCheckbox"
+                      id="selectallCheckbox"
+                      checked={selectAllChecked}
+                      onChange={(e) => handleSelectAll(e.target.checked)}
+                    />
+                  </div>
+                  <div className="relative">
+                    <select
+                      className="cursor-pointer border p-2 rounded-md"
+                      value={filterOption}
+                      onChange={(e) => setFilterOption(e.target.value)}
+                    >
+                      <option value="all">All Messages</option>
+                      <option value="read">Read</option>
+                      <option value="unread">Unread</option>
+                    </select>
+                  </div>
+
                     {/* Delete all start */}
             
                     <div className="hover:bg-slate-200 rounded-full p-2 transition-all duration-500">
@@ -148,13 +187,13 @@ import { AiFillDelete } from 'react-icons/ai';
                     {/* Delete all start */}
             
                   </div>
-                  {enquiryFormCollections && enquiryFormCollections.length === 0 && (
+                  {filteredMessages.length === 0 && (
                     <div className="flex justify-center items-center">
                       <p className=''>No Enquiry messages yet</p>
                     </div>
                   )}
                   {enquiryFormCollections && enquiryFormCollections.length > 0 &&
-                    enquiryFormCollections.map((message, index) => (
+                    filteredMessages.map((message, index) => (
                       <div
                         className={`flex items-center hover:bg-slate-200 hover:shadow-inner cursor-pointer p-2 border-b-[0.1rem] ${message.read ? 'font-normal' : 'font-bold'} `}
                         key={message._id}

@@ -58,9 +58,9 @@ const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // if(!validateForm()){
-      //   return
-      // }
+      if(!validateForm()){
+        return
+      }
       
         await dispatch(FormEnquiry({ formState }));
         // console.log('Form submitted successfully');
@@ -122,6 +122,17 @@ const handleSubmit = async (e) => {
             onChange={handleChange}
           />
         </div>
+              {/*  */}
+              <div className="my-10">
+                <input type="text"
+                name='fullName'
+                placeholder='Full Name'
+                className='' 
+                value={formState.fullName}
+                onChange={handleChange}
+                />
+            </div>
+        {/*  */}
         <div className="my-10 sm:flex gap-5">
           <input
             type="text"
@@ -143,17 +154,7 @@ const handleSubmit = async (e) => {
             <option value="dosa">DOSA</option>
           </select>
         </div>
-        {/*  */}
-            <div className="">
-                <input type="text"
-                name='fullName'
-                placeholder='Full Name'
-                className='mb-10' 
-                value={formState.fullName}
-                onChange={handleChange}
-                />
-            </div>
-        {/*  */}
+  
         <div className="">
         <textarea
             name='commends'

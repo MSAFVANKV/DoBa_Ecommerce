@@ -1,7 +1,7 @@
 export const PRODUCTS = [
-    { name: "Drag And Drop", link: "#" },
-    { name: "Visual Studio X", link: "#" },
-    { name: "Easy Content", link: "#" },
+    { name: "Dosa & Idly Batter", link: "#" },
+    // { name: "Idly Batter", link: "#" },
+    // { name: "Easy Content", link: "#" },
   ];
   export const RESOURCES = [
     { name: "Industries and tools", link: "#" },
@@ -10,18 +10,18 @@ export const PRODUCTS = [
     { name: "Online evenet", link: "#" },
     { name: "Nostrud exercitation", link: "#" },
   ];
-  export const COMPANY = [
-    { name: "Diversity & inclusion", link: "#" },
-    { name: "About us", link: "#" },
-    { name: "Press", link: "#" },
-    { name: "Customer Stories", link: "#" },
-    { name: "Online communities", link: "#" },
+  export const LOCATION = [
+    { name: "E K Food Products", link: "#" },
+    { name: "Near Post office", link: "#" },
+    { name: "Kattangal rd, Mavoor", link: "#" },
+    { name: "Calicut - 673661", link: "#" },
+    // { name: "Online communities", link: "#" },
   ];
-  export const SUPPORT = [
-    { name: "Documentation", link: "#" },
-    { name: "Tutorials & guides", link: "#" },
-    { name: "Webinars", link: "#" },
-    { name: "Open-source", link: "#" },
+  export const CONTACT = [
+    { name: "9747543802", link: "#" },
+    { name: "E K Food Products", link: "#" },
+    // { name: "Webinars", link: "#" },
+    // { name: "Open-source", link: "#" },
   ];
   
   export const Icons = [

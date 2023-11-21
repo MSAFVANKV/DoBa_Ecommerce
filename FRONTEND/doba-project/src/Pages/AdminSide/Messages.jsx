@@ -27,8 +27,10 @@ function Messages() {
   const [showEnquiryMessages, setShowEnquiryMessages] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState(null);
   const [checked, setChecked] = useState([]);
-  const [selectAll, setSelectAll] = useState(false);
-  const [open, setOpen] =useState(false)
+  // const [selectAll, setSelectAll] = useState(false);
+  const [selectAllChecked, setSelectAllChecked] = useState(false);
+  const [filterOption, setFilterOption] = useState('all');
+  const [open, setOpen] = useState(false)
   // =================================
 
   const SingleFormCollections = useSelector(state => state.form.form);
@@ -73,7 +75,7 @@ function Messages() {
 
   };
 
-  
+
   const enquiyForm = () => {
     setEnquiry1(false);
     setEnquiry2(true);
@@ -99,7 +101,23 @@ function Messages() {
     dispatch(markMessageAsRead(message._id));
   };
   // =================================
+  // Calculate allMessagesRead and unreadCount
 
+  const allMessagesRead = enquiryFormCollections.every(message => message.read);
+  const unreadCount = enquiryFormCollections.filter(message => !message.read).length;
+  const allSingleMessagesRead = SingleFormCollections.every(message => message.read);
+  const unreadSingleCount = SingleFormCollections.filter(message => !message.read).length;
+
+  // Filter messages based on the selected option
+  const filteredMessages = SingleFormCollections.filter((message) => {
+    if (filterOption === 'read') {
+      return message.read;
+    } else if (filterOption === 'unread') {
+      return !message.read;
+    } else {
+      return true; // 'all' option
+    }
+  });
 
   const handleChecked = (isChecked, index) => {
     const checkedItems = [...checked];
@@ -108,13 +126,21 @@ function Messages() {
   };
 
   // select all checkbox
+  // const handleSelectAll = (isAllChecked) => {
+  //   if (SingleFormCollections && SingleFormCollections.length > 0) {
+  //     const newChecked = SingleFormCollections.map(() => isAllChecked);
+  //     setChecked(newChecked);
+  //   } else {
+  //     setChecked([]); // Set to an empty array when there are no messages
+  //   }
+  // };
+
   const handleSelectAll = (isAllChecked) => {
-    if (SingleFormCollections && SingleFormCollections.length > 0) {
-      const newChecked = SingleFormCollections.map(() => isAllChecked);
-      setChecked(newChecked);
-    } else {
-      setChecked([]); // Set to an empty array when there are no messages
-    }
+    setSelectAllChecked(isAllChecked);
+
+    // Update the state of individual checkboxes
+    const newChecked = SingleFormCollections.map(() => isAllChecked);
+    setChecked(newChecked);
   };
 
   const isAllCheckboxesChecked = checked.every((isChecked) => isChecked);
@@ -124,7 +150,7 @@ function Messages() {
   const removeMessage = (id, e) => {
     // Prevent event propagation
     e.stopPropagation();
-    
+
     axios.delete(`${userURL}/form/delete/${id}`)
       .then((res) => {
         dispatch(getUserSingleForm()); // Fetch updated tasks
@@ -184,37 +210,42 @@ function Messages() {
           second
         </div> */}
       {/* ppppppp */}
-        {/* sm: sms menu bar menu ======================================================[?]*/}
+      {/* sm: sms menu bar menu ======================================================[?]*/}
 
       <div className=" pt-10 sm:flex bg-[#F6F8FC] p-5">
-        <div className={` ${open?'h-20 my-6':'h-1 w-[15%]'} w-[100%] flex justify-center sm:hidden m-auto duration-300 rounded-md  bg-dark-purple`}>
-        <MdOutlineArrowDropDown onClick={()=> setOpen(!open)} className='absolute  top-[1.8rem] text-[2rem]'/>
-        {/*  */}
-        <ul className={`${!open && 'hidden'} origin-left duration-200`}>
-              <li
-                className={`text-white p-2 cursor-pointer rounded-lg ${enquiry1 || showMessages ? 'font-bold' : 'font-light'}`}
-                onClick={openSingeForm}
-              >
-                SinglePurchase
-                {SingleFormCollections && SingleFormCollections.length > 0 && (
-                  <span className=" w-5 h-5 text-center ms-2 rounded-full bg-red-500 float-right ">
-                    {SingleFormCollections.length.toLocaleString()}
+        <div className={` ${open ? 'h-20 my-6' : 'h-1 w-[15%]'} w-[100%] flex justify-center sm:hidden m-auto duration-300 rounded-md  bg-dark-purple`}>
+          <MdOutlineArrowDropDown onClick={() => setOpen(!open)} className='absolute  top-[1.8rem] text-[2rem]' />
+          {/*  */}
+          <ul className={`${!open && 'hidden'} origin-left duration-200`}>
+            <li
+              className={`text-white p-2 cursor-pointer rounded-lg ${enquiry1 || showMessages ? 'font-bold' : 'font-light'}`}
+              onClick={openSingeForm}
+            >
+              SinglePurchase
+              {SingleFormCollections && SingleFormCollections.length > 0 && (
+                  <span className={`w-5 h-5  font-bold float-right flex justify-center items-center ms-2 rounded-full ${allSingleMessagesRead ? ' text-white' : 'bg-red-500 text-white'}`}>
+                    {allSingleMessagesRead ? SingleFormCollections.length.toLocaleString() : unreadSingleCount.toLocaleString()}
                   </span>
                 )}
-              </li>
-              <li
-                className={`text-white p-2 cursor-pointer rounded-lg ${enquiry2 || showEnquiryMessages ? 'font-bold' : 'font-light'}`}
-                onClick={enquiyForm}
-              >
-                Enquiry Form
-                {enquiryFormCollections && enquiryFormCollections.length > 0 && (
-                  <span className=" w-5 h-5 text-center ms-2 rounded-full bg-red-500 float-right ">
-                    {enquiryFormCollections.length.toLocaleString()}
+            </li>
+            <li
+              className={`text-white p-2 cursor-pointer rounded-lg ${enquiry2 || showEnquiryMessages ? 'font-bold' : 'font-light'}`}
+              onClick={enquiyForm}
+            >
+              Enquiry Form
+              {/* {enquiryFormCollections && enquiryFormCollections.length > 0 && (
+                <span className=" w-5 h-5 text-center ms-2 rounded-full bg-red-500 float-right ">
+                  {enquiryFormCollections.length.toLocaleString()}
+                </span>
+              )} */}
+               {enquiryFormCollections && enquiryFormCollections.length > 0 && (
+                  <span className={`w-5 h-5  font-bold float-right flex justify-center items-center ms-2 rounded-full ${allMessagesRead ? ' text-black' : 'bg-red-500 text-white'}`}>
+                    {allMessagesRead ? enquiryFormCollections.length.toLocaleString() : unreadCount.toLocaleString()}
                   </span>
                 )}
-              </li>
-            </ul>
-            {/*  */}
+            </li>
+          </ul>
+          {/*  */}
         </div>
         {/* sm: sms menu bar menu ======================================================[?]*/}
         <div className="w-[20%] md:block hidden">
@@ -227,17 +258,27 @@ function Messages() {
               >
                 SinglePurchase
                 {SingleFormCollections && SingleFormCollections.length > 0 && (
-                  <span className="float-right ">
-                    {SingleFormCollections.length.toLocaleString()}
+                  <span className={`w-5 h-5  font-bold float-right flex justify-center items-center ms-2 rounded-full ${allSingleMessagesRead ? ' text-black' : 'bg-red-500 text-white'}`}>
+                    {allSingleMessagesRead ? SingleFormCollections.length.toLocaleString() : unreadSingleCount.toLocaleString()}
                   </span>
                 )}
               </li>
+              {/* [===========================   =======================================] */}
               <li
                 className={`p-2 font-light hover:bg-slate-200 cursor-pointer rounded-lg ${enquiry2 || showEnquiryMessages ? 'bg-slate-300 hover:bg-slate-300' : ''}`}
                 onClick={enquiyForm}
               >
                 Enquiry Form
+
+                {/* Display the count based on read/unread status */}
+                {enquiryFormCollections && enquiryFormCollections.length > 0 && (
+                  <span className={`w-5 h-5  font-bold float-right flex justify-center items-center ms-2 rounded-full ${allMessagesRead ? ' text-black' : 'bg-red-500 text-white'}`}>
+                    {allMessagesRead ? enquiryFormCollections.length.toLocaleString() : unreadCount.toLocaleString()}
+                  </span>
+                )}
               </li>
+              {/* [=================================================================] */}
+
             </ul>
             {/* selection list ends*/}
           </div>
@@ -247,6 +288,8 @@ function Messages() {
           {enquiry1 && (
             <div className="w-[100%] bg-white rounded-2xl">
               <ul>
+                {/* head side stats */}
+
                 {/* all selection */}
                 <div className="m-5 pb-5 border-b flex justify-between">
                   {/* refresh pagestart */}
@@ -255,6 +298,29 @@ function Messages() {
                   </div>
 
                   {/* refresh ends */}
+                  {/* selectallCheckbox starts */}
+                  <div className="">
+                    <input
+                      type="checkbox"
+                      name="selectallCheckbox"
+                      id="selectallCheckbox"
+                      checked={selectAllChecked}
+                      onChange={(e) => handleSelectAll(e.target.checked)}
+                    />
+                  </div>
+                  <div className="relative">
+                    <select
+                      className="cursor-pointer border p-2 rounded-md"
+                      value={filterOption}
+                      onChange={(e) => setFilterOption(e.target.value)}
+                    >
+                      <option value="all">All Messages</option>
+                      <option value="read">Read</option>
+                      <option value="unread">Unread</option>
+                    </select>
+                  </div>
+
+                  {/* selectallCheckbox ends */}
 
                   {/* Delete all start */}
 
@@ -266,13 +332,14 @@ function Messages() {
                   {/* Delete all start */}
 
                 </div>
-                {SingleFormCollections && SingleFormCollections.length === 0 && (
+                {/* head side ends */}
+                {filteredMessages.length === 0 && (
                   <div className="flex justify-center items-center">
                     <p className=''>No messages yet</p>
                   </div>
                 )}
                 {SingleFormCollections && SingleFormCollections.length > 0 &&
-                  SingleFormCollections.map((message, index) => (
+                  filteredMessages.map((message, index) => (
                     <div
                       className={`flex items-center hover:bg-slate-200 hover:shadow-inner cursor-pointer p-2 border-b-[0.1rem] ${message.read ? 'font-normal' : 'font-bold'} `}
                       key={message._id}
@@ -321,17 +388,25 @@ function Messages() {
               </ul>
             </div>
           )}
-  
-  
-          {showMessages && <SinglePurchase 
+
+
+          {showMessages && <SinglePurchase
             openSingeForm={openSingeForm}
-             selectedItem={selectedMessage} 
-             />}
+            selectedItem={selectedMessage}
+          />}
 
-          <EnquirySMS enquiyForm={enquiyForm} enquiry2={enquiry2} setEnquiry2={setEnquiry2} handleEnquiyForm={enquiyForm} 
-          showEnquiryMessages={showEnquiryMessages} setShowEnquiryMessages={setShowEnquiryMessages} />
+          <EnquirySMS 
+          enquiyForm={enquiyForm}
+           enquiry2={enquiry2}
+           setEnquiry2={setEnquiry2} 
+           handleEnquiyForm={enquiyForm}
+          showEnquiryMessages={showEnquiryMessages} 
+          setShowEnquiryMessages={setShowEnquiryMessages} 
+          allMessagesRead={allMessagesRead}
+          unreadCount={unreadCount}
+          />
 
-          
+
         </div>
       </div>
     </div>

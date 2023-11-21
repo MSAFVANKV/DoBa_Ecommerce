@@ -63,7 +63,7 @@ function Header() {
         
         </div>
       </header>
-      <div className="">
+      {/* <div className="">
       <div
           id='toggle'
           className={`bgtheme flex sm:hidden ${toggle ? 'active' : ''}`}
@@ -73,7 +73,11 @@ function Header() {
           {toggle && <SideBar items={navLinks} closeToggle={() => setToggle(false)} />}
 
          
-          </div>
+          </div> */}
+          {/* <div className={`fixed flex justify-center items-center right-7 top-7 w-[50px] h-[50px] bg-gray-200 z-[999]`}>
+                <span className='w-[90px] h[100px] bg-black absolute'>5</span>
+          </div> */}
+        
     </>
   );
 }

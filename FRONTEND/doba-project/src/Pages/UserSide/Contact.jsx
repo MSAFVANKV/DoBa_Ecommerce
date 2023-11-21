@@ -15,7 +15,11 @@ function Contact() {
     if (itemRef) {
       itemRef.scrollIntoView({ behavior: 'auto' });
       setActiveIndex(index);
-      window.scrollTo(0, 300);
+      if (window.innerWidth < 600) {
+        window.scrollTo(0, 700); // Adjust the value as needed
+      } else {
+        window.scrollTo(0, 300);
+      }
 
     }
   };
@@ -47,7 +51,7 @@ function Contact() {
             <div className=" my-10">
               <ul className='text-white font-comforter2 text-[1.2rem]'>
                 <li className='flex items-center'><IoIosCall />9747543802</li>
-                <li className='flex items-center'><TiWorld />DoBa Food Products</li>
+                <li className='flex items-center'><TiWorld />E K Food Products</li>
                 <li className='ps-4'> Near Post office</li>
                 <li className='ps-4'> Kattangal rd, Mavoor</li>
                 <li className='ps-4'>Calicut - 673661</li>

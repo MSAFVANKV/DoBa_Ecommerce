@@ -25,11 +25,11 @@ function Footer() {
        <img src={waveWhite} alt="" />
     <div className="md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#ffffff19] py-7">
       <h1
-        className="lg:text-4xl text-3xl md:mb-0 mb-6 lg:leading-normal font-semibold
+        className="lg:text-3xl text-2xl md:mb-0 mb-6 lg:leading-normal font-semibold
        md:w-2/5"
       >
-        <span className="text-teal-400">Free</span> until you're ready to
-        launch
+        <span className="text-teal-400">Welcome</span> to a world where every bite tells 
+        a delicious story.
       </h1>
       <div className="sm:w-[100px] w-[80px]  p-1 ms-9">
       <img src={logo} alt="" />
@@ -49,12 +49,14 @@ function Footer() {
         </button>
       </div> */}
     </div>
-    <ItemsContainer />
+    <div className="md:flex md:justify-around">
+        <ItemsContainer />
+      </div>
     <div
       className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10
     text-center pt-2  text-sm pb-8"
     >
-      <span>© 2023 DoBa. All rights reserved.</span>
+      <span>© 2023 DoBafoods. All rights reserved.</span>
       <span>Terms · Privacy Policy</span>
       {/* <SocialIcons Icons={Icons} /> */}
       <div className="text-teal-500">
@@ -67,13 +69,13 @@ function Footer() {
           <FaFacebookF />
         
         </span>
-        <span
+        {/* <span
           className="p-2 cursor-pointer inline-flex items-center
         rounded-full bg-gray-700 mx-1.5 text-xl hover:text-gray-100 hover:bg-teal-500
         duration-300 "
         >
           <FaTwitter />
-        </span>
+        </span> */}
         <span
           className="p-2 cursor-pointer inline-flex items-center
         rounded-full bg-gray-700 mx-1.5 text-xl hover:text-gray-100 hover:bg-teal-500

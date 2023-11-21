@@ -117,6 +117,7 @@ import { AiFillDelete } from 'react-icons/ai';
     axios.delete(`${userURL}/form/enquiy/delete/${id}`)
       .then((res) => {
         dispatch(getEnquiryForm()); // Fetch updated tasks
+        
       })
       .catch((error) => {
         console.error('Error deleting message:', error);

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { adminbaseURL, userURL } from '../../Base/Constent';
-import { formsingle, markMessageAsRead } from '../../ReduxToolKit/User/SingleFormSlice';
+import { formsingle, getUserSingleForm, markMessageAsRead } from '../../ReduxToolKit/User/SingleFormSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import SinglePurchase from './AllMessages/SinglePurchase';
 import { confirmAlert } from 'react-confirm-alert'; // Import the confirmation alert library
@@ -43,6 +43,7 @@ function Messages() {
         console.log(response.data);
       })
   }, [dispatch]);
+  // enqyiry form=============================================
   useEffect(() => {
     axios.get(`${userURL}/form/enquiy/getall`, { withCredentials: true })
       .then((response) => {
@@ -123,10 +124,10 @@ function Messages() {
   const removeMessage = (id, e) => {
     // Prevent event propagation
     e.stopPropagation();
-
+    
     axios.delete(`${userURL}/form/delete/${id}`)
       .then((res) => {
-        dispatch(formsingle()); // Fetch updated tasks
+        dispatch(getUserSingleForm()); // Fetch updated tasks
       })
       .catch((error) => {
         console.error('Error deleting message:', error);
@@ -165,7 +166,7 @@ function Messages() {
 
     axios.post(`${userURL}/form/deleteAll`, { ids: selectedIds })
       .then(() => {
-        dispatch(formsingle()); // Fetch updated tasks
+        dispatch(getUserSingleForm()); // Fetch updated tasks
       })
       .catch((error) => {
         console.error('Error deleting messages:', error);

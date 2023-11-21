@@ -20,7 +20,8 @@ const enquiryFormSchema = new mongoose.Schema({
     },
     productType:{
         type: String,
-        require:true
+        // require:true
+        default: "both"
     },
     commends:{
         type: String,

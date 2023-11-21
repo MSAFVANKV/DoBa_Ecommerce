@@ -38,7 +38,7 @@ export const markMessageAsRead = createAsyncThunk(
 export const SingleFormSlice = createSlice({
     name:"form",
     initialState: {
-        form:null,
+        form:[],
     },
 
     reducers: {
@@ -67,6 +67,7 @@ export const SingleFormSlice = createSlice({
             state.status = 'failed';
             state.error = action.payload; // Store the error message from the server
         })
+        
         .addCase(markMessageAsRead.fulfilled, (state, action) => {
             // This case will be handled by markMessageAsReadLocally reducer
           });

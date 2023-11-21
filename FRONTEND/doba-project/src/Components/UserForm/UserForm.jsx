@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { singleFormEnquiry } from '../../ReduxToolKit/User/SingleFormSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function UserForm({ product }) {
   const dispatch = useDispatch();
@@ -53,6 +55,15 @@ function UserForm({ product }) {
 
     dispatch(singleFormEnquiry({ formState })).then((res) => {
       // Handle success or error
+      toast.success('Form submitted successfully', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      
       setFormState({
         number: '',
         email: '',
@@ -67,6 +78,15 @@ function UserForm({ product }) {
 
   return (
     <div>
+       <ToastContainer position="top-right"
+       autoClose={3000}
+        hideProgressBar={false} 
+        newestOnTop={false} 
+        closeOnClick rtl={false} 
+        pauseOnFocusLoss 
+        draggable 
+        pauseOnHover />
+
       <form onSubmit={handleSubmit} className='sm:w-[500px sm:h-[500px] sm:border p-5 rounded-3xl '>
         <span className='text-[1.3rem]  font-bold'>Approach us for this Item</span>
         <div className='sm:flex sm:my-0 my-5 gap-2'>
@@ -125,7 +145,7 @@ function UserForm({ product }) {
             type='submit'
             // onClick={handleSubmit}
             className='btn w-[100px]'>
-            SUBMIT
+            { singleFormEnquiry.pending ? " SUBMIT " : "Loading.."}
           </button>
         </div>
       </form>

@@ -30,6 +30,8 @@ exports.uploadFeedbackForm = async (req, res) => {
 
         })
         await form.save();
+        const savedForm = await feedbackFormCollection.find({});
+            res.status(200).json({ details: savedForm, form });
     } catch (error) {
         console.error(error,'Internal Server Error adding feeedback form');
         res.status(500).json({ error: 'Internal Server Error adding feeedback form' });

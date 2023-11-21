@@ -3,13 +3,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { FormEnquiry, getEnquiryForm } from '../../ReduxToolKit/User/EnquirySlice';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function EnquiryForm() {
   const dispatch = useDispatch();
 //   const [email, setEmail] = useState('');
 //   const [contactNumber, setContactNumber] = useState('');
 //   const [businessType, setBusinessType] = useState('');
-//   const [productType, setProductType] = useState('');
+//   const [productType, setproductType] = useState('');
 //   const [commends, setCommends] = useState('');
 //   const [fullName, setFullName] = useState('');
 const [formState, setFormState] = useState({
@@ -17,7 +18,7 @@ const [formState, setFormState] = useState({
     email: '',
     fullName: '',
     businessType:'',
-    productType: "both",
+    productType: "BOTH",
     commends: '',
   });
   const [error, setError] = useState('');
@@ -57,8 +58,21 @@ const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      // if(!validateForm()){
+      //   return
+      // }
+      
         await dispatch(FormEnquiry({ formState }));
-        console.log('Form submitted successfully');
+        // console.log('Form submitted successfully');
+           // Show success toast
+      toast.success('Form submitted successfully,\n We will get you soon', {
+        position: 'top-right',
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
         dispatch(getEnquiryForm());
         setFormState({
             contactNumber: '',
@@ -78,6 +92,16 @@ const handleSubmit = async (e) => {
   
 
   return (
+    <div className="">
+       <ToastContainer position="top-right"
+       autoClose={3000}
+        hideProgressBar={false} 
+        newestOnTop={false} 
+        closeOnClick rtl={false} 
+        pauseOnFocusLoss 
+        draggable 
+        pauseOnHover />
+
     <form onSubmit={handleSubmit} className='min-w-full p-5'>
 
         <div className="sm:my-10 sm:flex gap-5">
@@ -149,6 +173,7 @@ const handleSubmit = async (e) => {
         </div>
    
     </form>
+    </div>
   );
 }
 

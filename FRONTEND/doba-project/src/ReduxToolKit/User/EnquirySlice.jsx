@@ -38,7 +38,7 @@ export const markMessageAsRead = createAsyncThunk(
 export const EnquirySlice = createSlice({
     name:"enquiry",
     initialState: {
-        enquiry:null,
+        enquiry:[],
     },
 
     reducers: {
@@ -64,6 +64,18 @@ export const EnquirySlice = createSlice({
         })
         
         .addCase(FormEnquiry.rejected, (state, action) => {
+            state.status = 'failed';
+            state.error = action.payload; // Store the error message from the server
+        })
+        .addCase(getEnquiryForm.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(getEnquiryForm.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.enquiry = action.payload; // Update the enquiry field in the state
+        })
+        
+        .addCase(getEnquiryForm.rejected, (state, action) => {
             state.status = 'failed';
             state.error = action.payload; // Store the error message from the server
         })

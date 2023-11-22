@@ -67,11 +67,18 @@ function AdminSideBar({ onLogout, open, setOpen }) {
   const [toggle, setToggle] = useState(false);
   const isLoggedIn = useSelector((state) => state.admin.isLoggedIn);
 
+  const SingleFormCollections = useSelector((state) => state.form.form);
+  const enquiryFormCollections = useSelector((state) => state.enquiry.enquiry);
+
+  // Calculate unread counts
+  const unreadSingleCount = SingleFormCollections.filter((message) => !message.read).length;
+  const unreadEnquiryCount = enquiryFormCollections.filter((message) => !message.read).length;
+
   const navigate = useNavigate();
   
   const handleImageClick = (path) => {
     navigate(path); // Use navigate to navigate to the specified path
-    setOpen(!open)
+    setOpen(false)
   };
 
     const toggleSidebar = () => {
@@ -93,6 +100,11 @@ function AdminSideBar({ onLogout, open, setOpen }) {
             <img src={item.src} alt={item.display} className="w-6 h-6 mr-2" />
             <NavLink to={item.path} className="text-white" >
               <span className={`${!open && 'hidden'} origin-left duration-200`} >{item.display}</span>
+              {item.path === '/admin/messages' && (
+              <span className={`w-5 h-5 font-bold float-right flex justify-center items-center  rounded-full bg-red-500 text-white`}>
+                {unreadSingleCount + unreadEnquiryCount}
+              </span>
+            )}
             </NavLink>
           </li>
         ))}

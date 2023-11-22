@@ -49,8 +49,10 @@ function Contact() {
               <span>CONNECT US</span>
             </div>
             <div className=" my-10">
-              <ul className='text-white font-comforter2 text-[1.2rem]'>
-                <li className='flex items-center'><IoIosCall />9747543802</li>
+              <ul className='text-white font-comforter2 text-[1.2rem] leading-8'>
+                <li className='flex items-center'><IoIosCall />
+                <a href="tel:+91 9747543802">+91 9747543802</a>
+                </li>
                 <li className='flex items-center'><TiWorld />E K Food Products</li>
                 <li className='ps-4'> Near Post office</li>
                 <li className='ps-4'> Kattangal rd, Mavoor</li>

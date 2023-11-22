@@ -16,6 +16,7 @@ import { FaOpencart } from 'react-icons/fa';
 import { LuMessageSquareDashed } from 'react-icons/lu';
 import { TfiLayoutSlider } from 'react-icons/tfi';
 import { GiTatteredBanner } from 'react-icons/gi';
+import { enquiryForm, getEnquiryForm } from '../../ReduxToolKit/User/EnquirySlice';
 
 
 const ringAnimation = keyframes`
@@ -54,6 +55,7 @@ function Dashboard({ setIsAdminLoggedIn }) {
   const getBannerList = useSelector((state) => state.banner.banner);
   const getVideosList = useSelector((state) => state.video.video);
   const SingleFormCollections = useSelector(state => state.form.form);
+  const enquiryFormCollections = useSelector(state => state.enquiry.enquiry);
 
 
   useEffect(() => {
@@ -65,22 +67,28 @@ function Dashboard({ setIsAdminLoggedIn }) {
       });
   }, [dispatch]);
 
-     // fetch data to sliderslice
-     useEffect(() => {
-      dispatch(getSlider()); // Fetch products when the component mounts
-      dispatch(getBanner());
-      dispatch(getVideos());
-    }, [dispatch]);
+  // fetch data to sliderslice
+  useEffect(() => {
+    dispatch(getSlider()); // Fetch products when the component mounts
+    dispatch(getBanner());
+    dispatch(getVideos());
+    dispatch(getEnquiryForm());
+  }, [dispatch]);
 
-    // all messages
-    useEffect(() => {
-      axios.get(`${userURL}/singleform/getall`, { withCredentials: true })
-        .then((response) => {
-          dispatch(formsingle(response.data));
-          console.log(response.data);
-        })
-    }, [dispatch]);
-    
+  // all messages
+  useEffect(() => {
+    axios.get(`${userURL}/singleform/getall`, { withCredentials: true })
+      .then((response) => {
+        dispatch(formsingle(response.data));
+        console.log(response.data);
+      })
+  }, [dispatch]);
+
+  const totalSms = () => {
+    return enquiryFormCollections.length + SingleFormCollections.length;
+  };
+
+
 
   return (
     <div className="container mx-auto">
@@ -115,7 +123,7 @@ function Dashboard({ setIsAdminLoggedIn }) {
               {getBannerList && getBannerList.length > 0 && (
                 <span>{getBannerList.length} img ,</span>
               )}
-               {getVideosList && getVideosList.length > 0 && (
+              {getVideosList && getVideosList.length > 0 && (
                 <span>{getVideosList.length} vids</span>
               )}
               <GiTatteredBanner className="md:text-[4rem] text-[2.5rem] bottom-0 text-white absolute hover:rotate-6" />
@@ -126,10 +134,15 @@ function Dashboard({ setIsAdminLoggedIn }) {
           <div className="bg-slate-400 relative col-span-1 p-6 flex flex-col justify-center font-bold w-[200px] rounded-xl">
             MESSAGES
             <div>
-              {SingleFormCollections && SingleFormCollections.length > 0 ? (
-                <span>{SingleFormCollections.length} SMS</span>
-              ):<span>0 SMS</span>}
-              <RingingIcon className='text-[2rem]'/>
+              {/* {SingleFormCollections && SingleFormCollections.length > 0 ? (
+      <span>{SingleFormCollections.length} SMS</span>
+    ) : (
+      <span>0 SMS</span>
+    )} */}
+              {enquiryFormCollections && SingleFormCollections ? (
+                <span>{totalSms()} Total SMS</span>
+              ) : (<span>0 SMS</span>)}
+              <RingingIcon className='text-[2rem]' />
             </div>
           </div>
         </div>

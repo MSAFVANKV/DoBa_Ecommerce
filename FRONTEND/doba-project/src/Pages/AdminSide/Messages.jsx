@@ -143,7 +143,7 @@ function Messages() {
     setChecked(newChecked);
   };
 
-  const isAllCheckboxesChecked = checked.every((isChecked) => isChecked);
+  // const isAllCheckboxesChecked = checked.every((isChecked) => isChecked);
   const isAnyCheckboxChecked = checked.some((isChecked) => isChecked);
   // =================================
 

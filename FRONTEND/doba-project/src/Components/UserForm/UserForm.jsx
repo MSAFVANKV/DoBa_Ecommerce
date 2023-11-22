@@ -1,151 +1,138 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { singleFormEnquiry } from '../../ReduxToolKit/User/SingleFormSlice';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useFormik } from 'formik';
+import { UserFormSchema } from '../../ValidationSchema/SignUpSchema';
 
 function UserForm({ product }) {
   const dispatch = useDispatch();
-  const [formState, setFormState] = useState({
-    number: '',
-    email: '',
-    fullName: '',
-    productName: product.productName,
-    commends: '',
+
+  const formik = useFormik({
+    initialValues: {
+      number: '',
+      email: '',
+      fullName: '',
+      productName: product.productName,
+      commends: '',
+    },
+    validationSchema: UserFormSchema,
+    onSubmit: (values) => {
+      dispatch(singleFormEnquiry({ formState: values })).then((res) => {
+        // Handle success or error
+        toast.success('Form submitted successfully', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+
+        formik.resetForm();
+      }).catch((error) => {
+        console.error('form adding error:', error);
+      });
+    },
   });
-  const [error, setError] = useState('');
-
-//   const handleChange = (e) => {
-//     setFormState({
-//       ...formState,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
-  const validateForm = () => {
-    if (
-      formState.number &&
-      formState.email &&
-      formState.fullName &&
-      formState.commends
-    ) {
-      setError('');
-      return true;
-    } else {
-      let errorFields = [];
-      for (const [key, value] of Object.entries(formState)) {
-        if (!value) {
-          errorFields.push(key);
-        }
-      }
-      setError(errorFields.join(', '));
-      return false;
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!validateForm()) return;
-
-    dispatch(singleFormEnquiry({ formState })).then((res) => {
-      // Handle success or error
-      toast.success('Form submitted successfully', {
-        position: 'top-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-      
-      setFormState({
-        number: '',
-        email: '',
-        fullName: '',
-        productName: product.productName,
-        commends: '',
-      });
-    }).catch((error) => {
-      console.error('form adding error:', error);
-    });
-  };
 
   return (
     <div>
-       <ToastContainer position="top-right"
-       autoClose={3000}
-        hideProgressBar={false} 
-        newestOnTop={false} 
-        closeOnClick rtl={false} 
-        pauseOnFocusLoss 
-        draggable 
-        pauseOnHover />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
 
-      <form onSubmit={handleSubmit} className='sm:w-[500px sm:h-[500px] sm:border p-5 rounded-3xl '>
-        <span className='text-[1.3rem]  font-bold'>Approach us for this Item</span>
+      <form onSubmit={formik.handleSubmit} className='sm:w-[500px sm:h-[500px] sm:border p-5 rounded-3xl '>
+        <span className='text-[1.3rem] font-bold'>Approach us for this Item</span>
         <div className='sm:flex sm:my-0 my-5 gap-2'>
+          <div className="">
           <input
             type='email'
             placeholder='email here'
             name='email'
-            className='w-[100%] p-3  border rounded-md shadow-sm my-3'
-            value={formState.email}
-            onChange={handleChange}
+            className='w-[100%] p-3 border rounded-md shadow-sm my-3'
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
-          <input
-            type='number' 
+           {formik.touched.email && formik.errors.email && (
+          <div className=' m-auto  rounded-lg text-[#ca4747] font-bold'>
+            {formik.errors.email}
+          </div>
+        )}
+          </div>
+          
+         <div className="">
+         <input
+            type='number'
             placeholder='Phone Number'
             name='number'
-            className='w-[100%] p-3  border rounded-md shadow-sm my-3'
-            value={formState.number}
-            onChange={handleChange}
+            className='w-[100%] p-3 border rounded-md shadow-sm my-3'
+            value={formik.values.number}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
+               
+         {formik.touched.number && formik.errors.number && (
+          <div className=' m-auto  rounded-lg text-[#ca4747] font-bold'>
+            {formik.errors.number}
+          </div>
+        )}
+         </div>
         </div>
+  
         <div className='flex flex-col my-5'>
           <input
             type='text'
             placeholder='Full Name'
             name='fullName'
-            value={formState.fullName}
-            onChange={handleChange}
+            value={formik.values.fullName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
+           {formik.touched.fullName && formik.errors.fullName && (
+          <div className=' m-auto  rounded-lg text-[#ca4747] font-bold'>
+            {formik.errors.fullName}
+          </div>
+        )}
         </div>
         <div className='flex flex-col my-5'>
           <input
             type='text'
             readOnly
             name='productName'
-            value={formState.productName}
-            onChange={handleChange}
-
+            value={formik.values.productName}
+            onChange={formik.handleChange}
           />
         </div>
         <div className='flex flex-col my-5'>
           <textarea
             name='commends'
             placeholder='How can we help you'
-            value={formState.commends}
-            onChange={handleChange}
+            value={formik.values.commends}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             className='p-2'
           />
         </div>
-        {error && (
-          <div className='p-5 bg-red-200 m-auto my-2 rounded-lg text-[#ca4747] font-bold'>
-            {`include the field: ${error}`}
+        
+        {formik.touched.commends && formik.errors.commends && (
+          <div className=' m-auto  rounded-lg text-[#ca4747] font-bold'>
+            {formik.errors.commends}
           </div>
         )}
         <div className='flex justify-center'>
-          <button
-            type='submit'
-            // onClick={handleSubmit}
-            className='btn w-[100px]'>
-            { singleFormEnquiry.pending ? " SUBMIT " : "Loading.."}
+          <button type='submit' className='btn w-[100px]' disabled={formik.isSubmitting}>
+            {formik.isSubmitting ? 'Loading...' : 'SUBMIT'}
           </button>
         </div>
       </form>
@@ -154,3 +141,4 @@ function UserForm({ product }) {
 }
 
 export default UserForm;
+

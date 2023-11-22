@@ -75,13 +75,13 @@ const removeBanner = (id) => {
                     {/* <button onClick={() => handleEdit(row)}>Edit</button> */}
                     <div className="m-auto flex gap-3">
                     <button className='' onClick={() => removeBanner(row._id)}><AiFillDelete /></button>
-                    <button onClick={() => removeProduct(row._id)}><AiFillEdit /></button>
+                    {/* <button onClick={() => removeProduct(row._id)}><AiFillEdit /></button> */}
                     </div>
                 </>
             ),
             style: {
                 borderRight: '1px solid #ddd', // Add right border style here
-                padding: '8px', // Add padding to the cells
+                padding: '0px', // Add padding to the cells
               },
         }
       ];

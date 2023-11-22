@@ -18,7 +18,7 @@ const ItemsContainer = () => {
       <div className="hidden sm:block"></div>
 
       {/* Third column */}
-      <FooterItems Links={CONTACT} title="CONTACT" />
+      <FooterItems Links={CONTACT} title="CONTACT" isContact={true}/>
     </div>
   );
 };

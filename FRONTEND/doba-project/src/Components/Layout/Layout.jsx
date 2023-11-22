@@ -12,7 +12,7 @@ function Layout() {
   return (
     <div>
         {!isAdminRoute && <Header />}
-      <Routers />
+      {!isAdminRoute &&<Routers />}
       {!isAdminRoute && <Footer />}
     </div>
   )

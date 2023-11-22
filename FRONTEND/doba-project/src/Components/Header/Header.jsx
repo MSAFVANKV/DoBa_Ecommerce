@@ -38,6 +38,7 @@ function Header() {
   const [toggle, setToggle] = useState(false);
   const toggleSidebar = () => {
     setToggle(!toggle);
+    
   };
 
   return (

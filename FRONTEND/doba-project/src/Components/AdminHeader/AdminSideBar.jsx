@@ -58,7 +58,14 @@ const navLinks = [
     gap:true,
 
   },
-  
+  {
+    id: 6,
+    path: '/admin/crop',
+    display: 'Crop',
+    src: sms,
+    gap:true,
+
+  },
 ];
 
 function AdminSideBar({ onLogout, open, setOpen }) {
@@ -99,9 +106,14 @@ function AdminSideBar({ onLogout, open, setOpen }) {
            
             <img src={item.src} alt={item.display} className="w-6 h-6 mr-2" />
             <NavLink to={item.path} className="text-white" >
-              <span className={`${!open && 'hidden'} origin-left duration-200`} >{item.display}</span>
-              {item.path === '/admin/messages' && (
-              <span className={`w-5 h-5 font-bold float-right flex justify-center items-center  rounded-full bg-red-500 text-white`}>
+              <span className={`${!open && 'hidden'} origin-left duration-200 `} >{item.display}</span>
+              {item.path === '/admin/messages' && open &&(
+              <span className={`w-5 h-5 ms-2 font-bold float-right flex justify-center items-center  rounded-full bg-red-500 text-white`}>
+                {unreadSingleCount + unreadEnquiryCount}
+              </span>
+            )}
+            {item.path === '/admin/messages' && !open &&(
+              <span className={`w-5 h-5 sm:absolute hidden font-bold left-10  justify-center items-center  rounded-full bg-red-500 text-white`}>
                 {unreadSingleCount + unreadEnquiryCount}
               </span>
             )}

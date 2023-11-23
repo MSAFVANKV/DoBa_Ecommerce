@@ -32,7 +32,7 @@ function SideBar({ items, index, Icon, toggle, closeToggle }) {
   
     const handleImageClick = (path) => {
       navigate(path); // Use navigate to navigate to the specified path
-      setOpen(!open)
+      closeToggle(!toggle)
     };
   return (
     // <div className='modal-container ' onClick={()=>closeToggle()}>

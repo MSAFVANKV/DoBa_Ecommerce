@@ -25,6 +25,7 @@ import { RiMenu2Line } from "react-icons/ri";
 import { IoIosArrowForward } from 'react-icons/io'
 import SideBar from '../Components/Header/SideBar'
 import Sidebaritems from '../Components/AdminHeader/Sidebaritems'
+import Crop from '../Pages/AdminSide/Crop'
 
 
 function AdminRouter() {
@@ -83,7 +84,7 @@ function AdminRouter() {
         {isAdminLogin && <button className=' fixed sm:block hidden p-5' onClick={openSideBar}><RiMenu2Line className='text-[1.5rem]'/> </button>} */}
 {isAdminLogin && (
   <>
-    <div className={` ${open ? 'w-72 ' : 'sm:w-20 w-0'} duration-300 sm:p-4  z-50  pt-8 bg-blue-600 sm:relative fixed`}>
+    <div className={` ${open ? 'w-72 ' : 'sm:w-20 w-0'} duration-300 sm:p-4  z-50  pt-8 bg-blue-600 sm:h-auto h-full sm:relative fixed `}>
       <IoIosArrowForward
         className={`fixed sm:absolute cursor-pointer top-9 text-[1.75rem] border sm:-right-3  rounded-full duration-300 border-blue-600 ${open && 'rotate-180 -right-0'}`}
         onClick={() => setOpen(!open)}
@@ -124,6 +125,7 @@ function AdminRouter() {
         <Route path='/admin/products' element={isAdminLogin ?<Products/>: <Navigate to={'/admin'}/>} />
         <Route path='/admin/slider' element={isAdminLogin ?<Slider/>: <Navigate to={'/admin'}/>} />
         <Route path='/admin/messages' element={isAdminLogin ?<Messages/>: <Navigate to={'/admin'}/>} />
+        <Route path='/admin/crop' element={isAdminLogin ?<Crop/>: <Navigate to={'/admin'}/>} />
 
 
     </Routes>

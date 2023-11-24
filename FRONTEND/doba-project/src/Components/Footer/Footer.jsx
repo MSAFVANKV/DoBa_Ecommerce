@@ -21,7 +21,7 @@ function Footer() {
     //   </div>
     // </div>
     
-    <footer className="bg-[#F26D1E] text-white">
+    <footer className="bg-[#F26D1E] text-white mt-28">
        <img src={waveWhite} alt="" />
     <div className="md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#ffffff19] py-7">
       <h1

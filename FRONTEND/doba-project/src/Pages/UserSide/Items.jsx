@@ -93,7 +93,7 @@ function Items() {
           <Link to={`/product/${item._id}`} key={item._id}>
 
 
-            <div className="flex flex-col gap-6 group relative shadow-lg text-black hover:shadow-2xl
+            {/* <div className="flex flex-col gap-6 group relative shadow-lg text-black hover:shadow-2xl
               rounded-xl md:px-6 py-8 w-[100px] h-[110px] sm:h-[180px] sm:w-[200px] md:h-[200px] md:w-[215px] lg:h-[200px] lg:w-[250px] cursor-pointer">
               <div
                 className="absolute gap inset-0 bg-cover bg-center rounded-xl"
@@ -110,7 +110,24 @@ function Items() {
               </div>
               <LiaExternalLinkAltSolid className='sm:block absolute hidden bottom-5 left-5 sm:w-[35px] sm:h-[35px] text-black 
                group-hover:text-blue-600 group-hover:rotate-45 duration-100'/>
+            </div> */}
+            <div key={item._id} className="h-[220px] w-[200px] md:h-[215px] md:w-[215px] lg:h-[310px] lg:w-[300px]  my-4 border rounded-md overflow-hidden shadow-md">
+            <img
+              src={`${mainURL}/Public/ProductsImages/${item.file[0]}`}
+              alt={item.productName}
+              className='w-full lg:h-[250px] h-[150px] p-1 '
+            />
+            <div className="p-2">
+              <p className="text-center font-bold text-sm mb-1">{item.productName}</p>
+              {/* Add other details as needed */}
+              <div className="flex justify-between items-center">
+                <p className="text-gray-600 text-xs ">{/* Add other details, e.g., price, category, etc. */}</p>
+                {/* <Link to={`/product/${item._id}`} className="bg-blue-500 text-white px-2 py-1 rounded-md text-xs">
+                  Details
+                </Link> */}
+              </div>
             </div>
+          </div>
             {/* <ProductDetail product={item} /> */}
           </Link>
         ))}

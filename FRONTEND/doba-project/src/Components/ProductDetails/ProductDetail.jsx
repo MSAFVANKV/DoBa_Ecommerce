@@ -14,6 +14,8 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [similarProducts, setSimilarProducts] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(0);
+
 
   useEffect(() => {
     // Fetch product details using the productId `${adminbaseURL}/allproducts`
@@ -34,6 +36,9 @@ const ProductDetail = () => {
     setShowForm(!showForm)
   }
 
+  const handleImageClick = (index) => {
+    setSelectedImage(index);
+  };
   if (!product) {
     return <div className='flex justify-center h-[300px] items-center font-bold text-[1.6rem] text-blue-500'>
       <span>Loading..</span>
@@ -48,24 +53,51 @@ const ProductDetail = () => {
       </div>
       {/*  */}
       <div className="flex w-[100%]  justify-center items-center my-10">
-        <div className="sm:grid sm:grid-cols-3 grid-cols-4 sm:w-[55rem] w-[100%] items-center ">
-          <div className="border m-2 shadow-sm w-[200px]">
-            <img src={`${mainURL}/Public/ProductsImages/${product.file}`} alt={product.productName}
-              // width={'250px'}
-              className='p-3 object-cover' />
+        <div className="sm:grid sm:grid-cols-4 grid-cols-4 sm:w-[55rem] w-[100%]lg:h-[600px]">
+          {/* ====== */}
+
+          <div className='border sm:m-2 shadow-sm w-[100%] sm:h-[430px] h-[360px] col-span-2'>
+            <img
+              src={`${mainURL}/Public/ProductsImages/${product.file[selectedImage]}`}
+              alt={product.productName}
+              className='p-3 object-cover w-full h-full'
+              // main  image
+              // onClick={() => handleImageClick(0)}
+            />
+            {/* select images */}
+            <div className="flex">
+            <img
+              src={`${mainURL}/Public/ProductsImages/${product.file[1]}`}
+              alt={product.productName}
+              className='p-3 object-cover w-[100px] h-[100px] cursor-pointer'
+              // second image
+              onClick={() => handleImageClick(1)}
+            />
+            <img
+              src={`${mainURL}/Public/ProductsImages/${product.file[0]}`}
+              alt={product.productName}
+              className='p-3 object-cover w-[100px] h-[100px] cursor-pointer'
+              // second image
+              onClick={() => handleImageClick(0)}
+            />
+            </div>
           </div>
-          <div className="col-span-2 mx-5 text-[1.1rem]">
+          {/* ====== */}
+          
+          <div className=" mx-5 text-[1.1rem]  col-span-2 px-7 py-10 sm:mt-0 mt-20">
             <h2 className='font-bold'>{product.productName}</h2>
             {/* <p>Price: ₹{product.price}</p> */}
             <p>{product.description}</p>
           </div>
+
+
           <div className="flex justify-center items-center sm:hidden  rounded-2xl">
             <button className='p-2 border-r-4 border-t shadow-md border-s border-[#F26D1E] rounded-2xl sm:my-0 my-5' onClick={openForm}>Enquiry For This item</button>
           </div>
         </div>
 
       </div>
-      <div className="sm:flex hidden justify-center ">
+      <div className="sm:flex hidden justify-center mt-10">
         {!showForm && <UserForm product={product} />}
       </div>
       {
@@ -81,7 +113,7 @@ const ProductDetail = () => {
         {similarProducts.map((similar) => (
           <div key={similar._id} className="w-[100%] sm:w-[170px] sm:ms-10 my-4 border rounded-md overflow-hidden shadow-md">
             <img
-              src={`${mainURL}/Public/ProductsImages/${similar.file}`}
+              src={`${mainURL}/Public/ProductsImages/${similar.file[0]}`}
               alt={similar.productName}
               className='w-full h-[120px] object-cover'
             />

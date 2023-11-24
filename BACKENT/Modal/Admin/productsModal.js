@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
-    file: {
+    file: [{
         type: String,
         required: true,
-    },
+    }],
     productName: {
         type: String,
         required: true,

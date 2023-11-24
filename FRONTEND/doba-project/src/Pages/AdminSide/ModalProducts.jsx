@@ -2,18 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editProduct, getProducts, uploadProduct } from '../../ReduxToolKit/Admin/ProductsSlice';
 
-import { adminbaseURL } from '../../Base/Constent';
+import { adminbaseURL, mainURL } from '../../Base/Constent';
 import { IoCloseCircleSharp } from 'react-icons/io5'
-
+function bufferToBlob(buffer) {
+    return new Blob([buffer]);
+}
 function ModalProducts({ closeModal, selectedProduct }) {
 
     const dispatch = useDispatch()
     const [error, setError] = useState("")
+    const [imageError, setimageError] = useState("")
 
     const [productInfo, setProductInfo] = useState({
         productName: selectedProduct?.productName || '',
         price: selectedProduct?.price || '',
-        file: null,
+        // images: [],
+        images: selectedProduct?.file || [],
         description: selectedProduct?.description || '',
         category: selectedProduct?.category || 'dosa',
     });
@@ -27,12 +31,26 @@ function ModalProducts({ closeModal, selectedProduct }) {
         });
     };
 
+    // const handleImageUpload = (e) => {
+    //     const selectedImages = Array.from(e.target.files);
+    //     setProductInfo({
+    //         ...productInfo,
+    //         images: selectedImages,
+    //     });
+    // };
     const handleImageUpload = (e) => {
-        const selectedImage = e.target.files[0]; // Get the selected image file
-        setProductInfo({
-            ...productInfo,
-            image: selectedImage,
-        });
+        const selectedImages = Array.from(e.target.files);
+
+        // Check if the number of selected files is more than 2
+        if (selectedImages.length > 2) {
+            setimageError("Please select only 2 images.");
+        } else {
+            setProductInfo({
+                ...productInfo,
+                images: selectedImages,
+            });
+            setimageError(""); // Clear any previous error
+        }
     };
 
     useEffect(() => {
@@ -40,7 +58,9 @@ function ModalProducts({ closeModal, selectedProduct }) {
     }, [dispatch]);
 
     const validateForm = () => {
-        const { productName, price, image, category, description } = productInfo;
+        const { productName, price, images, category, description } = productInfo;
+        // const { images } = productInfo;
+
         const errors = [];
 
         if (!productName) {
@@ -51,7 +71,7 @@ function ModalProducts({ closeModal, selectedProduct }) {
             errors.push('Product Price');
         }
 
-        if (!image) {
+        if (!images) {
             errors.push('Product Image');
         }
 
@@ -74,14 +94,23 @@ function ModalProducts({ closeModal, selectedProduct }) {
 
     const upload = (e) => {
         e.preventDefault();
-        if (!selectedProduct&&!validateForm()) {
+        if (!selectedProduct && !validateForm()) {
             return;
         }
         const formData = new FormData();
         // Add other form data fields
         formData.append('productName', productInfo.productName);
         formData.append('price', productInfo.price);
-        formData.append('image', productInfo.image);
+        // formData.append('image', productInfo.image);
+        // productInfo.images.forEach((image, index) => {
+        //     formData.append('images', image);
+        // });
+        // If there are new images, append them
+        if (productInfo.images.length > 0) {
+            productInfo.images.forEach((image, index) => {
+                formData.append("images", image);
+            });
+        }
         formData.append('description', productInfo.description);
         formData.append('category', productInfo.category);
 
@@ -102,7 +131,7 @@ function ModalProducts({ closeModal, selectedProduct }) {
                 setProductInfo({
                     productName: '',
                     price: '',
-                    image: null,
+                    images: [],
                     description: '',
                     category: 'dosa',
                 });
@@ -113,7 +142,7 @@ function ModalProducts({ closeModal, selectedProduct }) {
 
 
     const handleClose = () => {
-        if (productInfo.productName || productInfo.description || productInfo.file) {
+        if (productInfo.productName || productInfo.description) {
             const result = window.confirm("You have unsaved changes. Are you sure you want to close?");
             if (result) {
                 closeModal();
@@ -141,7 +170,7 @@ function ModalProducts({ closeModal, selectedProduct }) {
                         </span>
                     </span>
                     {/* ========== */}
-                   
+
                     <div className="flex flex-col">
                         <label htmlFor="productName" className="font-bold">
                             Product Name
@@ -176,10 +205,40 @@ function ModalProducts({ closeModal, selectedProduct }) {
                         </label>
                         <input type="file"
                             id="productImage"
-                            name="image"
+                            name="images"
+                            multiple
                             onChange={handleImageUpload} />
 
                     </div>
+                    {imageError && (
+                        <div className='p-5 bg-red-200 m-auto my-2 rounded-lg text-[#ca4747] sm:text-[1rem] text-[0.8rem] font-bold'>
+                            {imageError}
+                        </div>
+                    )}
+                    {productInfo.images && productInfo.images.length > 0 && (
+                        productInfo.images.map((image, index) => (
+                            <img key={index} src={URL.createObjectURL(bufferToBlob(image.data))} alt="" width="30px" />
+                        ))
+                    )}
+                    {selectedProduct &&
+                        selectedProduct.file &&
+                        selectedProduct.file.length > 0 && (
+                            <div className="flex mt-2">
+                                {selectedProduct.file.map((filename, index) => (
+                                    <img
+                                        key={index}
+                                        src={`${mainURL}/Public/ProductsImages/${filename}`}
+                                        alt={`Image ${index + 1}`}
+                                        style={{
+                                            width: "30px",
+                                            height: "30px",
+                                            marginRight: "5px",
+                                        }}
+                                    />
+                                ))}
+                            </div>
+                        )}
+
                     <div className="flex flex-col">
                         <label htmlFor="description" className="font-bold">
                             Add Product Description
@@ -201,7 +260,7 @@ function ModalProducts({ closeModal, selectedProduct }) {
                             value={productInfo.category}
                             onChange={handleInputChange}
                         >
-                            <option value="dosa">DOASA</option>
+                            <option value="dosa">DOSA</option>
                             <option value="idly">IDLY</option>
                         </select>
                     </div>

@@ -34,11 +34,19 @@ router
     });
 
     // router.post('/upload', upload.single('image'), uploadFile);
+// router
+//    .route("/upload")
+//    .post( upload.fields([
+//       { name: "images", maxCount: 2 },
+//     ]),uploadFile);
+
 router
-   .route("/upload")
-   .post( upload.fields([
-      { name: "image", maxCount: 1 },
-    ]),uploadFile);
+.route("/upload")
+.post( upload.fields([
+   { name: "images", maxCount: 2 },
+]),uploadFile);
+
+
 
 router
     .route('/allproducts')
@@ -47,7 +55,7 @@ router
     
 router
     .route('/product/edit')
-    .put(upload.fields([{ name: 'image', maxCount: 1 }]), editFile);
+    .put(upload.fields([{ name: 'images', maxCount: 2 }]), editFile);
 
 router
     .route('/product/delete/:_id')

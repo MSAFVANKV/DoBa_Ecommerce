@@ -58,11 +58,16 @@ const columns = [
   {
       name: 'Product Image',
       cell: row => (
+        <div className='flex '>
+        {row.file.map((filename, index) => (
           <img
-              src={`${mainURL}/Public/ProductsImages/${row.file}`}
-              alt={row.productName}
-              style={{ width: '50px', height: '50px' }}
+            key={index}
+            src={`${mainURL}/Public/ProductsImages/${filename}`}
+            alt={`${row.productName} Image ${index + 1}`}
+            style={{ width: '35px', height: '35px', marginRight: '10px ' , border:'0.5px black solid' }}
           />
+        ))}
+      </div>
       ),
       sortable: true,
       wrap: true,
@@ -102,6 +107,17 @@ const columns = [
   <div className="pt-10 h-[100vh] sm:w-[100%] w-screen bg-[#F6F8FC] p-5">
     <div className=" flex justify-center items-center">
     <button className='bg-[#F26D1E] text-white font-bold p-3 rounded-xl m-5' onClick={openAddProductModal}>ADD PRODUCTS</button>
+
+    </div>
+    <div className="flex flex-col text-start items-center ">
+      <div className="bg-slate-300 w-[60%] flex flex-col p-2">
+      <span>* BEFORE ADD PRODUCTS NOTE THESE INSTRECTIONS:</span>
+      <span>*TRY ADD ALL FIELDS IN FORM</span>
+      <span>*WHEN IMAGE UPLOAD YOU HAVE OPTION FOR SELECT 2 IMAGES:</span>
+      <span>a) FIRST SELECT MAIN IMAGE FOR SHOWING HOME PAGES</span>
+      <span>B) SECOND SELECT ANOTHER SIDE OF THE PACK</span>
+
+      </div>
     </div>
     {modalOpen && <ModalProducts closeModal={closeProductModal} selectedProduct={selectedProduct}/>}
       <div className=" sm:w-[95%]">

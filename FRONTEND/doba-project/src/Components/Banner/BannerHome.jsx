@@ -28,7 +28,7 @@ function BannerHome() {
 
   return (
     <>
-      <div className="text-center w-[100%]"></div>
+      <div className="text-center w-[100%] py-[0.1rem]"></div>
       <div className="flex items-center justify-center">
         <Swiper
           breakpoints={{
@@ -54,16 +54,16 @@ function BannerHome() {
             <SwiperSlide key={item.id}>
               <div className="flex flex-col gap-6 group relative shadow-lg text-white hover:shadow-2xl px-6 py-8 h-[210px] md:h-[350px] lg:h-[450px] w-[100%] cursor-pointer">
                 {/* <div
-                  className="absolute inset-0 bg-cover bg-no-repeat bg-center w-[100%] h-[100%]"
+                  className="absolute inset-0 bg-contain bg-no-repeat bg-center w-[100%] h-[100%]"
                   style={{ backgroundImage: `url(${mainURL}/Public/Banner/${item.file})` }}
                 /> */}
-                <img src={`${mainURL}/Public/Banner/${item.file}`} alt="" width={'100%'} height={'100%'}
-                className='absolute inset-0 sm:object-cover sm:object-center w-[100%] h-[100%]'/>
+                <img src={`${mainURL}/Public/Banner/${item.file}`} alt="" 
+                className='absolute inset-0 w-[100%] h-[100%]'/>
                 <div className='absolute inset-0 bg-black opacity-5 group-hover:opacity-50' />
                 <div className="relative flex flex-col gap-3">
                   <p className='lg:text-[20px] font-bold text-white capitalize'>{item.bannerName}</p>
                 </div>
-                <img src={logo} alt="" className='absolute bottom-5 left-5 w-[50px] h-[50px] text-black group-hover:text-blue-600 group-hover:rotate-45 duration-100' />
+                <img src={logo} alt="" className='absolute bottom-5 left-5 w-[50px] h-[50px] text-black group-hover:text-blue-600  duration-100' />
               </div>
             </SwiperSlide>
           ))}

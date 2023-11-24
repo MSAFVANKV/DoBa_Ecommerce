@@ -51,7 +51,7 @@ function UserForm({ product }) {
         pauseOnHover
       />
 
-      <form onSubmit={formik.handleSubmit} className='sm:w-[500px sm:h-[500px] sm:border p-5 rounded-3xl '>
+      <form onSubmit={formik.handleSubmit} className='sm:w-[500px sm:h-[500px] sm:border p-5 mt-20 rounded-3xl '>
         <span className='text-[1.3rem] font-bold'>Approach us for this Item</span>
         <div className='sm:flex sm:my-0 my-5 gap-2'>
           <div className="">

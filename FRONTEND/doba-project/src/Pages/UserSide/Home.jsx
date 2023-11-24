@@ -9,6 +9,8 @@ import waveTop from '../../../assets/images/wave_white.svg'
 
 import chef from '../../../assets/images/chef-1.png'
 import nature from '../../../assets/images/rice-icon.png'
+import Banner_03 from '../../../assets/images/Banner_03.png'
+
 
 // vdros
 import video1 from '../../../assets/videos/video-1.mp4'
@@ -45,18 +47,16 @@ function Home() {
         <BannerHome />
         {/* ======================================================================== */}
         {/* <div className="sm:grid md:grid-cols-8 grid-col justify-center"> */}
-        <div className="">
-          <img src={waveTop} className='' alt="" />
-
-        </div>
-        <div className="md:flex sm:p-[2rem] justify-center">
+        <div className="w-full h-[5px] bg-white " />
+          {/* <img src={waveTop} className='h-[300px] w-full' alt="" /> */}
+        <div className="md:flex sm:p-[2rem] justify-center  bg-[#F26D1E]">
 
 
           {/* col-1 start ======================================*/}
           {/* <div className="bg-[#F26D1E]">
 
           </div> */}
-          <div className="">
+          <div className="bg-[#F26D1E]">
             <div className="hero_subtitle md:flex justify-center">
               {/* home image ================ */}
               <div className=" rounded-2xl drop sm:ms-0 flex justify-center ">
@@ -121,47 +121,76 @@ function Home() {
         {/* ===================================Section end===================================== */}
 
       </section>
-      <img src={wave} className='' alt="" />
+      <img src={wave} className='-mt-16' alt="" />
 
       <section>
 
         {/* {getProductSlice && getProductSlice.length > 0 ?<Items/> : null} */}
-        <h2 className='text-center sm:text-[2rem] text-[1.5rem] font-bold'>OUR PRODUCTS</h2>
-        <div className='flex flex-wrap justify-center items-center gap-5 mx-10 my-10'>
-          {
-            getProductSlice.slice(0, 4).map((item, index) => (
-              <Link to={`/product/${item._id}`} key={item._id}>
+        {getProductSlice?.length > 0 && (
+  <>
+    <h2 className='text-center sm:text-[2rem] text-[1.5rem] font-bold'>OUR PRODUCTS</h2>
+    <div className='flex flex-wrap justify-center items-center gap-5 mx-10 my-10'>
+      {getProductSlice.slice(0, 4).map((item) => (
+        // <Link to={`/product/${item._id}`} key={item._id}>
+        //   <div className="flex flex-col gap-6 group relative shadow-lg text-black hover:shadow-2xl rounded-xl md:px-6 py-8 w-[100px] h-[110px] sm:h-[180px] sm:w-[200px] md:h-[200px] md:w-[215px] lg:h-[200px] lg:w-[250px] cursor-pointer">
+        //     <div
+        //       className="absolute gap inset-0 bg-cover bg-center rounded-xl"
+        //       style={{ backgroundImage: `url(${mainURL}/Public/ProductsImages/${item.file})` }}
+        //     />
+        //     <div className=' absolute inset-0 bg-black opacity-5 group-hover:opacity-20 rounded-xl' />
+        //     <div className="relative flex flex-col text-black p-3 border bg-white opacity-50 group-hover:opacity-80 gap-2">
+        //       <p className='lg:text-[18px] md:text-[15px] text-[12px] font-bold'>
+        //         {item.productName.length > 8 ? `${item.productName.slice(0, 8)}...` : item.productName}
+        //       </p>
+        //       <p className='lg:text-[18px] md:text-[15px] text-[12px]  font-bold'>₹{item.price}</p>
+        //     </div>
+        //     <LiaExternalLinkAltSolid className='sm:block absolute hidden bottom-5 left-5 sm:w-[35px] sm:h-[35px] text-black group-hover:text-blue-600 group-hover:rotate-45 duration-100'/>
+        //   </div>
+        // </Link>
+        <div key={item._id} className="h-[220px] w-[200px] md:h-[215px] md:w-[215px] lg:h-[250px] lg:w-[250px]  my-4 border rounded-md overflow-hidden shadow-md">
+            <img
+              src={`${mainURL}/Public/ProductsImages/${item.file[0]}`}
+              alt={item.productName}
+              className='w-full lg:h-[190px] h-[150px] p-1 sm:object-cover sm:object-center'
+            />
+            <div className="p-2">
+              <p className="text-center font-bold text-sm mb-1">{item.productName}</p>
+              {/* Add other details as needed */}
+              <div className="flex justify-between items-center">
+                <p className="text-gray-600 text-xs ">{/* Add other details, e.g., price, category, etc. */}</p>
+                <Link to={`/product/${item._id}`} className="bg-blue-500 text-white px-2 py-1 rounded-md text-xs">
+                  Details
+                </Link>
+              </div>
+            </div>
+          </div>
+      ))}
+     
+    </div>
+    {/* <div className="flex justify-center">
+        <Link to="/products">
+          <button className="h-[50px] border font-comforter2 text-[1.3rem] relative   border-[#F26D1E]  lg:w-[250px] my-3 shadow-xl">Take to store</button>
+          <div className="h-[50px] lg:w-[250px] bg-[#F26D1E] top-1 absolute"></div>
+        </Link>
+      </div> */}
+      <div class="relative flex justify-center  overflow-hidde ">
+  <div class="absolute inset-0 bg-center"></div>
+  <div class="">
+    <div class="flex py-5">
+    <Link to={`/products`}>
+      <button class="relative border-2 border-[#F26D1E] bg-transparent py-2.5 lg:px-16 font-medium uppercase text-black
+       transition-colors before:absolute before:left-0 before:top-0 before:-z-10 before:h-full
+       before:w-full before:origin-top-left before:scale-x-0 before:bg-[#F26D1E] before:transition-transform
+        before:duration-300 before:content-[''] hover:text-white before:hover:scale-x-100">
+        Take to store</button>
+        </Link>
+    </div>
+  </div>
+</div>
 
+  </>
+)}
 
-                <div className="flex flex-col gap-6 group relative shadow-lg text-black hover:shadow-2xl
-              rounded-xl md:px-6 py-8 w-[100px] h-[110px] sm:h-[180px] sm:w-[200px] md:h-[200px] md:w-[215px] lg:h-[200px] lg:w-[250px] cursor-pointer">
-                  <div
-                    className="absolute gap inset-0 bg-cover bg-center rounded-xl"
-                    style={{ backgroundImage: `url(${mainURL}/Public/ProductsImages/${item.file})` }}
-                  />
-
-                  <div className=' absolute inset-0 bg-black opacity-5 group-hover:opacity-20 rounded-xl' />
-                  <div className="relative flex flex-col text-black p-3 border bg-white opacity-50 group-hover:opacity-80 gap-2">
-                    <p className='lg:text-[18px] md:text-[15px] text-[12px] font-bold'>{item.productName.length > 8
-                      ? `${item.productName.slice(0, 8)}...`
-                      : item.productName}</p>
-                    <p className='lg:text-[18px] md:text-[15px] text-[12px]  font-bold'>₹{item.price}</p>
-
-                  </div>
-                  <LiaExternalLinkAltSolid className='sm:block absolute hidden bottom-5 left-5 sm:w-[35px] sm:h-[35px] text-black 
-               group-hover:text-blue-600 group-hover:rotate-45 duration-100'/>
-                </div>
-                {/* <ProductDetail product={item} /> */}
-              </Link>
-            ))
-          }
-        </div>
-
-        <div className="text-center">
-          <Link to="/products">
-            <button className="btn my-3 shadow-xl">Take to store</button>
-          </Link>
-        </div>
 
         {/* slider started here */}
         {getSliderSlice && getSliderSlice.length > 0 ? <Sample /> : null}

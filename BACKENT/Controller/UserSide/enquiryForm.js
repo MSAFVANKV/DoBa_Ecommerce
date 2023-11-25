@@ -14,7 +14,11 @@ exports.getEnquiryForm = async (req, res) => {
 
 
 exports.uploadEnquiryForm = async (req, res) => {
+  console.log('555');
+
     try {
+      console.log('1');
+
         const {formState} = req.body
         if(!formState){
             return res.status(400).send({ msg: " fields are required." });
@@ -25,14 +29,19 @@ exports.uploadEnquiryForm = async (req, res) => {
             contactNumber:formState.contactNumber,
             email:formState.email,
             fullName:formState.fullName,
-            productType:formState.productType,
+            // productType:formState.productType,
             businessType:formState.businessType,
             commends:formState.commends,
+            pincode:formState.pincode,
+            postOffice:formState.postOffice,
+            district:formState.district,
+            state:formState.state,
             read: false,
             sentAt: new Date(),
 
         })
         await form.save();
+        console.log('sms sent successfully');
         const transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
             port: process.env.SMTP_PORT,
@@ -55,7 +64,7 @@ exports.uploadEnquiryForm = async (req, res) => {
                     <p><strong>User Information:</strong></p>
                     <p><strong>Email:</strong> ${formState.email}</p>
                     <p><strong>Phone Number:</strong> ${formState.contactNumber}</p>
-                    <p><strong>Product of Interest:</strong> ${formState.productType}</p>
+                    <p><strong>Product of Interest:</strong> ${formState.businessType}</p>
                     <p><strong>Check the messages in given link:</strong></p>
                     <span>https://dobafoods.com/admin</span>
                   </div>

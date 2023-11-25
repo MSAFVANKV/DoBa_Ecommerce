@@ -16,6 +16,8 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 // img
 import logo from '../../../assets/images/doba_logo.png';
 import { enquiryForm } from '../../ReduxToolKit/User/EnquirySlice';
+import { getFeedbackInfo, setFeedback } from '../../ReduxToolKit/User/FeedBackSlice';
+import FeedbackSMS from './AllMessages/FeedbackSMS';
 
 
 function Messages() {
@@ -23,8 +25,11 @@ function Messages() {
 
   const [enquiry1, setEnquiry1] = useState(true);
   const [enquiry2, setEnquiry2] = useState(false);
+  const [enquiry3, setEnquiry3] = useState(false);
+
   const [showMessages, setShowMessages] = useState(false);
   const [showEnquiryMessages, setShowEnquiryMessages] = useState(false);
+  const [showFeedbackMessages, setShowFeedbackMessages] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState(null);
   const [checked, setChecked] = useState([]);
   // const [selectAll, setSelectAll] = useState(false);
@@ -35,6 +40,7 @@ function Messages() {
 
   const SingleFormCollections = useSelector(state => state.form.form);
   const enquiryFormCollections = useSelector(state => state.enquiry.enquiry);
+  const feedbackFormCollections = useSelector(state => state.feedback.feedback);
 
   // console.log(SingleFormCollections, 'SingleFormCollections');
 
@@ -53,7 +59,15 @@ function Messages() {
         console.log(response.data);
       })
   }, [dispatch]);
-  // =================================
+  // =======Feedback form==========================
+  useEffect(() => {
+    axios.get(`${userURL}/form/feedback/getall`, { withCredentials: true })
+      .then((response) => {
+        dispatch(setFeedback(response.data));
+        console.log(response.data);
+      })
+  }, [dispatch]);
+  // ==============================================
   const refreshMessages = () => {
     axios.get(`${userURL}/singleform/getall`, { withCredentials: true })
       .then((response) => {
@@ -70,8 +84,10 @@ function Messages() {
   const openSingeForm = () => {
     setEnquiry1(true);
     setEnquiry2(false);
+    setEnquiry3(false);
     setShowMessages(false);
     setShowEnquiryMessages(false)
+    setShowFeedbackMessages(false)
 
   };
 
@@ -79,8 +95,18 @@ function Messages() {
   const enquiyForm = () => {
     setEnquiry1(false);
     setEnquiry2(true);
+    setEnquiry3(false);
     setShowMessages(false);
     setShowEnquiryMessages(false)
+    setShowFeedbackMessages(false)
+  };
+  const openFeedbackForm = () => {
+    setEnquiry1(false);
+    setEnquiry2(false);
+    setEnquiry3(true);
+    setShowMessages(false);
+    setShowEnquiryMessages(false)
+    setShowFeedbackMessages(false)
   };
 
   // const showSingleMessage = (message) => {
@@ -105,9 +131,13 @@ function Messages() {
 
   const allMessagesRead = enquiryFormCollections.every(message => message.read);
   const unreadCount = enquiryFormCollections.filter(message => !message.read).length;
+  // ==
   const allSingleMessagesRead = SingleFormCollections.every(message => message.read);
   const unreadSingleCount = SingleFormCollections.filter(message => !message.read).length;
-
+  // ==
+  const allFeedbacksRead = feedbackFormCollections.every(message => message.read);
+  const unreadFeedbackCount = feedbackFormCollections.filter(message => !message.read).length;
+  
   // Filter messages based on the selected option
   const filteredMessages = SingleFormCollections.filter((message) => {
     if (filterOption === 'read') {
@@ -213,7 +243,7 @@ function Messages() {
       {/* sm: sms menu bar menu ======================================================[?]*/}
 
       <div className=" pt-10 sm:flex bg-[#F6F8FC] p-5">
-        <div className={` ${open ? 'h-20 my-6' : 'h-1 w-[15%]'} w-[100%] flex justify-center sm:hidden m-auto duration-300 rounded-md  bg-dark-purple`}>
+        <div className={` ${open ? ' my-6' : 'h-1 w-[15%]'} w-[100%] flex justify-center sm:hidden m-auto duration-300 rounded-md  bg-dark-purple`}>
           <MdOutlineArrowDropDown onClick={() => setOpen(!open)} className='absolute  top-[1.8rem] text-[2rem]' />
           {/*  */}
           <ul className={`${!open && 'hidden'} origin-left duration-200`}>
@@ -239,15 +269,28 @@ function Messages() {
                 </span>
               )} */}
                {enquiryFormCollections && enquiryFormCollections.length > 0 && (
-                  <span className={`w-5 h-5  font-bold float-right flex justify-center items-center ms-2 rounded-full ${allMessagesRead ? ' text-black' : 'bg-red-500 text-white'}`}>
+                  <span className={`w-5 h-5  font-bold float-right flex justify-center items-center ms-2 rounded-full ${allMessagesRead ? ' text-white' : 'bg-red-500 text-white'}`}>
                     {allMessagesRead ? enquiryFormCollections.length.toLocaleString() : unreadCount.toLocaleString()}
+                  </span>
+                )}
+            </li>
+            {/* feedback menu */}
+            <li
+              className={`text-white p-2 cursor-pointer rounded-lg ${enquiry3 || showFeedbackMessages ? 'font-bold' : 'font-light'}`}
+              onClick={openFeedbackForm}
+            >
+              Feedback Form
+               {feedbackFormCollections && feedbackFormCollections.length > 0 && (
+                  <span className={`w-5 h-5  font-bold float-right flex justify-center items-center ms-2 rounded-full ${allFeedbacksRead ? ' text-white' : 'bg-red-500 text-white'}`}>
+                    {allFeedbacksRead ? feedbackFormCollections.length.toLocaleString() : unreadFeedbackCount.toLocaleString()}
                   </span>
                 )}
             </li>
           </ul>
           {/*  */}
         </div>
-        {/* sm: sms menu bar menu ======================================================[?]*/}
+        {/* sm: sms menu bar menu ends ======================================================[?]*/}
+
         <div className="w-[20%] md:block hidden">
           <div className="w-[80%] ">
             {/* selection list */}
@@ -274,6 +317,24 @@ function Messages() {
                 {enquiryFormCollections && enquiryFormCollections.length > 0 && (
                   <span className={`w-5 h-5  font-bold float-right flex justify-center items-center ms-2 rounded-full ${allMessagesRead ? ' text-black' : 'bg-red-500 text-white'}`}>
                     {allMessagesRead ? enquiryFormCollections.length.toLocaleString() : unreadCount.toLocaleString()}
+                  </span>
+                )}
+              </li>
+
+               {/* feedback menu */}
+           
+            {/*  */}
+            <li
+                className={`p-2 font-light hover:bg-slate-200 cursor-pointer mt-3 rounded-lg ${enquiry3 || showEnquiryMessages ? 'bg-slate-300 hover:bg-slate-300' : ''}`}
+                onClick={openFeedbackForm}
+              >
+              Feedback Form
+
+
+                {/* Display the count based on read/unread status */}
+                {feedbackFormCollections && feedbackFormCollections.length > 0 && (
+                  <span className={`w-5 h-5  font-bold float-right flex justify-center items-center ms-2 rounded-full ${allFeedbacksRead ? ' text-black' : 'bg-red-500 text-white'}`}>
+                    {allFeedbacksRead ? feedbackFormCollections.length.toLocaleString() : unreadFeedbackCount.toLocaleString()}
                   </span>
                 )}
               </li>
@@ -406,6 +467,19 @@ function Messages() {
           unreadCount={unreadCount}
           />
 
+          
+<FeedbackSMS 
+          openFeedbackForm={openFeedbackForm}
+           enquiry3={enquiry3}
+           setEnquiry3={setEnquiry3} 
+          //  handleEnquiyForm={openFeedbackForm}
+          showFeedbackMessages={showFeedbackMessages} 
+          setShowFeedbackMessages={setShowFeedbackMessages} 
+          allFeedbacksRead={allFeedbacksRead}
+          unreadFeedbackCount={unreadFeedbackCount}
+          />
+
+  
 
         </div>
       </div>

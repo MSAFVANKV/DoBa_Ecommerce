@@ -9,7 +9,7 @@ const feedbackFormSchema = new mongoose.Schema({
         type: String,
         require:true,
     },
-    feedback:{
+    feedbacks:{
         type: String,
         require:true
     },

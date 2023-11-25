@@ -18,10 +18,26 @@ const enquiryFormSchema = new mongoose.Schema({
         type: String,
         require:true
     },
-    productType:{
+    // productType:{
+    //     type: String,
+    //     // require:true
+    //     default: "both"
+    // },
+    state:{
         type: String,
-        // require:true
-        default: "both"
+        require:true
+    },
+    district:{
+        type: String,
+        require:true,
+    },
+    pincode:{
+        type: String,
+        require:true
+    },
+    postOffice:{
+        type: String,
+        require:true
     },
     commends:{
         type: String,

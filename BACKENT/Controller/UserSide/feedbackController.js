@@ -14,7 +14,7 @@ exports.getFeedbackForm = async (req, res) => {
 
 exports.uploadFeedbackForm = async (req, res) => {
     try {
-        const {phone, email, feedback} = req.body
+        const {formState} = req.body
         if(!req.body){
             console.log(phone, email, feedback,' fields are required')
             return res.status(400).send({ msg: " fields are required." });
@@ -22,9 +22,9 @@ exports.uploadFeedbackForm = async (req, res) => {
         }
         // const form = await feedbackFormCollection.find({})
         const form = new feedbackFormCollection({
-            phone:phone,
-            email:email,
-            feedback:feedback,
+            phone:formState.phone,
+            email:formState.email,
+            feedbacks:formState.feedbacks,
             read: false,
             sentAt: new Date(),
 

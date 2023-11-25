@@ -21,6 +21,30 @@ const singleForm = new mongoose.Schema({
         type: String,
         require:true
     },
+    state:{
+        type: String,
+        require:true
+    },
+    district:{
+        type: String,
+        require:true,
+    },
+    landMark:{
+        type: String,
+        require:true
+    },
+    pincode:{
+        type: String,
+        require:true
+    },
+    postOffice:{
+        type: String,
+        require:true
+    },
+    productId:{
+        type: String,
+        require:true
+    },
     read: {
         type: Boolean,
         default: false,

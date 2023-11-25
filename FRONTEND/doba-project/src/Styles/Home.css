@@ -52,16 +52,7 @@
     align-items: center;
 }
 
-input[type='text'], input[type='file'],input[type='mobile'] {
-    border: 1px solid #ccc; /* Add a border with a light gray color */
-    border-radius: 5px; /* Add rounded corners */
-    padding: 10px; /* Adjust padding for better spacing */
-    width: 100%; /* Make the input element take the full width of its container */
-    font-size: 16px; /* Set the font size */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
-    transition: border-color 0.3s, box-shadow 0.3s; /* Add smooth transitions for hover and focus effects */
-    color: black;
-  }
+
 
   .email{
     border: 1px solid #ccc; /* Add a border with a light gray color */

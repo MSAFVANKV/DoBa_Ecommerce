@@ -26,7 +26,13 @@ exports.uploadSingleForm = async (req, res) => {
             email:formState.email,
             fullName:formState.fullName,
             productName:formState.productName,
+            landMark:formState.landMark,
+            pincode:formState.pincode,
+            postOffice:formState.postOffice,
+            district:formState.district,
+            state:formState.state,
             command:formState.commends,
+            productId:formState.productId,
             read: false,
             sentAt: new Date(),
 

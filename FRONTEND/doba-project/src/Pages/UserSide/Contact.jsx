@@ -8,7 +8,7 @@ import { IoIosCall } from "react-icons/io";
 
 function Contact() {
   const scrollRef = useRef();
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const handleScrollTo = (index) => {
     const itemRef = scrollRef.current.children[index];

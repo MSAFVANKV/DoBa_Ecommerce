@@ -52,7 +52,8 @@ function SinglePurchase({ selectedItem, selectedEnquiryItem, openSingeForm, enqu
        : selectedFeedbackItem ? 
        <div className="">
        <IoIosArrowRoundBack className='m-5 w-[30px] h-[30px] cursor-pointer hover:bg-slate-100 rounded-full' onClick={openFeedbackForm}/>
-       <h2 className='ps-5 font-bold'>Message From: <span className='text-blue-800 font-normal'>{selectedFeedbackItem.email}</span></h2>
+       <h2 className='ps-5 font-bold'>Message From: <a href={`mailto:${selectedFeedbackItem.email}`} className='text-blue-700 font-normal'>{selectedFeedbackItem.email}</a></h2>
+
        <h2 className='font-normal ps-5 flex items-center' >Contact Number:<a href={`tel:${selectedFeedbackItem.phone}`} className='text-blue-700 font-normal flex items-center ms-2'><IoIosCall />{selectedFeedbackItem.phone}</a></h2>
 
    <span className=' font-normal ps-5 flex items-center'></span>  

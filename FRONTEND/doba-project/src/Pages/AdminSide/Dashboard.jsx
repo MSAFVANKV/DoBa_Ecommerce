@@ -17,6 +17,7 @@ import { LuMessageSquareDashed } from 'react-icons/lu';
 import { TfiLayoutSlider } from 'react-icons/tfi';
 import { GiTatteredBanner } from 'react-icons/gi';
 import { enquiryForm, getEnquiryForm } from '../../ReduxToolKit/User/EnquirySlice';
+import { getFeedbackInfo } from '../../ReduxToolKit/User/FeedBackSlice';
 
 
 const ringAnimation = keyframes`
@@ -56,6 +57,7 @@ function Dashboard({ setIsAdminLoggedIn }) {
   const getVideosList = useSelector((state) => state.video.video);
   const SingleFormCollections = useSelector(state => state.form.form);
   const enquiryFormCollections = useSelector(state => state.enquiry.enquiry);
+  const feedbackFormCollections = useSelector(state => state.feedback.feedback);
 
 
   useEffect(() => {
@@ -73,6 +75,8 @@ function Dashboard({ setIsAdminLoggedIn }) {
     dispatch(getBanner());
     dispatch(getVideos());
     dispatch(getEnquiryForm());
+    dispatch(getFeedbackInfo());
+
   }, [dispatch]);
 
   // all messages
@@ -85,7 +89,7 @@ function Dashboard({ setIsAdminLoggedIn }) {
   }, [dispatch]);
 
   const totalSms = () => {
-    return enquiryFormCollections.length + SingleFormCollections.length;
+    return enquiryFormCollections.length + SingleFormCollections.length + feedbackFormCollections.length;
   };
 
 
@@ -139,7 +143,7 @@ function Dashboard({ setIsAdminLoggedIn }) {
     ) : (
       <span>0 SMS</span>
     )} */}
-              {enquiryFormCollections && SingleFormCollections ? (
+              {enquiryFormCollections && SingleFormCollections && feedbackFormCollections ? (
                 <span>{totalSms()} Total SMS</span>
               ) : (<span>0 SMS</span>)}
               <RingingIcon className='text-[2rem]' />

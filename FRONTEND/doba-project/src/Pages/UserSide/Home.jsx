@@ -68,9 +68,13 @@ function Home() {
             <div className="w-[100%] flex">
               <span className='text-white font-semibold m-2 sm:text-[2rem] font-comforter2 text-center'>This batter is made fresh with rich organic ingredients and fermented naturally</span>
             </div>
+
+            {/* ==== #Search bar starts ==== */}
             <div className="lg:m-8 mt-5 flex flex-col justify-center max-m-lg">
               <SearchBar />
             </div>
+            {/* ==== #Search bar starts ==== */}
+
           </div>
           {/* videoss start && col-2 start ====*/}
           <div className=" lg:pt-0 pt-3 sm:col-span-4 sm:w-[100%] grid sm:flex justify-center items-center  home_video-box gap-5">
@@ -167,12 +171,7 @@ function Home() {
       ))}
      
     </div>
-    {/* <div className="flex justify-center">
-        <Link to="/products">
-          <button className="h-[50px] border font-comforter2 text-[1.3rem] relative   border-[#F26D1E]  lg:w-[250px] my-3 shadow-xl">Take to store</button>
-          <div className="h-[50px] lg:w-[250px] bg-[#F26D1E] top-1 absolute"></div>
-        </Link>
-      </div> */}
+    {/* store buton */}
       <div class="relative flex justify-center  overflow-hidde ">
   <div class="absolute inset-0 bg-center"></div>
   <div class="">

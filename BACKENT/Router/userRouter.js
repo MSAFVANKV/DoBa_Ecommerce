@@ -1,7 +1,7 @@
 const {Router} = require('express')
 const router = Router();
 
-const { getProductById, getSimilarProducts } = require('../Controller/UserSide/productsDetails');
+const { getProductById, getSimilarProducts, searchProducts } = require('../Controller/UserSide/productsDetails');
 const { getUserForm, uploadSingleForm, markMessageAsRead, deleteSingleForm, deleteAllMessages } = require('../Controller/UserSide/singleForm');
 const { getEnquiryForm, uploadEnquiryForm, markEnquiryMessageAsRead, deleteEnquiryForm, deleteAllEnquiryMessages } = require('../Controller/UserSide/enquiryForm');
 
@@ -10,6 +10,12 @@ const { getFeedbackForm, uploadFeedbackForm, markFeedMessageAsRead, deleteFeedba
 
 router.route('/product/:productId').get(getProductById);
 router.route('/product/:productId/similar').get(getSimilarProducts);
+
+// ...
+router.route(`/search/products/:query`).get(searchProducts);
+// ...
+
+
 
 // the single purchase routes
 

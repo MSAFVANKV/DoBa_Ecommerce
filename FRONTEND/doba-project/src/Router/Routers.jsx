@@ -40,6 +40,7 @@ function Routers() {
       <Route path="/aboutus" element={<AboutUs />} />
       <Route path="/sample" element={<Sample />} />
       <Route path="/product/:productId" element={<ProductDetail />} />
+      <Route path="/search/products/:query" element={<SearchBarPage />} />
       <Route path="/contact" element={<Contact />} />
 
     </Routes></>

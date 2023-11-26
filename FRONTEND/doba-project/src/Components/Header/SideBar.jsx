@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/images/doba_logo.png';
+import { AiOutlineSearch } from 'react-icons/ai';
 
 const navLinks = [
   {
@@ -29,10 +30,21 @@ const navLinks = [
 function SideBar({ items, index, Icon, toggle, closeToggle }) {
     // const [sideBar, setSideBar] = useState("#sidebar.active")
     const navigate = useNavigate();
+    const [searchQuery, setSearchQuery] = useState('');
   
     const handleImageClick = (path) => {
       navigate(path); // Use navigate to navigate to the specified path
       closeToggle(!toggle)
+    };
+    const handleSearchChange = (e) => {
+      setSearchQuery(e.target.value);
+    };
+  
+    const handleSearchSubmit = (e) => {
+      e.preventDefault();
+      // Perform search or navigate to search results page
+      console.log('Search query:', searchQuery);
+      // You can add logic to navigate to the search results page here
     };
   return (
     // <div className='modal-container ' onClick={()=>closeToggle()}>
@@ -83,7 +95,21 @@ function SideBar({ items, index, Icon, toggle, closeToggle }) {
             </NavLink>
           </li>
         ))}
-       
+           {/* Search input */}
+           <div className='flex items-center sm:hidden'>
+            <form onSubmit={handleSearchSubmit}>
+              <input
+                type="text"
+                placeholder="Search..."
+                className='border relative border-gray-300 rounded-md p-1 mr-2'
+                value={searchQuery}
+                onChange={handleSearchChange}
+              />
+              <button type="submit" className='text-gray-600 absolute  -translate-x-7 translate-y-1/2'>
+                <AiOutlineSearch />
+              </button>
+            </form>
+          </div>
       </ul></>
   );
 }

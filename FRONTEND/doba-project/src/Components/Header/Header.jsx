@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import './Header.css';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 
 // imported images
 import logo from '../images/doba_logo.png';
 
 // imported icons
-import { AiFillHome } from 'react-icons/ai';
+import { AiFillHome, AiOutlineSearch } from 'react-icons/ai';
 import HeaderItems from './HeaderItems';
 import SideBar from './SideBar';
+import axios from 'axios';
+import { userURL } from '../../Base/Constent';
 
 const navLinks = [
   {
@@ -36,10 +38,48 @@ const navLinks = [
 
 function Header() {
   const [toggle, setToggle] = useState(false);
+  // const [searchQuery, setSearchQuery] = useState('');
+  const [activeSearch, setActiveSearch] = useState([]);
+
+  const navigate = useNavigate();
   const toggleSidebar = () => {
     setToggle(!toggle);
     
   };
+  // const handleSearchChange = (e) => {
+  //   setSearchQuery(e.target.value);
+  // };
+  
+  const handleSearchChange = async (e) => {
+    const query = e.target.value;
+
+    if (query === '') {
+      setActiveSearch([]);
+      return false;
+    }
+
+    try {
+      const response = await axios.get(`${userURL}/search/products/${query}`);
+      setActiveSearch(response.data);
+    } catch (error) {
+      console.error("Error searching products:", error);
+    }
+  };
+  // Header.jsx
+  const handleSearchSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      if (activeSearch && activeSearch.length > 0) {
+        const s = activeSearch[0];
+        navigate(`/search/products/${s._id}`);
+      }
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+      // Handle error, show a message, etc.
+    }
+  };
+  
 
   return (
     <>
@@ -58,8 +98,21 @@ function Header() {
               ))}
             </ul>
           </div>
-          <div className=''>
-            {/* <button className='btn hidden sm:flex'>LOGIN</button> */}
+            {/* Search input */}
+            <div className='sm:flex items-center hidden'>
+            <form onSubmit={handleSearchSubmit}>
+              <input
+                type="text"
+                placeholder="Search..."
+                className='border relative border-gray-300 rounded-md p-1 mr-2'
+                onChange={(e)=> handleSearchChange(e)}
+              />
+                  {/* <Link to={`/search/products/${activeSearch}`}> */}
+              <button type="submit" className='text-gray-600 absolute right-1 -translate-x-1/2 translate-y-1/2'>
+                <AiOutlineSearch />
+              </button>
+              {/* </Link> */}
+            </form>
           </div>
         
         </div>

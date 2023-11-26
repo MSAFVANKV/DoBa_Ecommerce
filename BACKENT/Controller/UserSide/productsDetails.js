@@ -55,12 +55,32 @@ exports.getSimilarProducts = async (req, res) => {
 // };
 
 
+// exports.searchProducts = async (req, res) => {
+//   const { query } = req.params;
+
+//   try {
+//     const products = await productsCollection.find({
+//       productName: { $regex: new RegExp(query, 'i') }, // Case-insensitive search
+//     });
+
+//     res.status(200).json(products);
+//   } catch (error) {
+//     console.error("Error searching products:", error);
+//     res.status(500).send("Internal Server Error searching products");
+//   }
+// }
+
+// productsDetails.js
+
 exports.searchProducts = async (req, res) => {
   const { query } = req.params;
 
   try {
     const products = await productsCollection.find({
-      productName: { $regex: new RegExp(query, 'i') }, // Case-insensitive search
+      $or: [
+        { productName: { $regex: new RegExp(query, 'i') } },
+        { category: { $regex: new RegExp(query, 'i') } }, // Add this line for category search
+      ],
     });
 
     res.status(200).json(products);

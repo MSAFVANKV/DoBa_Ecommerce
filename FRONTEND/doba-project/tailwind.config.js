@@ -18,6 +18,7 @@ export default {
     },
   },
   plugins: [
-    require('tailwindcss-no-scrollbar')
+    require('tailwindcss-no-scrollbar'),
+    require('tailwind-scrollbar'),
   ],
 }

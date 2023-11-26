@@ -20,10 +20,10 @@ function Footer() {
 
     //   </div>
     // </div>
-    
-    <footer className="bg-[#F26D1E] text-white mt-28">
-       <img src={waveWhite} alt="" />
-    <div className="md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#ffffff19] py-7">
+    // bg-[#F26D1E]bg-[#adF26D1E]bg-[#ffffff19]
+    <footer className=" border-t-4 border-indigo-50 text-black sm:mt-28 mt-20">
+       {/* <img src={waveWhite} alt="" /> */}
+    <div className="md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#adF26D1E] py-7">
       <h1
         className="lg:text-3xl text-2xl md:mb-0 mb-6 lg:leading-normal font-semibold
        md:w-2/5"
@@ -53,13 +53,13 @@ function Footer() {
         <ItemsContainer />
       </div>
     <div
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10
-    text-center pt-2  text-sm pb-8"
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5
+    text-center py-3 items-center text-sm  bg-[#F26D1E] text-white"
     >
       <span>© 2023 DoBafoods. All rights reserved.</span>
       <span>Terms · Privacy Policy</span>
       {/* <SocialIcons Icons={Icons} /> */}
-      <div className="text-teal-500">
+      <div className="">
       
         <span
           className="p-2 cursor-pointer inline-flex items-center

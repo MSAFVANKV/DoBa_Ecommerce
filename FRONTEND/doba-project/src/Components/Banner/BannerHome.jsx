@@ -59,9 +59,9 @@ function BannerHome() {
                 /> */}
                 <img src={`${mainURL}/Public/Banner/${item.file}`} alt="" 
                 className='absolute inset-0 w-[100%] h-[100%]'/>
-                <div className='absolute inset-0 bg-black opacity-5 group-hover:opacity-50' />
+                <div className='absolute inset-0 bg-black opacity-5 group-hover:opacity-10' />
                 <div className="relative flex flex-col gap-3">
-                  <p className='lg:text-[20px] font-bold text-white capitalize'>{item.bannerName}</p>
+                  <p className='lg:text-[60px] font-bold text-slate-500 capitalize'>{item.bannerName}</p>
                 </div>
                 <img src={logo} alt="" className='absolute bottom-5 left-5 w-[50px] h-[50px] text-black group-hover:text-blue-600  duration-100' />
               </div>

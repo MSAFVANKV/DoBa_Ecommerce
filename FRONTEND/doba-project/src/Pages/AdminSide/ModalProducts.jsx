@@ -12,6 +12,8 @@ function ModalProducts({ closeModal, selectedProduct }) {
     const dispatch = useDispatch()
     const [error, setError] = useState("")
     const [imageError, setimageError] = useState("")
+    const [loading, setLoading] = useState(false); // Add loading state
+
 
     const [productInfo, setProductInfo] = useState({
         productName: selectedProduct?.productName || '',
@@ -31,13 +33,6 @@ function ModalProducts({ closeModal, selectedProduct }) {
         });
     };
 
-    // const handleImageUpload = (e) => {
-    //     const selectedImages = Array.from(e.target.files);
-    //     setProductInfo({
-    //         ...productInfo,
-    //         images: selectedImages,
-    //     });
-    // };
     const handleImageUpload = (e) => {
         const selectedImages = Array.from(e.target.files);
 
@@ -92,51 +87,98 @@ function ModalProducts({ closeModal, selectedProduct }) {
         return true;
     };
 
-    const upload = (e) => {
+    // const upload = (e) => {
+    //     e.preventDefault();
+    //     if (!selectedProduct && !validateForm()) {
+    //         return;
+    //     }
+    //     const formData = new FormData();
+    //     // Add other form data fields
+    //     formData.append('productName', productInfo.productName);
+    //     formData.append('price', productInfo.price);
+    //     // formData.append('image', productInfo.image);
+    //     // productInfo.images.forEach((image, index) => {
+    //     //     formData.append('images', image);
+    //     // });
+    //     // If there are new images, append them
+    //     if (productInfo.images.length > 0) {
+    //         productInfo.images.forEach((image, index) => {
+    //             formData.append("images", image);
+    //         });
+    //     }
+    //     formData.append('description', productInfo.description);
+    //     formData.append('category', productInfo.category);
+
+    //     // Check if it's an edit or add operation
+    //     if (selectedProduct) {
+    //         // Add product ID for editing
+    //         formData.append('_id', selectedProduct?._id);
+    //         // Call editProduct action
+    //         dispatch(editProduct(formData)).then((res) => {
+    //             // Handle success or error
+    //             closeModal();
+    //             dispatch(getProducts());
+    //         });
+    //     } else {
+    //         // Call uploadProduct action for adding
+    //         dispatch(uploadProduct(formData)).then((res) => {
+    //             // Handle success or error
+    //             setProductInfo({
+    //                 productName: '',
+    //                 price: '',
+    //                 images: [],
+    //                 description: '',
+    //                 category: 'dosa',
+    //             });
+    //             closeModal();
+    //         });
+    //     }
+    // };
+    const upload = async (e) => {
         e.preventDefault();
         if (!selectedProduct && !validateForm()) {
             return;
         }
-        const formData = new FormData();
-        // Add other form data fields
-        formData.append('productName', productInfo.productName);
-        formData.append('price', productInfo.price);
-        // formData.append('image', productInfo.image);
-        // productInfo.images.forEach((image, index) => {
-        //     formData.append('images', image);
-        // });
-        // If there are new images, append them
-        if (productInfo.images.length > 0) {
-            productInfo.images.forEach((image, index) => {
-                formData.append("images", image);
-            });
-        }
-        formData.append('description', productInfo.description);
-        formData.append('category', productInfo.category);
 
-        // Check if it's an edit or add operation
-        if (selectedProduct) {
-            // Add product ID for editing
-            formData.append('_id', selectedProduct?._id);
-            // Call editProduct action
-            dispatch(editProduct(formData)).then((res) => {
-                // Handle success or error
-                closeModal();
-                dispatch(getProducts());
-            });
-        } else {
-            // Call uploadProduct action for adding
-            dispatch(uploadProduct(formData)).then((res) => {
-                // Handle success or error
-                setProductInfo({
-                    productName: '',
-                    price: '',
-                    images: [],
-                    description: '',
-                    category: 'dosa',
+        try {
+            setLoading(true);
+
+            const formData = new FormData();
+            formData.append('productName', productInfo.productName);
+            formData.append('price', productInfo.price);
+
+            if (productInfo.images.length > 0) {
+                productInfo.images.forEach((image, index) => {
+                    formData.append("images", image);
                 });
-                closeModal();
-            });
+            }
+
+            formData.append('description', productInfo.description);
+            formData.append('category', productInfo.category);
+
+            if (selectedProduct) {
+                formData.append('_id', selectedProduct?._id);
+                dispatch(editProduct(formData)).then(() => {
+                    closeModal();
+                    dispatch(getProducts());
+                });
+            } else {
+                dispatch(uploadProduct(formData)).then(() => {
+                    setProductInfo({
+                        productName: '',
+                        price: '',
+                        images: [],
+                        description: '',
+                        category: 'dosa',
+                    });
+                    closeModal();
+                });
+            }
+        } catch (error) {
+            console.error("Error during form submission:", error);
+            setError("An error occurred during form submission");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -217,7 +259,7 @@ function ModalProducts({ closeModal, selectedProduct }) {
                     )}
                     {productInfo.images && productInfo.images.length > 0 && (
                         productInfo.images.map((image, index) => (
-                            <img key={index} src={URL.createObjectURL(bufferToBlob(image.data))} alt="" width="30px" />
+                            <img key={index} src={URL.createObjectURL(bufferToBlob(image))} alt="" width="30px" />
                         ))
                     )}
                     {selectedProduct &&
@@ -266,8 +308,15 @@ function ModalProducts({ closeModal, selectedProduct }) {
                     </div>
                     {error && <div className='p-5 bg-red-200 m-auto my-2 rounded-lg text-[#ca4747] sm:text-[1rem] text-[0.8rem] font-bold'>{`incluse the field: ${error}`}</div>}
 
-                    <button type="submit" className="bg-[#F26D1E] p-2 my-5 border rounded-xl  text-white font-bold">
+                    {/* <button type="submit" disabled={loading} className="bg-[#F26D1E] p-2 my-5 border rounded-xl  text-white font-bold">
                         {selectedProduct ? 'Edit' : 'Submit'}
+                    </button> */}
+                    <button
+                        type="submit"
+                        className="bg-[#F26D1E] p-2 my-5 border rounded-xl text-white font-bold"
+                        disabled={loading} // Disable the button when loading is true
+                    >
+                        {loading ? 'Loading...' : (selectedProduct ? 'Edit' : 'Submit')}
                     </button>
                 </form>
             </div>

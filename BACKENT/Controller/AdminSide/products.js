@@ -69,6 +69,8 @@ module.exports.getAllProducts = async (req, res) => {
 // ...
 
 module.exports.uploadFile = async (req, res) => {
+console.log("images")
+
     try {
         const productInfo = req.body;
 
@@ -103,7 +105,7 @@ module.exports.uploadFile = async (req, res) => {
             });
 
             await newProduct.save();
-
+console.log("product saved")
             const products = await productsCollection.find({});
             return res.status(200).json({ details: products, newProduct });
         }

@@ -88,7 +88,7 @@ function Items() {
   return (
     <div className="">
       <h2 className='text-center sm:text-[2rem] text-[1.5rem] font-bold'>WHAT WE HAVE</h2>
-      <div className='flex flex-wrap justify-center items-center gap-5 mx-10 my-5 sm:my-10'>
+      <div className='grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 justify-center items-center gap-5 mx-2 sm:mx-10 my-5 sm:my-10'>
         {getProductSlice.map((item, index) => (
           <Link to={`/product/${item._id}`} key={item._id}>
 
@@ -111,20 +111,17 @@ function Items() {
               <LiaExternalLinkAltSolid className='sm:block absolute hidden bottom-5 left-5 sm:w-[35px] sm:h-[35px] text-black 
                group-hover:text-blue-600 group-hover:rotate-45 duration-100'/>
             </div> */}
-            <div key={item._id} className="h-[220px] w-[200px] md:h-[215px] md:w-[215px] lg:h-[310px] lg:w-[300px]  my-4 border rounded-md overflow-hidden shadow-md">
+            <div key={item._id} className="h-[150px] w-[100%] md:h-[215px] md:w-[215px] lg:h-[310px] lg:w-[300px]  my-4 border rounded-md overflow-hidden shadow-md">
             <img
               src={`${mainURL}/Public/ProductsImages/${item.file[0]}`}
               alt={item.productName}
-              className='w-full lg:h-[250px] h-[150px] p-1 '
+              className='w-full lg:h-[250px] h-[100px] p-1 '
             />
             <div className="p-2">
               <p className="text-center font-bold text-sm mb-1">{item.productName}</p>
               {/* Add other details as needed */}
               <div className="flex justify-between items-center">
-                <p className="text-gray-600 text-xs ">{/* Add other details, e.g., price, category, etc. */}</p>
-                {/* <Link to={`/product/${item._id}`} className="bg-blue-500 text-white px-2 py-1 rounded-md text-xs">
-                  Details
-                </Link> */}
+                <p className="text-gray-600 text-xs "></p>
               </div>
             </div>
           </div>

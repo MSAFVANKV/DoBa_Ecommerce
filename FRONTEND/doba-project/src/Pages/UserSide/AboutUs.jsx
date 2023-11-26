@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import GMap from '../../Components/GMap/GMap'
 import Sample from './Sample'
 
@@ -9,11 +9,17 @@ import texture_3 from '../../../assets/images/texture-2.jpg'
 import { about_Us } from '../../Components/AboutUs/Details'
 
 import { GiHamburgerMenu } from 'react-icons/gi'
+import { useDispatch, useSelector } from 'react-redux'
+import { getVideos } from '../../ReduxToolKit/Admin/videoSlice'
+import { mainURL } from '../../Base/Constent'
 
 function AboutUs() {
   const scrollRef = useRef();
-  const [activeIndex, setActiveIndex] = useState(null);
+  const dispatch = useDispatch();
+
+  const [activeIndex, setActiveIndex] = useState(0);
   const [openDetail, setOpenDetail] = useState(false)
+  const getVideosSlice = useSelector((state) => state.video?.video)
 
   const openAboutDeatail = () => {
     setOpenDetail(!openDetail)
@@ -33,6 +39,10 @@ function AboutUs() {
     }
   };
 
+  useEffect(() =>{
+    dispatch(getVideos())
+  },[dispatch])
+
   return (
     <div className=''>
       <div className=" font-bold sm:text-[2rem] text-[1.5rem] text-white lg:h-[180px] sm:h-[120px] h-[100px] flex justify-center items-center"
@@ -40,6 +50,10 @@ function AboutUs() {
         {/* <img src={texture_3} className='object-cover h-[100%]' alt="" /> */}
         <span>ABOUT</span>
       </div>
+      {/* <a href="https://maps.app.goo.gl/6JjWvUt2dKR9SibK7" target="_blank">Click Here for location </a> */}
+{/* videos */}
+
+
       <div className="sm:w-[100%]  flex justify-center">
         {/* Inside this div below is divided with two div */}
         <div className="sm:w-[70rem] w-[100%] bg-[white] md:flex">
@@ -150,6 +164,35 @@ function AboutUs() {
         </div>
         {/* Inside this end div above is divided with two div */}
       </div>
+
+      <div className="flex justify-center items-center my-20">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+    {getVideosSlice && getVideosSlice.length > 0 && (
+      getVideosSlice.map((media) => (
+        <div key={media._id} className="relative bg-white h-[400px] w-[350px] rounded-md overflow-hidden shadow-md">
+          <div className="flex justify-center items-center h-12 bg-gray-700 text-white">
+            <p className="font-bold">{media.videoName}</p>
+          </div>
+          <div className="h-[90%] ">
+            {media.videos.map((video, index) => (
+              <video
+                key={index}
+                preload="auto"
+                controls
+                muted
+                className=" w-full h-full object-cover"
+                controlsList="nodownload"
+              >
+                <source src={`${mainURL}${video}`} type="video/mp4" />
+              </video>
+            ))}
+          </div>
+        </div>
+      ))
+    )}
+  </div>
+</div>
+
     </div>
   )
 }

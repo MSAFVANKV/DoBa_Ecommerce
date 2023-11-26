@@ -177,8 +177,8 @@ function Slider() {
 
 
     return (
-        <div className='bg-slate-100 mx-auto sm:w-[90%] w-screen'>
-            <div className="flex flex-col justify-center items-center">
+        <div className='bg-slate-100 '>
+            <div className="flex flex-col justify-center items-center h-full">
 
             <div className="flex flex-col justify-center items-center">
             <h1 className='my-10 font-semibold text-[1.5rem]'>Upload your slider</h1>

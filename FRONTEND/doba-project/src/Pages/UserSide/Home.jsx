@@ -42,7 +42,7 @@ function Home() {
   }, [dispatch]);
   return (
     <>
-      <section className='wave bg-[#F26D1E]'>
+      <section className='wave '>
 
         <BannerHome />
         {/* ======================================================================== */}
@@ -56,7 +56,7 @@ function Home() {
           {/* <div className="bg-[#F26D1E]">
 
           </div> */}
-          <div className="bg-[#F26D1E]">
+          <div className="bg-[#F26D1E] sm:mt-6  py-10">
             <div className="hero_subtitle md:flex justify-center">
               {/* home image ================ */}
               <div className=" rounded-2xl drop sm:ms-0 flex justify-center ">
@@ -125,15 +125,15 @@ function Home() {
         {/* ===================================Section end===================================== */}
 
       </section>
-      <img src={wave} className='-mt-16' alt="" />
+      <img src={wave} className='' alt="" />
 
       <section>
 
         {/* {getProductSlice && getProductSlice.length > 0 ?<Items/> : null} */}
         {getProductSlice?.length > 0 && (
   <>
-    <h2 className='text-center sm:text-[2rem] text-[1.5rem] font-bold'>OUR PRODUCTS</h2>
-    <div className='flex flex-wrap justify-center items-center gap-5 mx-10 my-10'>
+    <h2 className='text-center sm:text-[2rem] text-[1.5rem] font-bold select-none'>OUR PRODUCTS</h2>
+    <div className='grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 justify-center items-center gap-5 mx-2 sm:mx-10 my-5 sm:my-10'>
       {getProductSlice.slice(0, 4).map((item) => (
         // <Link to={`/product/${item._id}`} key={item._id}>
         //   <div className="flex flex-col gap-6 group relative shadow-lg text-black hover:shadow-2xl rounded-xl md:px-6 py-8 w-[100px] h-[110px] sm:h-[180px] sm:w-[200px] md:h-[200px] md:w-[215px] lg:h-[200px] lg:w-[250px] cursor-pointer">
@@ -151,23 +151,23 @@ function Home() {
         //     <LiaExternalLinkAltSolid className='sm:block absolute hidden bottom-5 left-5 sm:w-[35px] sm:h-[35px] text-black group-hover:text-blue-600 group-hover:rotate-45 duration-100'/>
         //   </div>
         // </Link>
-        <div key={item._id} className="h-[220px] w-[200px] md:h-[215px] md:w-[215px] lg:h-[250px] lg:w-[250px]  my-4 border rounded-md overflow-hidden shadow-md">
+        <Link to={`/product/${item._id}`} key={item._id}>
+            <div key={item._id} className="h-[150px] w-[100%] md:h-[215px] md:w-[215px] lg:h-[310px] lg:w-[300px]  my-4 border rounded-md overflow-hidden shadow-md">
             <img
               src={`${mainURL}/Public/ProductsImages/${item.file[0]}`}
               alt={item.productName}
-              className='w-full lg:h-[190px] h-[150px] p-1 sm:object-cover sm:object-center'
+              className='w-full lg:h-[250px] h-[100px] p-1 '
             />
             <div className="p-2">
               <p className="text-center font-bold text-sm mb-1">{item.productName}</p>
               {/* Add other details as needed */}
               <div className="flex justify-between items-center">
-                <p className="text-gray-600 text-xs ">{/* Add other details, e.g., price, category, etc. */}</p>
-                <Link to={`/product/${item._id}`} className="bg-blue-500 text-white px-2 py-1 rounded-md text-xs">
-                  Details
-                </Link>
+                <p className="text-gray-600 text-xs "></p>
               </div>
             </div>
           </div>
+            {/* <ProductDetail product={item} /> */}
+          </Link>
       ))}
      
     </div>
@@ -177,7 +177,7 @@ function Home() {
   <div class="">
     <div class="flex py-5">
     <Link to={`/products`}>
-      <button class="relative border-2 border-[#F26D1E] bg-transparent py-2.5 lg:px-16 font-medium uppercase text-black
+      <button class="relative border-2 border-[#F26D1E] bg-transparent py-2.5 px-10 sm:px-14 md:px-16 font-medium uppercase text-black
        transition-colors before:absolute before:left-0 before:top-0 before:-z-10 before:h-full
        before:w-full before:origin-top-left before:scale-x-0 before:bg-[#F26D1E] before:transition-transform
         before:duration-300 before:content-[''] hover:text-white before:hover:scale-x-100">
@@ -197,12 +197,12 @@ function Home() {
       {/* why us */}
       <div className=' w-[100%] text-center'>
         <div className="my-5">
-          <span className='sm:text-[2rem] text-[1.5rem] font-bold'>WHY DoBa</span>
+          <span className='sm:text-[2rem] text-[1.5rem] font-bold select-none'>WHY DoBa</span>
         </div>
-        <div className="flex justify-center h-[700px] lg:h-[250px]">
+        <div className="flex justify-center h-[700px] sm:h-[500px] md:h-[300px] lg:h-[250px]">
           <div className="md:grid md:grid-cols-2  w-[80%] h-[250px]  gap-5">
             <div className="bg-[#FFAE79] rounded-xl shadow-xl ">
-              <span className='sm:text-[1.6rem] text-[1.2rem]  font-bold '>QUALITY</span>
+              <span className='sm:text-[1.6rem] text-[1.2rem]  font-bold select-none'>QUALITY</span>
               <div className="lg:grid lg:grid-cols-3">
                 <div className="flex items-center justify-center">
                   <img src={chef} alt="chef" className="lg:h-[70%] h-[80px]" />
@@ -215,7 +215,7 @@ function Home() {
             </div>
             {/* 2nd col */}
             <div className="bg-[#BBD8FF] rounded-xl shadow-xl mt-6 md:mt-0">
-              <span className='sm:text-[1.6rem] text-[1.2rem] font-bold uppercase lg:mt-5'>NATURE</span>
+              <span className='sm:text-[1.6rem] text-[1.2rem] font-bold uppercase lg:mt-5 select-none'>NATURE</span>
               <div className="lg:grid lg:grid-cols-3">
                 <div className="flex items-center justify-center">
                   <img src={nature} alt="chef" className="lg:h-[70%] h-[80px]" />

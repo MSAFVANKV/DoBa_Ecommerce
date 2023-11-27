@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import '../../Styles/Home.css'
 import Doba from '../../../assets/images/doba_product_2.jpeg';
 import Subtitle from '../../Shared/Subtitle';
+import {Parallax} from 'react-parallax'
+import { motion } from 'framer-motion'
 
 // images
 import wave from '../../../assets/images/wave_2.svg'
@@ -41,7 +43,14 @@ function Home() {
     dispatch(getVideos())
   }, [dispatch]);
   return (
-    <>
+   
+    <motion.div
+    initial={{width: 0}}
+    animate={{width: '100%'}}
+    exit={{x: window.innerWidth, transition: { duration: 0.3 }}}
+    >
+          {/* <Parallax strength={200}> */}
+
       <section className='wave '>
 
         <BannerHome />
@@ -126,6 +135,8 @@ function Home() {
 
       </section>
       <img src={wave} className='' alt="" />
+
+      {/* </Parallax> */}
 
       <section>
 
@@ -232,7 +243,8 @@ function Home() {
       </div>
 
 
-    </>
+    </motion.div>
+ 
   );
 }
 

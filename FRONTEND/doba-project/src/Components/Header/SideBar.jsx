@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/images/doba_logo.png';
 import { AiOutlineSearch } from 'react-icons/ai';
+import axios from 'axios';
+import { userURL } from '../../Base/Constent';
 
 const navLinks = [
   {
@@ -27,25 +29,57 @@ const navLinks = [
   }
 ];
 
-function SideBar({ items, index, Icon, toggle, closeToggle }) {
+function SideBar({ setToggle, toggle, closeToggle }) {
     // const [sideBar, setSideBar] = useState("#sidebar.active")
     const navigate = useNavigate();
-    const [searchQuery, setSearchQuery] = useState('');
+    const [activeSearch, setActiveSearch] = useState([]);
+    const searchInputRef = useRef(null);
+
   
-    const handleImageClick = (path) => {
-      navigate(path); // Use navigate to navigate to the specified path
-      closeToggle(!toggle)
+    const handleClick = (path) => {
+      closeToggle() 
+      // closeToggle(!toggle)
     };
-    const handleSearchChange = (e) => {
-      setSearchQuery(e.target.value);
-    };
+    const handleSearchChange = async (e) => {
+      const query = e.target.value;
   
-    const handleSearchSubmit = (e) => {
+      if (query === '') {
+        setActiveSearch([]);
+        return false;
+      }
+  
+      try {
+        const response = await axios.get(`${userURL}/search/products/${query}`);
+        setActiveSearch(response.data);
+      } catch (error) {
+        console.error("Error searching products:", error);
+      }
+    };
+    // Header.jsx
+    const handleSearchSubmit = async (e) => {
       e.preventDefault();
-      // Perform search or navigate to search results page
-      console.log('Search query:', searchQuery);
-      // You can add logic to navigate to the search results page here
+    
+      try {
+        const isSearchInputFocused = document.activeElement === searchInputRef.current;
+
+        if (activeSearch && activeSearch.length > 0) {
+          navigate('/search/products', { state: { searchResults: activeSearch } });
+          setActiveSearch([]); // Clear search results
+          e.target.reset();
+
+          if (isSearchInputFocused) {
+            setToggle(true); // Close the sidebar
+          }
+        }
+        else{
+          
+        }
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+        // Handle error, show a message, etc.
+      }
     };
+    
   return (
     // <div className='modal-container ' onClick={()=>closeToggle()}>
     //   <div id='' className=' border rounded-lg p-[2rem] bg-white w-[80%] sm:w-[28em] '>
@@ -87,7 +121,7 @@ function SideBar({ items, index, Icon, toggle, closeToggle }) {
         {navLinks.map((item, index) => (
           <li key={item.id} className={`flex items-center text-gray-300 gap-x-4
           cursor-pointer p-2 hover:bg-light-white rounded-md ${item.gap ? 'mb-9': 'mb-2'}`}
-          onClick={() => handleImageClick(item.path)}>
+          >
            
             {/* <img src={item.src} alt={item.display} className="w-6 h-6 mr-2" /> */}
             <NavLink to={item.path} className="text-white" >
@@ -97,13 +131,13 @@ function SideBar({ items, index, Icon, toggle, closeToggle }) {
         ))}
            {/* Search input */}
            <div className='flex items-center sm:hidden'>
-            <form onSubmit={handleSearchSubmit}>
+            <form onSubmit={handleSearchSubmit} >
               <input
                 type="text"
                 placeholder="Search..."
                 className='border relative border-gray-300 rounded-md p-1 mr-2'
-                value={searchQuery}
-                onChange={handleSearchChange}
+                onChange={(e)=> handleSearchChange(e)}
+                ref={searchInputRef}
               />
               <button type="submit" className='text-gray-600 absolute  -translate-x-7 translate-y-1/2'>
                 <AiOutlineSearch />

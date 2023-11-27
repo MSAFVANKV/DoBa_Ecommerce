@@ -114,3 +114,30 @@
 .custom-scrollbar::-webkit-scrollbar-track {
   background-color: #cbd5e0; /* Adjust as needed */
 }
+
+.product-card-container {
+  animation: fadeInLeft 2s ease-out; /* Adjust the duration and easing as needed */
+  /* display: grid;
+  grid-template-columns: repeat(4, 1fr); */
+}
+
+.product-card {
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: fadeInUp 2s ease-out forwards; /* Adjust the duration and easing as needed */
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+

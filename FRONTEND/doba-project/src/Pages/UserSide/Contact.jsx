@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import contact1 from '../../../assets/images/contact1.png';
 import EnquiryForm from '../../Components/UserForm/EnquiryForm';
 import Feedback from '../../Components/UserForm/Feedback';
+import { motion, } from 'framer-motion'
 
 import { TiWorld } from "react-icons/ti";
 import { IoIosCall } from "react-icons/io";
@@ -25,7 +26,11 @@ function Contact() {
   };
 
   return (
-    <div>
+    <motion.div
+    initial={{width: 0}}
+    animate={{width: '100%'}}
+    exit={{x: window.innerWidth, transition: { duration: 0.1 }}}
+    >
           <div className=" sm:h-[50vh] h-[30vh] sm:mt-0 mt-10 flex flex-col justify-center items-center relative">
           <span className='md:text-[3rem]  sm:text-[2.5rem] text-[2rem] font-comforter2 font-semibold '>CONTACT US </span>
           <span className='md:text-[2rem] sm:text-[1.8rem] text-[1.5rem] sm:w-fit w-[90%] font-comforter2 sm:font-semibold '>
@@ -88,7 +93,7 @@ function Contact() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

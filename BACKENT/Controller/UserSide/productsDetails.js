@@ -74,12 +74,12 @@ exports.getSimilarProducts = async (req, res) => {
 
 exports.searchProducts = async (req, res) => {
   const { query } = req.params;
-
+console.log(query,'query')
   try {
     const products = await productsCollection.find({
       $or: [
         { productName: { $regex: new RegExp(query, 'i') } },
-        { category: { $regex: new RegExp(query, 'i') } }, // Add this line for category search
+        { category: { $regex: new RegExp(query, 'i') } }, 
       ],
     });
 

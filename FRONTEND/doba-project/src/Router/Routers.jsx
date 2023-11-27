@@ -10,6 +10,7 @@ import Sample from '../Pages/UserSide/Sample';
 import { ProductDetail } from '../Components/ProductDetails/ProductDetail';
 import Contact from '../Pages/UserSide/Contact';
 import SideBar from '../Components/Header/SideBar';
+import AnimationRoutes from '../Components/AnimationPages/AnimationRoutes';
 
 
 
@@ -27,10 +28,10 @@ function Routers() {
     onClick={toggleSidebar}
   >
     <div className={`${toggle ? 'w-[100%]  p-4' : ' w-0'} duration-300 h-full bg-opacity-95 -z-50 top-0 left-0  pt-8 bg-dark-purple  fixed`}>
-    {toggle && <SideBar toggle={toggle} closeToggle={() => setToggle(false)} />}
+    {toggle && <SideBar setToggle={setToggle} toggle={toggle} closeToggle={() => setToggle(true)} />}
     </div>
   </div>
-    <Routes>
+    {/* <Routes>
       <Route path="/" element={<Navigate to={'/home'} />} />
       <Route path="/home" element={<Home />} />
       <Route path="/login" element={<Login />} />
@@ -43,7 +44,9 @@ function Routers() {
       <Route path="/search/products/:query" element={<SearchBarPage />} />
       <Route path="/contact" element={<Contact />} />
 
-    </Routes></>
+    </Routes> */}
+    <AnimationRoutes/>
+    </>
   );
 }
 

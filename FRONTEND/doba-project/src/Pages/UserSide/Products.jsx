@@ -7,11 +7,17 @@ import idly1 from '../../../assets/images/idly1.jpg'
 import waveside from '../../../assets/images/waveside.svg'
 import texture_2 from '../../../assets/images/texture-2.jpg'
 
+import { motion } from 'framer-motion'
 
 
 function Products() {
   return (
-    <div className=''>
+      
+    <motion.div
+    initial={{width: 0}}
+    animate={{width: '100%'}}
+    exit={{x: window.innerWidth, transition: { duration: 0.3 }}}
+    >
       {/*  */}
       <div className="w-[100%] h-[200px] sm:h-[70vh] md:flex">
         <div className="lg:w-[50%] w-[100%] h-[100%] bg-slate-200 rounded-e-xl relative flex justify-center items-center">
@@ -41,7 +47,7 @@ function Products() {
           <Items/>
           
       </div>
-    </div>
+    </motion.div>
   )
 }
 

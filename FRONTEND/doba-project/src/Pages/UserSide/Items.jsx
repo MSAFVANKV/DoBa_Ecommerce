@@ -17,6 +17,7 @@ import { LiaExternalLinkAltSolid } from 'react-icons/lia'
 // Importing ProductDetail as a named import
 import { ProductDetail } from '../../Components/ProductDetails/ProductDetail';
 
+import { motion } from 'framer-motion'
 
 
 function Items() {
@@ -86,7 +87,11 @@ function Items() {
     }
   };
   return (
-    <div className="">
+    <motion.div
+    initial={{width: 0}}
+    animate={{width: '100%'}}
+    exit={{x: window.innerWidth, transition: { duration: 0.3 }}}
+    >
       <h2 className='text-center sm:text-[2rem] text-[1.5rem] font-bold'>WHAT WE HAVE</h2>
       <div className='grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 justify-center items-center gap-5 mx-2 sm:mx-10 my-5 sm:my-10'>
         {getProductSlice.map((item, index) => (
@@ -131,7 +136,7 @@ function Items() {
       </div>
 
 
-    </div>
+    </motion.div>
   );
 }
 

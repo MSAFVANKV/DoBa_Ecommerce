@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import GMap from '../../Components/GMap/GMap'
 import Sample from './Sample'
+import { motion } from 'framer-motion'
 
 import inspiring from '../../../assets/images/inspiring.jpg'
 import texture_3 from '../../../assets/images/texture-2.jpg'
@@ -44,7 +45,11 @@ function AboutUs() {
   },[dispatch])
 
   return (
-    <div className=''>
+    <motion.div
+    initial={{width: 0}}
+    animate={{width: '100%'}}
+    exit={{x: window.innerWidth, transition: { duration: 0.3 }}}
+    >
       <div className=" font-bold sm:text-[2rem] text-[1.5rem] text-white lg:h-[180px] sm:h-[120px] h-[100px] flex justify-center items-center"
         style={{ backgroundImage: `url(${texture_3})` }}>
         {/* <img src={texture_3} className='object-cover h-[100%]' alt="" /> */}
@@ -193,7 +198,7 @@ function AboutUs() {
   </div>
 </div>
 
-    </div>
+    </motion.div>
   )
 }
 

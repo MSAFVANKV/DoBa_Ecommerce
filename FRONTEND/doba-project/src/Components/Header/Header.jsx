@@ -71,8 +71,12 @@ function Header() {
   
     try {
       if (activeSearch && activeSearch.length > 0) {
-        const s = activeSearch[0];
-        navigate(`/search/products/${s._id}`);
+        navigate('/search/products', { state: { searchResults: activeSearch } });
+        setActiveSearch([]); // Clear search results
+        e.target.reset();
+      }
+      else{
+        
       }
     } catch (error) {
       console.error("Error fetching search results:", error);

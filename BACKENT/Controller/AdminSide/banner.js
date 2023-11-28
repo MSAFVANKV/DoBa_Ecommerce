@@ -48,6 +48,7 @@ module.exports.uploadBanner = async (req, res) => {
             const newBanner = new bannerCollection({
                 file: bannerImages,
                 bannerName: req.body.bannerName, // Use bannerInfo to access the banner name
+                color: req.body.color,
             });
 
             await newBanner.save();

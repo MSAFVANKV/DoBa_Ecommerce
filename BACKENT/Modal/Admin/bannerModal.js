@@ -7,7 +7,10 @@ const bannerSchema = new mongoose.Schema({
     file: {
         type: String,
     },
-    
+    color: {
+        type: String, // Assuming color is stored as a string (hex code)
+        default: "#ffffff", // Default color
+      },
     // videos: [{ type: String }],
     createdAt: {
         type: Date,

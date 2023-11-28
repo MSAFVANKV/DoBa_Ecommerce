@@ -58,14 +58,14 @@ const navLinks = [
     gap:true,
 
   },
-  // {
-  //   id: 6,
-  //   path: '/admin/crop',
-  //   display: 'Crop',
-  //   src: sms,
-  //   gap:true,
+  {
+    id: 6,
+    path: '/admin/crop',
+    display: 'Crop',
+    src: sms,
+    gap:true,
 
-  // },
+  },
 ];
 
 function AdminSideBar({ onLogout, open, setOpen }) {

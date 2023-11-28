@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Header.css';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 // imported images
 import logo from '../images/doba_logo.png';
@@ -76,7 +77,14 @@ function Header() {
         e.target.reset();
       }
       else{
-        
+        toast.error('Don\'t Find Anything...', {
+            position: 'top-right',
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+          });
       }
     } catch (error) {
       console.error("Error fetching search results:", error);
@@ -120,6 +128,10 @@ function Header() {
           </div>
         
         </div>
+        <ToastContainer position="top-right"
+        autoClose={4000}
+    
+         />
       </header>
       {/* <div className="">
       <div

@@ -43,11 +43,11 @@ function BannerHome() {
           }}
           modules={[FreeMode, Pagination, Autoplay]}
           autoplay={{ // Configure autoplay settings
-            delay: 3000, // Delay between slides in milliseconds (e.g., 3000ms = 3 seconds)
+            delay: 5000, // Delay between slides in milliseconds (e.g., 3000ms = 3 seconds)
             disableOnInteraction: false, // Allow user interaction (e.g., clicking) to stop autoplay
           }}
           // loop={false}
-          speed={1000}
+          speed={2000}
           className="w-[100%] "
         >
           {getBannerSlice && getBannerSlice.length > 0 && getBannerSlice.map((item) => (
@@ -60,8 +60,8 @@ function BannerHome() {
                 <img src={`${mainURL}/Public/Banner/${item.file}`} alt="" 
                 className='absolute inset-0 w-[100%] h-[100%]'/>
                 <div className='absolute inset-0 bg-black opacity-5 group-hover:opacity-10' />
-                <div className="relative flex flex-col gap-3">
-                  <p className='lg:text-[60px] font-bold text-slate-500 capitalize'>{item.bannerName}</p>
+                <div className="relative flex flex-col justify-center items-center gap-3">
+                  <p className='lg:text-[60px]  font-bold text-slate-500 capitalize'>{item.bannerName}</p>
                 </div>
                 <img src={logo} alt="" className='absolute bottom-5 left-5 w-[50px] h-[50px] text-black group-hover:text-blue-600  duration-100' />
               </div>

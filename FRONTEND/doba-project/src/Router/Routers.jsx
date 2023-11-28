@@ -22,7 +22,7 @@ function Routers() {
   };
   return (
     <>
-    <div
+    {/* <div
     id='toggle'
     className={`bgtheme flex sm:hidden ${toggle ? 'active' : ''}`}
     onClick={toggleSidebar}
@@ -30,6 +30,9 @@ function Routers() {
     <div className={`${toggle ? 'w-[100%]  p-4' : ' w-0'} duration-300 h-full bg-opacity-95 -z-50 top-0 left-0  pt-8 bg-dark-purple  fixed`}>
     {toggle && <SideBar setToggle={setToggle} toggle={toggle} closeToggle={() => setToggle(true)} />}
     </div>
+  </div> */}
+  <div className="flex sm:hidden ">
+    <SideBar/>
   </div>
     {/* <Routes>
       <Route path="/" element={<Navigate to={'/home'} />} />

@@ -125,7 +125,7 @@ function AdminRouter() {
         <Route path='/admin/products' element={isAdminLogin ?<Products/>: <Navigate to={'/admin'}/>} />
         <Route path='/admin/slider' element={isAdminLogin ?<Slider/>: <Navigate to={'/admin'}/>} />
         <Route path='/admin/messages' element={isAdminLogin ?<Messages/>: <Navigate to={'/admin'}/>} />
-        {/* <Route path='/admin/crop' element={isAdminLogin ?<Crop/>: <Navigate to={'/admin'}/>} /> */}
+        <Route path='/admin/crop' element={isAdminLogin ?<Crop/>: <Navigate to={'/admin'}/>} />
 
 
     </Routes>

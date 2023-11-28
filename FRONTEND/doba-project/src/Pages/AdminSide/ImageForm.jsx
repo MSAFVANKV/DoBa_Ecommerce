@@ -2,7 +2,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadBanner, getBanner } from '../../ReduxToolKit/Admin/bannerSlice';
-import { Button, FormControl, FormLabel, Radio, RadioGroup, FormControlLabel, TextField, Container, Box } from '@mui/material';
+import { Button, TextField, Container, Box } from '@mui/material';
+import ImgCrop from 'antd-img-crop';
+import { Upload } from 'antd';
 
 function ImageForm() {
   const dispatch = useDispatch();
@@ -21,11 +23,10 @@ function ImageForm() {
     });
   };
 
-  const handleImageUpload = (e) => {
-    const selectedImage = e.target.files[0];
+  const handleImageUpload = ({ fileList: newFileList }) => {
     setBannerInfo({
       ...bannerInfo,
-      image: selectedImage,
+      image: newFileList, // Update the image property in the state
     });
   };
 
@@ -35,7 +36,11 @@ function ImageForm() {
     try {
       const formData = new FormData();
       formData.append('bannerName', bannerInfo.bannerName);
-      formData.append('image', bannerInfo.image);
+
+      // Append only the first file from the fileList array (the cropped image)
+      if (bannerInfo.image && bannerInfo.image.length > 0) {
+        formData.append('image', bannerInfo.image[0].originFileObj);
+      }
 
       await dispatch(uploadBanner(formData));
       setBannerInfo({
@@ -49,45 +54,34 @@ function ImageForm() {
   };
 
   return (
-    // <form onSubmit={upload} className='border p-2 w-[300px] h-[300px]'>
-    //   <input type="text" name="bannerName" value={bannerInfo.bannerName} onChange={handleInputChange} />
-    //   <input type="file" name="image" accept="image/*" onChange={handleImageUpload} />
-    //   {error && <div className='text-red-500 p-5'>{error}</div>}
-    //   <button type="submit" className="bt bg-slate-500 p-2 rounded-2xl font-bold text-white">
-    //     SUBMIT
-    //   </button>
-    // </form>
     <form onSubmit={upload}>
-    <TextField
-      type="text"
-      id="bannerName"
-      name="bannerName"
-      label="Add your product's name"
-      value={bannerInfo.bannerName}
-      onChange={handleInputChange}
-      fullWidth
-      margin="normal"
-    />
-    <input
-      type="file"
-      id="bannerImage"
-      name="image"
-      accept="image/*"
-      onChange={handleImageUpload}
-    />
-    {error && <div className="text-red-500 p-5">{error}</div>}
-    <Box mt={5}>
-    {bannerInfo.image && (
-                <img src={URL.createObjectURL(bannerInfo.image)} alt="" width="30px" />
-              )}
-    </Box>
+      <TextField
+        type="text"
+        id="bannerName"
+        name="bannerName"
+        label="Add your product's name"
+        value={bannerInfo.bannerName}
+        onChange={handleInputChange}
+        fullWidth
+        margin="normal"
+      />
+      <ImgCrop rotationSlider aspect={19/ 7 } >
+        <Upload
+          listType="picture-card"
+          fileList={bannerInfo.image}
+          onChange={handleImageUpload}
+        >
+          {bannerInfo.image ? null : '+ Upload'}
+        </Upload>
+      </ImgCrop>
 
-    <Box mt={3}>
-      <Button type="submit" variant="contained" color="primary">
-        Submit
-      </Button>
-    </Box>
-  </form>
+      {error && <div className="text-red-500 p-5">{error}</div>}
+      <Box mt={3}>
+        <Button type="submit" variant="contained" color="primary">
+          Submit
+        </Button>
+      </Box>
+    </form>
   );
 }
 

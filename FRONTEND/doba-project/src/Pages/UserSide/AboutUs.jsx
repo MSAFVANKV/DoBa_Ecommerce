@@ -171,10 +171,10 @@ function AboutUs() {
       </div>
 
       <div className="flex justify-center items-center my-20">
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 p-4">
     {getVideosSlice && getVideosSlice.length > 0 && (
       getVideosSlice.map((media) => (
-        <div key={media._id} className="relative bg-white h-[400px] w-[350px] rounded-md overflow-hidden shadow-md">
+        <div key={media._id} className="relative bg-white h-[250px] sm:h-[400px] sm:w-[400px] rounded-md overflow-hidden shadow-md">
           <div className="flex justify-center items-center h-12 bg-gray-700 text-white">
             <p className="font-bold">{media.videoName}</p>
           </div>

@@ -18,6 +18,8 @@
     "@mui/material": "^5.14.18",
     "@react-google-maps/api": "^2.19.2",
     "@reduxjs/toolkit": "^1.9.7",
+    "antd": "^5.11.5",
+    "antd-img-crop": "^4.17.0",
     "axios": "^1.6.0",
     "cropperjs": "^1.6.1",
     "formik": "^2.4.5",

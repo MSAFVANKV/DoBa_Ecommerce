@@ -29,17 +29,16 @@ const navLinks = [
   }
 ];
 
-function SideBar({ setToggle, toggle, closeToggle }) {
+function SideBar({ }) {
     // const [sideBar, setSideBar] = useState("#sidebar.active")
     const navigate = useNavigate();
     const [activeSearch, setActiveSearch] = useState([]);
     const searchInputRef = useRef(null);
-
-  
-    const handleClick = (path) => {
-      closeToggle() 
-      // closeToggle(!toggle)
+    const [toggle, setToggle] = useState(false);
+    const toggleSidebar = () => {
+      setToggle(!toggle);
     };
+
     const handleSearchChange = async (e) => {
       const query = e.target.value;
   
@@ -113,6 +112,13 @@ function SideBar({ setToggle, toggle, closeToggle }) {
     //   </div>
     // </div>
     <>
+     <div
+    id='toggle'
+    className={`bgtheme flex sm:hidden ${toggle ? 'active' : ''}`}
+    onClick={toggleSidebar}
+  >
+    <div className={`${toggle ? 'w-[100%]  p-4' : ' w-0'} duration-300 h-full bg-opacity-95 -z-50 top-0 left-0  pt-8 bg-dark-purple  fixed`}>
+   
      <div className="flex gap-x-4 items-center ">
         <img src={logo} alt='' className={`cursor-pointer w-14 duration-500 rounded-full ${toggle && 'rotate-[360deg]'}`} />
         <h1 className={`text-white origin-left font-medium text-xl duration-300 ${!toggle && 'scale-0'}`}>DoBa </h1>
@@ -130,7 +136,7 @@ function SideBar({ setToggle, toggle, closeToggle }) {
           </li>
         ))}
            {/* Search input */}
-           <div className='flex items-center sm:hidden'>
+           <div className={` ${!toggle && 'hidden'} origin-left duration-200 items-center`} >
             <form onSubmit={handleSearchSubmit} >
               <input
                 type="text"
@@ -144,7 +150,12 @@ function SideBar({ setToggle, toggle, closeToggle }) {
               </button>
             </form>
           </div>
-      </ul></>
+      </ul>
+
+      </div>
+  </div>
+      
+      </>
   );
 }
 

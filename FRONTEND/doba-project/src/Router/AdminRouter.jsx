@@ -25,7 +25,7 @@ import { RiMenu2Line } from "react-icons/ri";
 import { IoIosArrowForward } from 'react-icons/io'
 import SideBar from '../Components/Header/SideBar'
 import Sidebaritems from '../Components/AdminHeader/Sidebaritems'
-import Crop from '../Pages/AdminSide/Crop'
+import Error from '../Pages/UserSide/Error'
 
 
 function AdminRouter() {
@@ -125,6 +125,8 @@ function AdminRouter() {
         <Route path='/admin/products' element={isAdminLogin ?<Products/>: <Navigate to={'/admin'}/>} />
         <Route path='/admin/slider' element={isAdminLogin ?<Slider/>: <Navigate to={'/admin'}/>} />
         <Route path='/admin/messages' element={isAdminLogin ?<Messages/>: <Navigate to={'/admin'}/>} />
+        <Route path='/*' element={<Error/> }/>
+
         {/* <Route path='/admin/crop' element={isAdminLogin ?<Crop/>: <Navigate to={'/admin'}/>} /> */}
 
 

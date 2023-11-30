@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { adminbaseURL, userURL } from '../../Base/Constent';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
@@ -18,6 +18,8 @@ import { TfiLayoutSlider } from 'react-icons/tfi';
 import { GiTatteredBanner } from 'react-icons/gi';
 import { enquiryForm, getEnquiryForm } from '../../ReduxToolKit/User/EnquirySlice';
 import { getFeedbackInfo } from '../../ReduxToolKit/User/FeedBackSlice';
+import SignUp from './SignUp';
+import { Button } from '@mui/material';
 
 
 const ringAnimation = keyframes`
@@ -59,6 +61,7 @@ function Dashboard({ setIsAdminLoggedIn }) {
   const enquiryFormCollections = useSelector(state => state.enquiry.enquiry);
   const feedbackFormCollections = useSelector(state => state.feedback.feedback);
 
+  const [createAdmin, setCreateAdmin] = useState(false)
 
   useEffect(() => {
     // Fetch products
@@ -92,7 +95,9 @@ function Dashboard({ setIsAdminLoggedIn }) {
     return enquiryFormCollections.length + SingleFormCollections.length + feedbackFormCollections.length;
   };
 
-
+const openSignup = () => {
+  setCreateAdmin(!createAdmin)
+}
 
   return (
     <div className="container mx-auto">
@@ -150,7 +155,16 @@ function Dashboard({ setIsAdminLoggedIn }) {
             </div>
           </div>
         </div>
+
+        <div className="mt-10">
+         
+         <Button type="submit" variant="contained" color="primary" onClick={openSignup}>
+         Admin
+       </Button>
+         { createAdmin && <SignUp openSignup={openSignup} />}
+       </div>
       </div>
+     
     </div>
   );
 }

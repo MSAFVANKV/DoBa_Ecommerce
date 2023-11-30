@@ -10,7 +10,7 @@ import { getProducts } from '../../ReduxToolKit/Admin/ProductsSlice';
 import { mainURL } from '../../Base/Constent';
 
 import { RxArrowTopRight } from 'react-icons/rx'
-import { getSlider } from '../../ReduxToolKit/Admin/SliderSlice';
+import { getSlider, getSliderHome } from '../../ReduxToolKit/Admin/SliderSlice';
 
 
 function Sample({ items }) {
@@ -20,7 +20,7 @@ function Sample({ items }) {
 
 
   useEffect(() => {
-    dispatch(getSlider()); // Fetch products when the component mounts
+    dispatch(getSliderHome()); // Fetch products when the component mounts
   }, [dispatch]);
 
   return (

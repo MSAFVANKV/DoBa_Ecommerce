@@ -1,12 +1,19 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import axios from 'axios'
-import { adminbaseURL } from '../../Base/Constent'
+import { adminbaseURL, userURL } from '../../Base/Constent'
 
 export const getProducts = createAsyncThunk('admin/products', async () => {
     const response = await axios.get(`${adminbaseURL}/allproducts`, { withCredentials: true });
     console.log(response.data,"In productSlice");
     return response.data;  // access the data property of the response
 });
+export const getProductsHome = createAsyncThunk('home/products', async () => {
+    const response = await axios.get(`${userURL}/get/allproducts`, { withCredentials: true });
+    console.log(response.data,"In productSlice home");
+    return response.data;  // access the data property of the response
+});
+
+
 
 export const uploadProduct = createAsyncThunk('products/upload', async (formData) => {
     try {
@@ -71,6 +78,18 @@ const productSlice = createSlice({
                 state.error = null;
             })
             .addCase(getProducts.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            .addCase(getProductsHome.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getProductsHome.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.products = action.payload
+                state.error = null;
+            })
+            .addCase(getProductsHome.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
             });

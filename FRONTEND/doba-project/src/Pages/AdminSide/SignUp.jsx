@@ -6,7 +6,7 @@ import { SignupSchema } from '../../ValidationSchema/SignUpSchema';
 import { selectAdmin, signupAdmin } from '../../ReduxToolKit/Admin/AdminLoginSlice';
 
 
-function SignUp({ onSignupSuccess }) {
+function SignUp({ onSignupSuccess, openSignup }) {
 
     const dispatch = useDispatch();
     const adminError = useSelector((state) => state.admin?.error);
@@ -30,7 +30,7 @@ function SignUp({ onSignupSuccess }) {
     })
 
     return (
-        <div className='modal-container'>
+        <div className='modal-container' onClick={(e) => { if (e.target.className === 'modal-container') openSignup() }}>
             <div >
                 <form action="" onSubmit={formik.handleSubmit} 
                 className="bg-white w-[350px] h-[300px] rounded-lg flex-col pt-10 flex items-center gap-4">

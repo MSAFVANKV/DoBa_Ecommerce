@@ -64,7 +64,7 @@ exports.uploadEnquiryForm = async (req, res) => {
                     <p><strong>User Information:</strong></p>
                     <p><strong>Email:</strong> ${formState.email}</p>
                     <p><strong>Phone Number:</strong> ${formState.contactNumber}</p>
-                    <p><strong>Product of Interest:</strong> ${formState.businessType}</p>
+                    <p><strong>Business Type:</strong> ${formState.businessType}</p>
                     <p><strong>Check the messages in given link:</strong></p>
                     <span>https://dobafoods.com/admin</span>
                   </div>

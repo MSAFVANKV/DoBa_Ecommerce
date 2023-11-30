@@ -8,7 +8,7 @@ import 'swiper/css/free-mode'
 import { Link } from 'react-router-dom';
 
 import img from '../../../assets/images/doba_product_2.jpeg'
-import { getProducts } from '../../ReduxToolKit/Admin/ProductsSlice';
+import { getProducts, getProductsHome } from '../../ReduxToolKit/Admin/ProductsSlice';
 import { mainURL } from '../../Base/Constent';
 
 // icons
@@ -25,7 +25,7 @@ function Items() {
 
   const getProductSlice = useSelector(state => state.products?.products);
   useEffect(() => {
-    dispatch(getProducts()); // Fetch products when the component mounts
+    dispatch(getProductsHome()); // Fetch products when the component mounts
   }, [dispatch]);
 
   console.log(getProducts, 'getProducts')

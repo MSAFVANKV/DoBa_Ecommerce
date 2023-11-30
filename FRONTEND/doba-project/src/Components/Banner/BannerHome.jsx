@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Pagination, Autoplay } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBanner, setBanner } from '../../ReduxToolKit/Admin/bannerSlice';
-import { adminbaseURL, mainURL } from '../../Base/Constent';
+import { adminbaseURL, mainURL, userURL } from '../../Base/Constent';
 import { RxArrowTopRight } from 'react-icons/rx';
 import logo from '../images/doba_logo.png';
 import wave from '../../../assets/images/wave_2.svg'
@@ -18,7 +18,7 @@ function BannerHome() {
 
 
   useEffect(() => {
-    axios.get(`${adminbaseURL}/allbanner`, { withCredentials: true })
+    axios.get(`${userURL}/get/allbanner`, { withCredentials: true })
       .then((response) => {
         dispatch(setBanner(response.data));
         console.log(response.data);

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import GMap from '../../Components/GMap/GMap'
 import Sample from './Sample'
 import { motion } from 'framer-motion'
 
@@ -11,7 +10,7 @@ import { about_Us } from '../../Components/AboutUs/Details'
 
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { useDispatch, useSelector } from 'react-redux'
-import { getVideos } from '../../ReduxToolKit/Admin/videoSlice'
+import { getVideos, getVideosHome } from '../../ReduxToolKit/Admin/videoSlice'
 import { mainURL } from '../../Base/Constent'
 
 function AboutUs() {
@@ -41,7 +40,7 @@ function AboutUs() {
   };
 
   useEffect(() =>{
-    dispatch(getVideos())
+    dispatch(getVideosHome())
   },[dispatch])
 
   return (

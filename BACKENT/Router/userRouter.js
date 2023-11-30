@@ -1,12 +1,19 @@
 const {Router} = require('express')
 const router = Router();
 
-const { getProductById, getSimilarProducts, searchProducts } = require('../Controller/UserSide/productsDetails');
+const { getProductById, getAllProducts, getSimilarProducts, searchProducts } = require('../Controller/UserSide/productsDetails');
 const { getUserForm, uploadSingleForm, markMessageAsRead, deleteSingleForm, deleteAllMessages } = require('../Controller/UserSide/singleForm');
 const { getEnquiryForm, uploadEnquiryForm, markEnquiryMessageAsRead, deleteEnquiryForm, deleteAllEnquiryMessages } = require('../Controller/UserSide/enquiryForm');
 
 const { getFeedbackForm, uploadFeedbackForm, markFeedMessageAsRead, deleteFeedbackForm, deleteAllFeedbackMessages} = require('../Controller/UserSide/feedbackController');
 
+const {getAllslider} = require('../Controller/UserSide/slider')
+const {getVideos, getAllbanner} = require('../Controller/UserSide/bannersUser');
+
+
+router
+    .route('/get/allproducts')
+    .get(getAllProducts)
 
 router.route('/product/:productId').get(getProductById);
 router.route('/product/:productId/similar').get(getSimilarProducts);
@@ -15,8 +22,21 @@ router.route('/product/:productId/similar').get(getSimilarProducts);
 router.route(`/search/products/:query`).get(searchProducts);
 // ...
 
+// slider
 
+router
+    .route('/get/allslider')
+    .get(getAllslider)
 
+    // videos
+    router
+    .route('/get/videos')
+    .get(getVideos)
+
+    // banner images
+    router
+    .route('/get/allbanner')
+    .get(getAllbanner)
 // the single purchase routes
 
 router.

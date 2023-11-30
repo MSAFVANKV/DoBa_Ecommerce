@@ -1,6 +1,6 @@
 const {Router} = require('express')
 const { adminLogin,createAdmin,logout } = require('../Controller/AdminSide/adminLogin')
-const sessionCheck = require('../Middleware/adminSession')
+const {adminSessionCheck} = require('../Middleware/adminSession')
 const {uploadFile, getAllProducts, deleteFile, editFile} = require('../Controller/AdminSide/products');
 const {getAllslider, uploadSlider, deleteSlider} = require('../Controller/AdminSide/slider')
 const { uploadBanner, getAllbanner, deleteBanner } = require('../Controller/AdminSide/banner')
@@ -22,7 +22,7 @@ router
 
 router  
     .route('/signup')
-    .post(createAdmin);
+    .post(adminSessionCheck,createAdmin);
 
     router.get('/check-auth', (req, res) => {
         if (req.session.adminId) {
@@ -33,6 +33,8 @@ router
         }
     });
 
+    // router.use(adminSessionCheck)
+
     // router.post('/upload', upload.single('image'), uploadFile);
 // router
 //    .route("/upload")
@@ -42,7 +44,7 @@ router
 
 router
 .route("/upload")
-.post( upload.fields([
+.post( adminSessionCheck,upload.fields([
    { name: "images", maxCount: 2 },
 ]),uploadFile);
 
@@ -50,32 +52,32 @@ router
 
 router
     .route('/allproducts')
-    .get(getAllProducts)
+    .get(adminSessionCheck,getAllProducts)
 
     
 router
     .route('/product/edit')
-    .put(upload.fields([{ name: 'images', maxCount: 2 }]), editFile);
+    .put(adminSessionCheck,upload.fields([{ name: 'images', maxCount: 2 }]), editFile);
 
 router
     .route('/product/delete/:_id')
-    .delete(deleteFile);
+    .delete(adminSessionCheck,deleteFile);
 
 // slider uploaders
 
 router
    .route("/upload/slider")
-   .post( fileUpload.fields([
+   .post(adminSessionCheck, fileUpload.fields([
       { name: "image", maxCount: 1 },
     ]),uploadSlider);
 
 router
     .route('/allslider')
-    .get(getAllslider)
+    .get(adminSessionCheck,getAllslider)
 
 router
     .route('/slider/delete/:_id')
-    .delete(deleteSlider);
+    .delete(adminSessionCheck,deleteSlider);
 
 
 
@@ -87,35 +89,35 @@ router
 
    router
    .route("/upload/banner")
-   .post( fileUpload.fields([
+   .post( adminSessionCheck,fileUpload.fields([
       { name: "image", maxCount: 1 },
     ]),uploadBanner);
 
 
 router
     .route('/allbanner')
-    .get(getAllbanner)
+    .get(adminSessionCheck,getAllbanner)
 
     router
     .route('/banner/delete/:_id')
-    .delete(deleteBanner);
+    .delete(adminSessionCheck,deleteBanner);
 
     // videoos
 
     router
     .route("/upload/video")
-    .post( videoUpload.fields([
+    .post(adminSessionCheck, videoUpload.fields([
        { name: "videos", maxCount: 5 },
      ]),create);
  
 
     router
     .route('/videos')
-    .get(getVideos)
+    .get(adminSessionCheck,getVideos)
 
     router
     .route('/videos/delete/:_id')
-    .delete(deleteVideos);
+    .delete(adminSessionCheck,deleteVideos);
 // router
 //     .route('/banner/delete/:_id')
 //     .delete(deleteBanner);

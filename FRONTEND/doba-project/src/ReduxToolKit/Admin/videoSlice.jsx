@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { adminbaseURL } from "../../Base/Constent";
+import { adminbaseURL, userURL } from "../../Base/Constent";
 
 export const uploadVideo = createAsyncThunk('video/upload' ,async (formData) => {
     try {
@@ -21,6 +21,11 @@ export const uploadVideo = createAsyncThunk('video/upload' ,async (formData) => 
 export const getVideos = createAsyncThunk('admin/video', async () => {
     const response = await axios.get(`${adminbaseURL}/videos`, { withCredentials: true });
     console.log(response.data,"In videoSlice");
+    return response.data;  // access the data property of the response
+});
+export const getVideosHome = createAsyncThunk('home/video', async () => {
+    const response = await axios.get(`${userURL}/get/videos`, { withCredentials: true });
+    console.log(response.data,"In videoSlice home");
     return response.data;  // access the data property of the response
 });
 
@@ -58,6 +63,18 @@ const videoSlice = createSlice({
                 state.error = null;
             })
             .addCase(getVideos.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            .addCase(getVideosHome.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getVideosHome.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.video = action.payload
+                state.error = null;
+            })
+            .addCase(getVideosHome.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
             });

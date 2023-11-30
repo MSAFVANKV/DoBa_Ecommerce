@@ -1,7 +1,16 @@
 const productsCollection =require('../../Modal/Admin/productsModal')
 
 
-
+// Fetch all products
+module.exports.getAllProducts = async (req, res) => {
+  try {
+    const products = await productsCollection.find({});
+    res.status(200).send(products);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    res.status(500).send("Internal Server Error fetching products");
+  }
+}
 
 exports.getProductById = async (req, res) => {
     const { productId } = req.params;

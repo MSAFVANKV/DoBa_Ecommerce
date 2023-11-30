@@ -20,13 +20,13 @@ import video2 from '../../../assets/videos/video-2.mp4'
 import SearchBar from '../../Shared/SearchBar';
 import Sample from './Sample';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSlider } from '../../ReduxToolKit/Admin/SliderSlice';
-import { getProducts } from '../../ReduxToolKit/Admin/ProductsSlice';
+import { getSlider, getSliderHome } from '../../ReduxToolKit/Admin/SliderSlice';
+import { getProducts, getProductsHome } from '../../ReduxToolKit/Admin/ProductsSlice';
 import { adminbaseURL, mainURL } from '../../Base/Constent';
 import { LiaExternalLinkAltSolid } from 'react-icons/lia';
 import { Link } from 'react-router-dom';
 import BannerHome from '../../Components/Banner/BannerHome';
-import { getVideos } from '../../ReduxToolKit/Admin/videoSlice';
+import { getVideos, getVideosHome } from '../../ReduxToolKit/Admin/videoSlice';
 
 
 function Home() {
@@ -38,9 +38,9 @@ function Home() {
 
 
   useEffect(() => {
-    dispatch(getSlider()); // Fetch products when the component mounts
-    dispatch(getProducts()); // Fetch products when the component mounts
-    dispatch(getVideos())
+    dispatch(getSliderHome()); // Fetch products when the component mounts
+    dispatch(getProductsHome()); // Fetch products when the component mounts
+    dispatch(getVideosHome())
   }, [dispatch]);
   return (
    

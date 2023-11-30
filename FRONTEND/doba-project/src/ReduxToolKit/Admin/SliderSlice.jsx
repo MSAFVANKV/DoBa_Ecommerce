@@ -1,10 +1,15 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import axios from 'axios'
-import { adminbaseURL } from '../../Base/Constent'
+import { adminbaseURL, userURL } from '../../Base/Constent'
 
 export const getSlider = createAsyncThunk('admin/slider', async () => {
     const response = await axios.get(`${adminbaseURL}/allslider`, { withCredentials: true });
     console.log(response.data,"In sliderSlice");
+    return response.data;  // access the data property of the response
+});
+export const getSliderHome = createAsyncThunk('home/slider', async () => {
+    const response = await axios.get(`${userURL}/get/allslider`, { withCredentials: true });
+    console.log(response.data,"In home sliderSlice");
     return response.data;  // access the data property of the response
 });
 
@@ -55,6 +60,18 @@ const sliderSlice = createSlice({
                 state.error = null;
             })
             .addCase(getSlider.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            .addCase(getSliderHome.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getSliderHome.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.slider = action.payload
+                state.error = null;
+            })
+            .addCase(getSliderHome.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
             });

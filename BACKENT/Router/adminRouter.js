@@ -1,5 +1,5 @@
 const {Router} = require('express')
-const { adminLogin,createAdmin,logout } = require('../Controller/AdminSide/adminLogin')
+const { adminLogin,createAdmin, getAllAdmins, deleteAdmin, forgotPassword,resetPassword, logout } = require('../Controller/AdminSide/adminLogin')
 const {adminSessionCheck} = require('../Middleware/adminSession')
 const {uploadFile, getAllProducts, deleteFile, editFile} = require('../Controller/AdminSide/products');
 const {getAllslider, uploadSlider, deleteSlider} = require('../Controller/AdminSide/slider')
@@ -23,6 +23,19 @@ router
 router  
     .route('/signup')
     .post(adminSessionCheck,createAdmin);
+
+    router
+    .route('/getAllAdmins')
+    .get(adminSessionCheck, getAllAdmins);
+  
+  router
+    .route('/deleteAdmin/:adminId')
+    .delete(adminSessionCheck, deleteAdmin);
+
+    router.post('/forgot-password', forgotPassword);
+    router.post('/reset-password/:id/:token', resetPassword);
+
+
 
     router.get('/check-auth', (req, res) => {
         if (req.session.adminId) {

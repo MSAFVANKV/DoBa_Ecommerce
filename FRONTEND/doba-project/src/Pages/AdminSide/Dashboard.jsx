@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { adminbaseURL, userURL } from '../../Base/Constent';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
+import{ Table, Button, Flex }from "antd"
 
 // fetched items from slices
 import { setProducts } from '../../ReduxToolKit/Admin/ProductsSlice';
@@ -19,7 +20,8 @@ import { GiTatteredBanner } from 'react-icons/gi';
 import { enquiryForm, getEnquiryForm } from '../../ReduxToolKit/User/EnquirySlice';
 import { getFeedbackInfo } from '../../ReduxToolKit/User/FeedBackSlice';
 import SignUp from './SignUp';
-import { Button } from '@mui/material';
+import { deleteAdmin, getAllAdmins, selectAdmin } from '../../ReduxToolKit/Admin/AdminLoginSlice';
+import { Link } from 'react-router-dom';
 
 
 const ringAnimation = keyframes`
@@ -60,6 +62,8 @@ function Dashboard({ setIsAdminLoggedIn }) {
   const SingleFormCollections = useSelector(state => state.form.form);
   const enquiryFormCollections = useSelector(state => state.enquiry.enquiry);
   const feedbackFormCollections = useSelector(state => state.feedback.feedback);
+  const adminsCollections = useSelector(selectAdmin);
+  // console.log(adminsCollections,"adminsCollections");
 
   const [createAdmin, setCreateAdmin] = useState(false)
 
@@ -81,6 +85,21 @@ function Dashboard({ setIsAdminLoggedIn }) {
     dispatch(getFeedbackInfo());
 
   }, [dispatch]);
+  useEffect(() => {
+    dispatch(getAllAdmins());
+  }, [dispatch]);
+  
+
+  const handleDelete = (adminId) => {
+    // Dispatch deleteAdmin action to delete an admin
+    const confimdele= confirm("Are you sure")
+    if(confimdele){
+      dispatch(deleteAdmin(adminId));
+      dispatch(getAllAdmins());
+    }
+    return
+
+  };
 
   // all messages
   useEffect(() => {
@@ -98,9 +117,39 @@ function Dashboard({ setIsAdminLoggedIn }) {
 const openSignup = () => {
   setCreateAdmin(!createAdmin)
 }
+const columns = [
+  {
+    title: 'Id',  // Column title
+    dataIndex: '_id',  
+    key: 'id',
+    render: (text, record, index) => index + 1,
+  },
+  {
+    title: 'Email',  // Column title
+    dataIndex: 'email',  // Corresponds to the key in the data array
+    key: 'email',
+  },
+  {
+    title: 'Actions',
+    key: 'actions',
+    render: (text, record) => (
+      <Flex wrap="wrap" gap="small" className="site-button-ghost-wrapper">
+       <Button  type='primary' ghost  onClick={() => handleDelete(record._id)}>
+        Delete
+      </Button>
+      <Link to="/admin/forgot-password">
+      <Button type='primary' danger ghost>
+        reset
+      </Button>
+      </Link>
+     </Flex>
+      
+    ),
+  },
+];
 
   return (
-    <div className="container mx-auto">
+    <div className=" mx-auto h-[100vh]">
       <div className="page-container justify-center">
         <div className="grid grid-cols-1 md:grid-cols-3 h-[25%] lg:grid-cols-4 text-center rounded-xl m-10 gap-10">
           {/* Products */}
@@ -164,7 +213,10 @@ const openSignup = () => {
          { createAdmin && <SignUp openSignup={openSignup} />}
        </div>
       </div>
-     
+      <div className="flex justify-center items-center my-20 container">
+      
+      <Table columns={columns} dataSource={adminsCollections} scroll={{x:500}} sortDirections={{y:600}}/>
+      </div>
     </div>
   );
 }

@@ -4,12 +4,12 @@ import { adminbaseURL, userURL } from '../../Base/Constent'
 
 export const getSlider = createAsyncThunk('admin/slider', async () => {
     const response = await axios.get(`${adminbaseURL}/allslider`, { withCredentials: true });
-    console.log(response.data,"In sliderSlice");
+    // console.log(response.data,"In sliderSlice");
     return response.data;  // access the data property of the response
 });
 export const getSliderHome = createAsyncThunk('home/slider', async () => {
     const response = await axios.get(`${userURL}/get/allslider`, { withCredentials: true });
-    console.log(response.data,"In home sliderSlice");
+    // console.log(response.data,"In home sliderSlice");
     return response.data;  // access the data property of the response
 });
 

@@ -21,6 +21,19 @@ export const loginAdmin = createAsyncThunk('admin/login', async ({ email, passwo
     }
 });
 
+export const forgotPass = createAsyncThunk('admin/reset', async ({ email}) => {
+    try {
+        const res = await axios.post(`${adminbaseURL}/reset-password`, { email}, { withCredentials: true });
+        console.log(res.data, 'res.data reset-passwordAdmin slice');
+
+        return res.data;
+
+    } catch (error) {
+        console.log(error, 'error reset-passwordAdmin slice');
+        throw new Error(error.response?.data?.msg || "reset-password failed"); // Throw the error with the correct error message
+    }
+});
+
 // logout
 export const logoutAdmin = createAsyncThunk('admin/logout', async () => {
     try {
@@ -32,12 +45,28 @@ export const logoutAdmin = createAsyncThunk('admin/logout', async () => {
     }
 });
 
-
+// Fetch all admins
+  export const getAllAdmins = createAsyncThunk('admin/getAllAdmins', async () => {
+    const response = await axios.get(`${adminbaseURL}/getAllAdmins`, { withCredentials: true });
+    console.log(response.data,"/getAllAdmins");
+    return response.data;  // access the data property of the response
+});
+  
+  // Delete an admin
+  export const deleteAdmin = createAsyncThunk('admin/deleteAdmin', async (adminId) => {
+    try {
+      await axios.delete(`${adminbaseURL}/deleteAdmin/${adminId}`, { withCredentials: true });
+      return adminId;
+    } catch (error) {
+      console.error('Error deleting admin:', error);
+      throw error;
+    }
+  });
 
 export const adminSlice = createSlice({
     name:"admin",
     initialState: {
-        admin:null,
+        admin:[],
         isLoggedIn: false,
     },
     reducers: {
@@ -57,7 +86,18 @@ export const adminSlice = createSlice({
         .addCase(signupAdmin.rejected, (state, action) => {
             state.status = 'failed';
             state.error = action.payload; // Store the error message from the server
-        });
+        })
+        .addCase(getAllAdmins.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(getAllAdmins.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.admin = action.payload;
+        })        
+        .addCase(getAllAdmins.rejected, (state, action) => {
+            state.status = 'failed';
+            state.error = action.payload;
+        })        
     }
 })
 

@@ -4,6 +4,7 @@ import { useFormik } from 'formik'
 import '../../Components/Header/Header.css'
 import { SignupSchema } from '../../ValidationSchema/SignUpSchema';
 import { getAllAdmins, selectAdmin, signupAdmin } from '../../ReduxToolKit/Admin/AdminLoginSlice';
+import { Button } from '@mui/material';
 
 
 function SignUp({ openSignup }) {
@@ -37,7 +38,7 @@ function SignUp({ openSignup }) {
             <div >
                 <form action="" onSubmit={formik.handleSubmit} 
                 className="bg-white w-[350px] py-2 rounded-lg flex-col pt-10 flex items-center gap-4">
-                <span className='font-bold'>ADMIN Signup</span>
+                <span className='font-bold'>CREATE NEW ADMIN</span>
                 {adminError && <div className='text-red-600 font-bold'>{adminError}</div>}
 
                     <input type="email"
@@ -60,7 +61,16 @@ function SignUp({ openSignup }) {
                     />
                     {formik.touched.password && formik.errors.password ? 
                         <div className='text-red-600'>{formik.errors.password}</div> : null}
-                    <button type='submit' className='border bg-[#F26D1E] p-3 rounded-xl shadow-lg text-white font-bold hover:bg-[#f18e54]'>SUBMIT</button>
+                    {/* <button type='submit' className='border bg-[#F26D1E] p-3 rounded-xl shadow-lg text-white font-bold hover:bg-[#f18e54]'>SUBMIT</button> */}
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className="btn w-[100px]"
+                        disabled={formik.isSubmitting}
+                    >
+                        {formik.isSubmitting ? 'Loading...' : 'CREATE'}
+                    </Button>
                 </form>
             </div>
         </div>

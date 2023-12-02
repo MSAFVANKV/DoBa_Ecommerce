@@ -61,7 +61,8 @@ function BannerHome() {
                 className='absolute inset-0 w-[100%] h-[100%]'/>
                 <div className='absolute inset-0 bg-black opacity-5 group-hover:opacity-10' />
                 <div className="relative flex flex-col justify-center items-center gap-3">
-                <p className={`lg:text-[60px]  font-bold capitalize`} style={{ color: item.color }}>{item.bannerName}</p>
+                <p className={`lg:text-[60px]  text-[30px] font-bold capitalize`} style={{ color: item.color }}>{item.bannerName}</p>
+                <p className={`lg:text-[30px]  font-bold capitalize`} style={{ color: item.color }}>{item.subtitle}</p>
                 </div>
                 <img src={logo} alt="" className='absolute bottom-5 left-5 w-[50px] h-[50px] text-black group-hover:text-blue-600  duration-100' />
               </div>

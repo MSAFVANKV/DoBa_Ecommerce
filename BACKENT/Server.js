@@ -32,7 +32,7 @@ app.use(session({
 app.use('/Public', express.static(path.join(__dirname, 'Public')));
 
 
-mongoose.connect(process.env.MONGO_DB_CONNECTION)
+mongoose.connect(process.env.DOBA_MONGO_ATLES)
 .then(()=>{
     console.log("mongodb connected");
 })

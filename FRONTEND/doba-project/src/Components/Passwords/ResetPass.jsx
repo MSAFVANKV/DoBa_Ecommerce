@@ -8,6 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { adminbaseURL } from '../../Base/Constent';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import { Button } from '@mui/material';
 
 
 const validationSchema = Yup.object({
@@ -34,7 +35,7 @@ function ResetPass() {
         onSubmit: async (values) => {
             try {
                 const response = await axios.post(`${adminbaseURL}/reset-password/${id}/${token}`, { password: values.password });
-                console.log(response.data, 'Password reset instructions sent successfully.');
+                // console.log(response.data, 'Password reset instructions sent successfully.');
 
                 if (response.data.Status === "Success") {
                     navigate('/admin/dashboard');
@@ -65,7 +66,7 @@ function ResetPass() {
         pauseOnHover />
             <div>
                 <form onSubmit={formik.handleSubmit} className="bg-white w-[350px] py-2 rounded-lg flex-col pt-10 flex items-center gap-4">
-                    <span className="font-bold">ADMIN Reset Password</span>
+                    <span className="font-bold">CHANGE PASSWORD</span>
 
                     <input
                         type="password"
@@ -80,9 +81,18 @@ function ResetPass() {
                         <div className="text-red-500">{formik.errors.password}</div>
                     ) : null}
 
-                    <button type="submit" className="border bg-[#F26D1E] p-2 w-[80%] my-5 rounded-xl shadow-lg text-white font-bold hover:bg-[#f18e54]">
+                    {/* <button type="submit" className="border bg-[#F26D1E] p-2 w-[80%] my-5 rounded-xl shadow-lg text-white font-bold hover:bg-[#f18e54]">
                         UPDATE PASSWORD
-                    </button>
+                    </button> */}
+                     <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className="btn w-[100px]"
+                        disabled={formik.isSubmitting}
+                    >
+                        {formik.isSubmitting ? 'Loading...' : 'UPDATE PASSWORD'}
+                    </Button>
                 </form>
             </div>
         </div>

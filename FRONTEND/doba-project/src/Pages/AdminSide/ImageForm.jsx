@@ -9,14 +9,22 @@ import { Upload } from 'antd';
 import { SketchPicker } from 'react-color'; // Import the color picker component
 import { ToastContainer, toast } from 'react-toastify';
 
-function ImageForm() {
+function ImageForm({passData}) {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.banner.error);
+  console.log(passData,"passData")
 
+  // const [bannerInfo, setBannerInfo] = useState({
+  //   bannerName: "",
+  //   subtitle:"",
+  //   image: null,
+  //   color: "#ffffff", // Default color
+  // });
   const [bannerInfo, setBannerInfo] = useState({
-    bannerName: "",
+    bannerName: passData ? passData.bannerName : "",
+    subtitle: passData ? passData.subtitle : "",
     image: null,
-    color: "#ffffff", // Default color
+    color: passData ? passData.color : "#ffffff",
   });
 
   const handleInputChange = (e) => {
@@ -66,12 +74,14 @@ function ImageForm() {
     try {
       const formData = new FormData();
       formData.append('bannerName', bannerInfo.bannerName);
+      formData.append('subtitle', bannerInfo.subtitle);
       formData.append('image', bannerInfo.image[0]?.originFileObj || null);
       formData.append('color', bannerInfo.color); // Add color to the form data
 
       await dispatch(uploadBanner(formData));
       setBannerInfo({
         bannerName: "",
+        subtitle:"",
         image: null,
         color: "#ffffff", // Reset color to default after upload
       });
@@ -96,8 +106,18 @@ function ImageForm() {
         type="text"
         id="bannerName"
         name="bannerName"
-        label="Add your product's name"
+        label="Add your Banner Title"
         value={bannerInfo.bannerName}
+        onChange={handleInputChange}
+        fullWidth
+        margin="normal"
+      />
+       <TextField
+        type="text"
+        id="subtitle"
+        name="subtitle"
+        label="Add your Banner Subtitle"
+        value={bannerInfo.subtitle}
         onChange={handleInputChange}
         fullWidth
         margin="normal"
@@ -120,9 +140,12 @@ function ImageForm() {
 
       {error && <div className="text-red-500 p-5">{error}</div>}
       <Box mt={3}>
-        <Button type="submit" variant="contained" color="primary">
+        {/* <Button type="submit" variant="contained" color="primary">
           Submit
-        </Button>
+        </Button> */}
+         <Button type="submit" variant="contained" color="primary">
+            {passData ? "Update" : "Submit"}
+          </Button>
       </Box>
     </form>
     </>

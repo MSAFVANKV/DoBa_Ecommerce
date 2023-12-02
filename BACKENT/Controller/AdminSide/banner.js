@@ -47,8 +47,9 @@ module.exports.uploadBanner = async (req, res) => {
             
             const newBanner = new bannerCollection({
                 file: bannerImages,
-                bannerName: req.body.bannerName, // Use bannerInfo to access the banner name
-                color: req.body.color,
+                bannerName: bannerInfo.bannerName, // Use bannerInfo to access the banner name
+                subtitle: bannerInfo.subtitle, // Use bannerInfo to access the banner name
+                color: bannerInfo.color,
             });
 
             await newBanner.save();
@@ -84,3 +85,53 @@ module.exports.deleteBanner = async (req, res) => {
         res.status(500).send({ error: error.message, msg: "Internal Server Error deleting banner" });
     }
 }
+
+
+module.exports.updateBanner = async (req, res) => {
+    const { _id } = req.params;
+  
+    if (!_id) {
+      return res.status(400).send({ msg: "Banner ID not provided." });
+    }
+  
+    try {
+      const bannerInfo = req.body;
+  
+      // Check if the banner exists
+      const existingBanner = await bannerCollection.findById(_id);
+  
+      if (!existingBanner) {
+        return res.status(404).send({ msg: "Banner not found." });
+      }
+  
+      // Update the banner details
+      existingBanner.bannerName = bannerInfo.bannerName;
+      existingBanner.subtitle = bannerInfo.subtitle;
+      existingBanner.color = bannerInfo.color;
+  
+      // If a new image is uploaded, update the image
+      if (req.files && req.files["image"]) {
+        const newImage = `${bannerInfo.bannerName}_DoBa_${Date.now()}.png`;
+  
+        await sharp(req.files["image"][0].buffer)
+          .toFormat("png")
+          .png({ quality: 100 })
+          .toFile(`Public/banner/${newImage}`);
+  
+        existingBanner.file = newImage;
+      }
+  
+      // Save the updated banner
+      await existingBanner.save();
+  
+      // Fetch all banners and send the updated list
+      const banners = await bannerCollection.find({});
+      res.status(200).json({ details: banners, updatedBanner: existingBanner });
+    } catch (error) {
+      console.error("Error updating banner:", error);
+      res.status(500).send({ error: error.message, msg: "Internal Server Error updating banner" });
+    }
+  };
+  
+  // ... (other code)
+  

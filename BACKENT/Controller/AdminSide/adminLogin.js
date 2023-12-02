@@ -160,7 +160,14 @@ module.exports.forgotPassword = async (req, res) => {
             from: process.env.SMTP_MAIL,
             to: process.env.SMTP_MAIL,
             subject: 'Reset Your Password',
-            text: `http://localhost:5173/admin/reset-password/${admin._id}/${token}`
+            html: `
+            <div style="background-color: #f4f4f4; padding: 20px;">
+            <div style="max-width: 600px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+            <h2 style="text-align: center; color: #3498db;">CLICK THE LINK:</h2>
+            https://dobafoods.com/admin/reset-password/${admin._id}/${token}
+            </div>
+            </div>
+            `
           };
           
           transporter.sendMail(mailOptions, function(error, info){

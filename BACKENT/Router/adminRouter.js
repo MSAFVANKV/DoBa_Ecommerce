@@ -3,7 +3,7 @@ const { adminLogin,createAdmin, getAllAdmins, deleteAdmin, forgotPassword,resetP
 const {adminSessionCheck} = require('../Middleware/adminSession')
 const {uploadFile, getAllProducts, deleteFile, editFile} = require('../Controller/AdminSide/products');
 const {getAllslider, uploadSlider, deleteSlider} = require('../Controller/AdminSide/slider')
-const { uploadBanner, getAllbanner, deleteBanner } = require('../Controller/AdminSide/banner')
+const { uploadBanner, getAllbanner, deleteBanner, updateBanner } = require('../Controller/AdminSide/banner')
 const { getVideos, create, deleteVideos } = require('../Controller/AdminSide/videocontroller')
 
 
@@ -98,7 +98,7 @@ router
     .route('/logout')
     .get(logout);
 
-// banner
+// banner ===============================
 
    router
    .route("/upload/banner")
@@ -114,7 +114,9 @@ router
     router
     .route('/banner/delete/:_id')
     .delete(adminSessionCheck,deleteBanner);
-
+    router
+    .route("/banner/update/:_id")
+    .put(adminSessionCheck, fileUpload.fields([{ name: "image", maxCount: 1 }]), updateBanner);
     // videoos
 
     router

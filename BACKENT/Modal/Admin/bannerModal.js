@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 // Create a schema for your banner data
 const bannerSchema = new mongoose.Schema({
     bannerName: String,
-    videoName: String,
+    subtitle: String,
+    // videoName: String,
     file: {
         type: String,
     },

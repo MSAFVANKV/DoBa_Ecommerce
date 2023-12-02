@@ -81,7 +81,7 @@ function Footer() {
         rounded-full bg-gray-700 mx-1.5 text-xl hover:text-gray-100 hover:bg-teal-500
         duration-300 "
         >
-            <a href="https://linkedin.com/in/muhammed-safvan-kv-648388250/" target="_blank" rel="noopener noreferrer">
+            <a href="" target="_blank" rel="noopener noreferrer">
     <FaInstagram />
   </a>
         </span>

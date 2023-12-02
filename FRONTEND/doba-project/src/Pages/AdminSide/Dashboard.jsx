@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { adminbaseURL, userURL } from '../../Base/Constent';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
-import{ Table, Button, Flex }from "antd"
+import{ Table,}from "antd"
 
 // fetched items from slices
 import { setProducts } from '../../ReduxToolKit/Admin/ProductsSlice';
@@ -20,9 +20,11 @@ import { GiTatteredBanner } from 'react-icons/gi';
 import { enquiryForm, getEnquiryForm } from '../../ReduxToolKit/User/EnquirySlice';
 import { getFeedbackInfo } from '../../ReduxToolKit/User/FeedBackSlice';
 import SignUp from './SignUp';
-import { deleteAdmin, getAllAdmins, selectAdmin } from '../../ReduxToolKit/Admin/AdminLoginSlice';
+import { deleteAdmin, forgotPass, getAllAdmins, selectAdmin } from '../../ReduxToolKit/Admin/AdminLoginSlice';
 import { Link } from 'react-router-dom';
-
+import ForgetPass from '../../Components/Passwords/ForgetPass';
+import { Button, Stack } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const ringAnimation = keyframes`
   0% {
@@ -66,6 +68,9 @@ function Dashboard({ setIsAdminLoggedIn }) {
   // console.log(adminsCollections,"adminsCollections");
 
   const [createAdmin, setCreateAdmin] = useState(false)
+  const [openforgot, setOpenforgot] = useState(false)
+  const [email, setEmail] = useState('');
+
 
   useEffect(() => {
     // Fetch products
@@ -117,6 +122,10 @@ function Dashboard({ setIsAdminLoggedIn }) {
 const openSignup = () => {
   setCreateAdmin(!createAdmin)
 }
+const openForgotPage = (email) => {
+  setEmail(email);
+  setOpenforgot(!openforgot);
+};
 const columns = [
   {
     title: 'Id',  // Column title
@@ -133,16 +142,16 @@ const columns = [
     title: 'Actions',
     key: 'actions',
     render: (text, record) => (
-      <Flex wrap="wrap" gap="small" className="site-button-ghost-wrapper">
-       <Button  type='primary' ghost  onClick={() => handleDelete(record._id)}>
-        Delete
-      </Button>
-      <Link to="/admin/forgot-password">
-      <Button type='primary' danger ghost>
+     
+      <Stack direction="row" spacing={2}>
+        <Button variant="outlined" startIcon={<DeleteIcon />}  onClick={() => handleDelete(record._id)}/>
+     
+      {/* <Link to="/admin/forgot-password"> */}
+      <Button variant="outlined" onClick={() => openForgotPage(record.email)} >
         reset
       </Button>
-      </Link>
-     </Flex>
+      </Stack>
+    
       
     ),
   },
@@ -153,7 +162,7 @@ const columns = [
       <div className="page-container justify-center">
         <div className="grid grid-cols-1 md:grid-cols-3 h-[25%] lg:grid-cols-4 text-center rounded-xl m-10 gap-10">
           {/* Products */}
-          <div className="bg-red-400 relative col-span-1 p-6 flex flex-col justify-center font-bold w-[200px] rounded-xl">
+          <div className="bg-red-400 relative h-[150px] col-span-1 p-6 flex flex-col justify-center font-bold w-[200px] rounded-xl">
             PRODUCTS
             <div>
               {productsList && productsList.length > 0 && (
@@ -164,7 +173,7 @@ const columns = [
           </div>
 
           {/* Slider */}
-          <div className="bg-green-400 relative col-span-1 p-6 flex flex-col justify-center font-bold w-[200px] rounded-xl">
+          <div className="bg-green-400 relative h-[150px] col-span-1 p-6 flex flex-col justify-center font-bold w-[200px] rounded-xl">
             SLIDERS
             <div>
               {sliderList && sliderList.length > 0 && (
@@ -175,7 +184,7 @@ const columns = [
           </div>
 
           {/* Banners */}
-          <div className="bg-blue-400 relative col-span-1 p-6 flex flex-col justify-center font-bold w-[200px] rounded-xl">
+          <div className="bg-blue-400 relative h-[150px] col-span-1 p-6 flex flex-col justify-center font-bold w-[200px] rounded-xl">
             BANNERS
             <div>
               {getBannerList && getBannerList.length > 0 && (
@@ -189,7 +198,7 @@ const columns = [
           </div>
 
           {/* Messages */}
-          <div className="bg-slate-400 relative col-span-1 p-6 flex flex-col justify-center font-bold w-[200px] rounded-xl">
+          <div className="bg-slate-400 relative h-[150px] col-span-1 p-6 flex flex-col justify-center font-bold w-[200px] rounded-xl">
             MESSAGES
             <div>
               {/* {SingleFormCollections && SingleFormCollections.length > 0 ? (
@@ -207,7 +216,7 @@ const columns = [
 
         <div className="mt-10">
          
-         <Button type="submit" variant="contained" color="primary" onClick={openSignup}>
+         <Button type='primary' ghost onClick={openSignup}>
          Admin
        </Button>
          { createAdmin && <SignUp openSignup={openSignup} />}
@@ -216,6 +225,9 @@ const columns = [
       <div className="flex justify-center items-center my-20 container">
       
       <Table columns={columns} dataSource={adminsCollections} scroll={{x:500}} sortDirections={{y:600}}/>
+      {
+        openforgot && <ForgetPass openForgotPage={openForgotPage} changeEmail={email} />
+      }
       </div>
     </div>
   );

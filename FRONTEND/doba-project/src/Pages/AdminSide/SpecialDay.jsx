@@ -9,6 +9,12 @@ import {  FormControl, FormLabel, Radio, RadioGroup, FormControlLabel, TextField
 
 function SpecialDay() {
   const [fileType, setFileType] = useState("image");
+  const [passData, setPassData] = useState(null)
+  const getData = (data) => {
+    console.log('Received bannerDetails in SpecialDay:', data);
+
+    setPassData(data)
+  }
 
   return (
     // <div className="pt-3 h-[100%] flex flex-col items-center">
@@ -40,12 +46,12 @@ function SpecialDay() {
           </RadioGroup>
         </FormControl>
       {fileType === "image" ? (
-        <ImageForm />
+        <ImageForm passData={passData} />
       ) : fileType === "video" ? (
         <VideoForm />
       ) : null}
  </Box>
-      {fileType && fileType === 'image' && <Banner />}
+      {fileType && fileType === 'image' && <Banner onBannerDetails={getData} />}
       {fileType && fileType === 'video' && <VideoBanner />}
     {/* </div> */}
     </Container>

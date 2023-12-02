@@ -7,7 +7,7 @@ function AdminLogin({ onAdminLoginSuccess }) {
     const dispatch = useDispatch()
 
     const [email, setEmail] = useState("doba2k23@gmail.com")
-    const [password, setPassword] = useState("789456")
+    const [password, setPassword] = useState("")
 
     const hanleSubmit = (e) => {
         e.preventDefault();
@@ -33,11 +33,13 @@ function AdminLogin({ onAdminLoginSuccess }) {
                     <input type="email"
                         className='border border-black w-[80%] p-2 rounded-xl bg-slate-100'
                         value={email}
+                        placeholder='email'
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <input type="password"
                         className='border border-black w-[80%] p-2 rounded-xl bg-slate-100'
                         value={password}
+                        placeholder='password'
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <button type='submit' className='border bg-[#F26D1E] p-3 rounded-xl shadow-lg text-white font-bold hover:bg-[#f18e54]'>SUBMIT</button>

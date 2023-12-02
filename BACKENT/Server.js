@@ -41,10 +41,10 @@ mongoose.connect(process.env.DOBA_MONGO_ATLES)
 })
 
 // connecting to react 
-// app.use(cors({
-//     origin: 'http://localhost:5173', // This is the correct version
-//     credentials: true
-// }));
+app.use(cors({
+    origin: ['http://localhost:5173','https://doba-frontend.onrender.com'], // This is the correct version
+    credentials: true
+}));
 // const buildpath = path.join(__dirname,"../FRONTEND/doba-project/dist")
 // app.use(express.static(buildpath))
 

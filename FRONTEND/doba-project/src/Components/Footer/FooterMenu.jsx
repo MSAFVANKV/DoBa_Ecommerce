@@ -20,6 +20,7 @@ export const PRODUCTS = [
   export const CONTACT = [
     { name: "+91-9747543802", link: "tel:9747543802" },
     { name: "E K Food Products", link: "#" },
+    { name: "Click here", link: "https://maps.app.goo.gl/bVBtPsabqczdkb8H8" },
     // { name: "Webinars", link: "#" },
     // { name: "Open-source", link: "#" },
   ];

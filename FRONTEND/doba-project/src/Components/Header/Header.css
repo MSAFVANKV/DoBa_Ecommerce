@@ -25,6 +25,7 @@
     background-color: #fff;
     transform: translatey(-5px);
     transition: 0.2s;
+
 }
 #toggle::after
 {

@@ -16,7 +16,8 @@ const FooterItems = ({ Links, title, isContact }) => {
       </h1>
       {Links.map((link) => (
         <li key={link.name}>
-          <a
+          <a target="_blank"
+  rel="noopener noreferrer"
             className=" hover:text-teal-400 duration-300
           sm:text-base text-sm cursor-pointer leading-6 "
             href={link.link}

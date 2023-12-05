@@ -59,16 +59,12 @@ function SideBar({ }) {
       e.preventDefault();
     
       try {
-        const isSearchInputFocused = document.activeElement === searchInputRef.current;
 
         if (activeSearch && activeSearch.length > 0) {
           navigate('/search/products', { state: { searchResults: activeSearch } });
           setActiveSearch([]); // Clear search results
           e.target.reset();
-
-          if (isSearchInputFocused) {
-            setToggle(true); // Close the sidebar
-          }
+          toggleSidebar()
         }
         else{
           
@@ -116,8 +112,11 @@ function SideBar({ }) {
     id='toggle'
     className={`bgtheme flex sm:hidden ${toggle ? 'active' : ''}`}
     onClick={toggleSidebar}
+    
   >
-    <div className={`${toggle ? 'w-[100%]  p-4' : ' w-0'} duration-300 h-full bg-opacity-95 -z-50 top-0 left-0  pt-8 bg-dark-purple  fixed`}>
+  </div>
+
+    <div className={`${toggle ? 'w-[100%]  p-4' : ' w-0'} duration-300 h-full bg-opacity-95 z-[999] top-0 left-0  pt-8 bg-dark-purple  fixed`}>
    
      <div className="flex gap-x-4 items-center ">
         <img src={logo} alt='' className={`cursor-pointer w-14 duration-500 rounded-full ${toggle && 'rotate-[360deg]'}`} />
@@ -127,6 +126,7 @@ function SideBar({ }) {
         {navLinks.map((item, index) => (
           <li key={item.id} className={`flex items-center text-gray-300 gap-x-4
           cursor-pointer p-2 hover:bg-light-white rounded-md ${item.gap ? 'mb-9': 'mb-2'}`}
+          onClick={toggleSidebar}
           >
            
             {/* <img src={item.src} alt={item.display} className="w-6 h-6 mr-2" /> */}
@@ -153,7 +153,6 @@ function SideBar({ }) {
       </ul>
 
       </div>
-  </div>
       
       </>
   );

@@ -11,7 +11,7 @@ export const singleFormEnquiry = createAsyncThunk('user/form', async ({ formStat
         throw Error(err.response?.data?.msg || "Login failed");
     }
 })
-export const getUserSingleForm = createAsyncThunk('user/form', async () => {
+export const getUserSingleForm = createAsyncThunk('user/singleform', async () => {
     try {
         const res = await axios.get(`${userURL}/singleform/getall` );
         return res.data;

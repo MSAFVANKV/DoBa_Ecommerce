@@ -175,7 +175,7 @@ function EnquirySMS({ enquiry2, setEnquiry2, enquiyForm, showEnquiryMessages, se
                 >
                   Check all
                 </Checkbox>
-                <span>Select ALL</span>
+                {/* <span>Select ALL</span> */}
               </div>
               <div className="relative">
                 <select
@@ -217,7 +217,7 @@ function EnquirySMS({ enquiry2, setEnquiry2, enquiyForm, showEnquiryMessages, se
                   }}
                 >
                   {/* Radio Button */}
-                  <input
+                  {/* <input
                     type="checkbox"
                     name="selectedEnquiryMessage"
                     value={message._id}
@@ -226,7 +226,12 @@ function EnquirySMS({ enquiry2, setEnquiry2, enquiyForm, showEnquiryMessages, se
                       handleCheckedEnquiry(e.target.checked, index);
                     }}
                     checkedEnquiry={checkedEnquiry[index] || false}
-                  />
+                  /> */}
+                  <Checkbox
+                  // indeterminate={indeterminate}
+                  onChange={(e) =>handleCheckedEnquiry(e.target.checked,index)}
+                  checkedEnquiry={checkedEnquiry[index] || false}
+                />
                   {/* Full Name */}
                   <span className={`ms-2 `}>{message.fullName}</span>
 

@@ -56,7 +56,7 @@ function Footer() {
       className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5
     text-center py-3 items-center text-sm  bg-[#F26D1E] text-white"
     >
-      <span>© 2023 DoBafoods. All rights reserved.</span>
+      <span>© 2023 dobafoods All rights reserved.</span>
       <span>Terms · Privacy Policy</span>
       {/* <SocialIcons Icons={Icons} /> */}
       <div className="">

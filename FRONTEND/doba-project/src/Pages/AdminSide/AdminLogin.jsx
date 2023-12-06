@@ -6,7 +6,7 @@ import { login, loginAdmin } from '../../ReduxToolKit/Admin/AdminLoginSlice'
 function AdminLogin({ onAdminLoginSuccess }) {
     const dispatch = useDispatch()
 
-    const [email, setEmail] = useState("doba2k23@gmail.com")
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
     const hanleSubmit = (e) => {

@@ -91,7 +91,7 @@ const removeBanner = (id) => {
           <>
             <div className="m-auto flex gap-3">
               <button className='' onClick={() => removeBanner(row._id)}><AiFillDelete /></button>
-              <button className='' onClick={() => handleEditBanner(row)}><AiFillEdit /></button>
+              {/* <button className='' onClick={() => handleEditBanner(row)}><AiFillEdit /></button> */}
 
             </div>
           </>

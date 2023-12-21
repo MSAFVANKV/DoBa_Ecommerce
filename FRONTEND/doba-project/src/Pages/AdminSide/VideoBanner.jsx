@@ -73,7 +73,7 @@ const removeVideos = (id) => {
                     {/* <button onClick={() => handleEdit(row)}>Edit</button> */}
                     <div className="m-auto flex gap-3">
                     <button className='' onClick={() => removeVideos(row._id)}><AiFillDelete /></button>
-                    <button onClick={() => removeProduct(row._id)}><AiFillEdit /></button>
+                    {/* <button onClick={() => removeProduct(row._id)}><AiFillEdit /></button> */}
                     </div>
                 </>
             ),
@@ -86,7 +86,7 @@ const removeVideos = (id) => {
       
 
   return (
-    <div className='sm:w-fit w-[100%] sm:mb-0 mb-10'>
+    <div className='sm:w-fit w-[100%] sm:mb-0 mb-10 h-[100vh]'>
         <DataTable
         title="Banner"
         columns={columns}

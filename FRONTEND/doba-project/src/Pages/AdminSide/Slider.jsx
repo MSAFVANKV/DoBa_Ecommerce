@@ -177,7 +177,7 @@ function Slider() {
 
 
     return (
-        <div className='bg-slate-100 '>
+        <div className='bg-slate-100 h-[100vh]'>
             <div className="flex flex-col justify-center items-center h-full">
 
             <div className="flex flex-col justify-center items-center">

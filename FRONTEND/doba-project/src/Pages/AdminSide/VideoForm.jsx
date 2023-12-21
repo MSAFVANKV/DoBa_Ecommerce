@@ -7,7 +7,7 @@ import { Button, FormControl, FormLabel, Radio, RadioGroup, FormControlLabel, Te
 
 function VideoForm() {
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.video.error);
+  const error = useSelector((state) => state.video);
 
   const [videos, setBannerVideos] = useState({
     videoName: "",
@@ -95,6 +95,7 @@ function VideoForm() {
               onChange={handleVideoNameChange}
               fullWidth
               margin="normal"
+              required
             />
             <input
               type="file"
@@ -102,6 +103,7 @@ function VideoForm() {
               name="videos"
               accept=".mp4, .mkv"
               onChange={handleVideoFileChange}
+              required
             />
             <Box mt={3}>
               {videos.videoFile && (

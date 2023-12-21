@@ -104,7 +104,7 @@ const columns = [
 
   return (
  
-  <div className="pt-10   bg-[#F6F8FC] p-5">
+  <div className="pt-10 h-[100vh]  bg-[#F6F8FC] p-5">
     <div className=" flex justify-center items-center">
     <button className='bg-[#F26D1E] text-white font-bold p-3 rounded-xl m-5' onClick={openAddProductModal}>ADD PRODUCTS</button>
 

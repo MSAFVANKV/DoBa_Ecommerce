@@ -37,6 +37,10 @@ app.use('/Public', express.static(path.join(__dirname, 'Public')));
 //     origin: 'http://localhost:5173', // This is the correct version
 //     credentials: true
 // }));
+// app.use(cors({
+//     origin: 'https://doba-frondent.onrender.com', // This is the correct version
+//     credentials: true
+// }));
 
 const buildpath = path.join(__dirname,"../FRONTEND/doba-project/dist")
 app.use(express.static(buildpath))

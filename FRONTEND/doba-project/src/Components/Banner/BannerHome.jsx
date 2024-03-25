@@ -21,7 +21,7 @@ function BannerHome() {
     axios.get(`${userURL}/get/allbanner`, { withCredentials: true })
       .then((response) => {
         dispatch(setBanner(response.data));
-        console.log(response.data);
+        // console.log(response.data);
       })
   }, [dispatch]);
  
@@ -50,8 +50,8 @@ function BannerHome() {
           speed={2000}
           className="w-[100%] "
         >
-          {getBannerSlice && getBannerSlice.length > 0 && getBannerSlice.map((item) => (
-            <SwiperSlide key={item.id}>
+          {getBannerSlice && getBannerSlice.length > 0 && getBannerSlice.map((item,index) => (
+            <SwiperSlide key={item.id || index}>
               <div className="flex flex-col gap-6 group relative shadow-lg text-white hover:shadow-2xl px-6 py-8 h-[210px] md:h-[350px] lg:h-[450px] w-[100%] cursor-pointer">
                 {/* <div
                   className="absolute inset-0 bg-contain bg-no-repeat bg-center w-[100%] h-[100%]"

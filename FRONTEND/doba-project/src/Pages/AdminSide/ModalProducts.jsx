@@ -123,14 +123,24 @@ function ModalProducts({ closeModal, selectedProduct }) {
             // Call uploadProduct action for adding
             dispatch(uploadProduct(formData)).then((res) => {
                 // Handle success or error
-                setProductInfo({
-                    productName: '',
-                    price: '',
-                    images: [],
-                    description: '',
-                    category: 'dosa',
-                });
-                closeModal();
+                setLoading(true)
+
+                if(res.payload.msg ){
+                    setError(res.payload.msg)
+                setLoading(false)
+
+                } else {
+                    
+                   setProductInfo({
+                        productName: '',
+                        price: '',
+                        images: [],
+                        description: '',
+                        category: 'dosa',
+                    });
+                    closeModal();
+                }
+                
             });
         }
     };
@@ -254,7 +264,7 @@ function ModalProducts({ closeModal, selectedProduct }) {
                             onChange={handleImageUpload} />
 
                     </div>
-                    {imageError && (
+                    {imageError&&(
                         <div className='p-5 bg-red-200 m-auto my-2 rounded-lg text-[#ca4747] sm:text-[1rem] text-[0.8rem] font-bold'>
                             {imageError}
                         </div>
@@ -311,7 +321,7 @@ function ModalProducts({ closeModal, selectedProduct }) {
                     {error && <div className='p-5 bg-red-200 m-auto my-2 rounded-lg text-[#ca4747] sm:text-[1rem] text-[0.8rem] font-bold'>{`incluse the field: ${error}`}</div>}
 
                     <button type="submit" className="bg-[#F26D1E] p-2 my-5 border rounded-xl  text-white font-bold">
-                        {selectedProduct ? 'Edit' : 'Submit'}
+                    {loading ? "Loading" : selectedProduct ? 'Edit' : 'Submit'}
                     </button>
                     {/* <button
                         type="submit"

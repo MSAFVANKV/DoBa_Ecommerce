@@ -12,7 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 function ImageForm({passData}) {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.banner.error);
-  console.log(passData,"passData")
+  // console.log(passData,"passData")
 
   // const [bannerInfo, setBannerInfo] = useState({
   //   bannerName: "",

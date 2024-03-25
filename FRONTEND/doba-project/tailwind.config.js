@@ -13,12 +13,14 @@ export default {
       },
       colors:{
         "dark-purple":"#081a51",
-        "light-white":"rgba(255,255,255,0.17)"
+        "light-white":"rgba(255,255,255,0.17)",
+        "main":"#F26D1E"
       }
     },
   },
   plugins: [
     require('tailwindcss-no-scrollbar'),
     require('tailwind-scrollbar'),
+    require("daisyui"),
   ],
 }

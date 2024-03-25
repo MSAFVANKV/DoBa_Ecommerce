@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadVideo, getVideos } from '../../ReduxToolKit/Admin/videoSlice';
-import { Button, FormControl, FormLabel, Radio, RadioGroup, FormControlLabel, TextField, Container, Box } from '@mui/material';
+import { Button, TextField,  Box } from '@mui/material';
 
 
 function VideoForm() {
@@ -13,6 +13,7 @@ function VideoForm() {
     videoName: "",
     videoFile: null,
   });
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleVideoNameChange = (e) => {
     setBannerVideos({
@@ -33,6 +34,7 @@ function VideoForm() {
     e.preventDefault();
 
     try {
+      setIsLoading(true);
       const formData = new FormData();
       formData.append('videoName', videos.videoName);
       formData.append('videos', videos.videoFile);
@@ -45,6 +47,8 @@ function VideoForm() {
       await dispatch(getVideos());
     } catch (error) {
       console.error("Error uploading video:", error);
+    } finally{
+      setIsLoading(false)
     }
   };
 
@@ -111,8 +115,8 @@ function VideoForm() {
               )}
             </Box>
             <Box mt={3}>
-              <Button type="submit" variant="contained" color="primary">
-                Submit
+              <Button type="submit" variant="contained" color="primary" disabled={isLoading}>
+              {isLoading ? "loading" : "Submit"}
               </Button>
             </Box>
           </form>

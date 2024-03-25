@@ -11,7 +11,7 @@ export const PRODUCTS = [
     { name: "Nostrud exercitation", link: "#" },
   ];
   export const LOCATION = [
-    { name: "E K Food Products", link: "#" },
+    { name: "DoBa Idly & Dosa batter", link: "#" },
     { name: "Near Post office", link: "#" },
     { name: "Kattangal rd, Mavoor", link: "#" },
     { name: "Calicut - 673661", link: "#" },
@@ -19,7 +19,7 @@ export const PRODUCTS = [
   ];
   export const CONTACT = [
     { name: "+91-9747543802", link: "tel:9747543802" },
-    { name: "E K Food Products", link: "#" },
+    { name: "DoBa Idly & Dosa batter", link: "#" },
     { name: "Click here", link: "https://maps.app.goo.gl/bVBtPsabqczdkb8H8" },
     // { name: "Webinars", link: "#" },
     // { name: "Open-source", link: "#" },

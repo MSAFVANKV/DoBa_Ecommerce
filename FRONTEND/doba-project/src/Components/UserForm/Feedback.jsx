@@ -12,9 +12,9 @@ import { userURL } from '../../Base/Constent';
 function Feedback() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getFeedbackInfo());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getFeedbackInfo());
+  // }, []);
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Please Enter a Valid Email") // This will validate the format of the email

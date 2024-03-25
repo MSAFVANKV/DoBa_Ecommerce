@@ -37,7 +37,7 @@ function EnquirySMS({ enquiry2, setEnquiry2, enquiyForm, showEnquiryMessages, se
     axios.get(`${userURL}/form/enquiy/getall`, { withCredentials: true })
       .then((response) => {
         dispatch(enquiryForm(response.data));
-        console.log(response.data);
+        // console.log(response.data);
       })
   }, [dispatch]);
   // ====================[>]
@@ -45,7 +45,7 @@ function EnquirySMS({ enquiry2, setEnquiry2, enquiyForm, showEnquiryMessages, se
     axios.get(`${userURL}/form/enquiy/getall`, { withCredentials: true })
       .then((response) => {
         dispatch(enquiryForm(response.data));
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
         console.error('Error refreshing messages:', error);

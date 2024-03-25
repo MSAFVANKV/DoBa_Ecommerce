@@ -36,7 +36,7 @@ function Products() {
     axios.get(`${adminbaseURL}/allproducts`, { withCredentials: true })
       .then((response) => {
         dispatch(setProducts(response.data));
-        console.log(response.data);
+        // console.log(response.data);
       })
   }, [dispatch]);
   

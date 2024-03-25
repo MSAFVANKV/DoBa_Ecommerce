@@ -28,6 +28,7 @@ import Sidebaritems from '../Components/AdminHeader/Sidebaritems'
 import Error from '../Pages/UserSide/Error'
 import ForgetPass from '../Components/Passwords/ForgetPass'
 import ResetPass from '../Components/Passwords/ResetPass'
+import JobsFeedAdmin from '../Pages/AdminSide/JobsFeedAdmin'
 
 
 function AdminRouter() {
@@ -121,12 +122,14 @@ function AdminRouter() {
    <div className="flex-1">
    <Routes>
         <Route path='/admin' element={isAdminLogin ?<Navigate to="/admin/dashboard" /> : <AdminLogin onAdminLoginSuccess={handleAdminLoginSuccess}/>} />
-        {/* <Route path="/admin/signup" element={<SignUp adminSignup={handleAdminSignup} />} /> */}
+        <Route path="/admin/signup" element={<SignUp adminSignup={handleAdminSignup} />} />
         <Route path='/admin/dashboard'element={ isAdminLogin ?<Dashboard setIsAdminLoggedIn={setIsAdminLoggedIn}/> : <Navigate to={'/admin'}/>} />
         <Route path='/admin/specialday' element={isAdminLogin ?<SpecialDay/>: <Navigate to={'/admin'}/>} />
         <Route path='/admin/products' element={isAdminLogin ?<Products/>: <Navigate to={'/admin'}/>} />
         <Route path='/admin/slider' element={isAdminLogin ?<Slider/>: <Navigate to={'/admin'}/>} />
         <Route path='/admin/messages' element={isAdminLogin ?<Messages/>: <Navigate to={'/admin'}/>} />
+        <Route path='/admin/careers/jobs' element={isAdminLogin ?<JobsFeedAdmin/>: <Navigate to={'/admin'}/>} />
+
         <Route path='/admin/forgot-password' element={isAdminLogin ?<ForgetPass/> : <Navigate to={'/admin'}/>}/>
         <Route path='/admin/reset-password/:id/:token' element={<ResetPass/> }/>
 

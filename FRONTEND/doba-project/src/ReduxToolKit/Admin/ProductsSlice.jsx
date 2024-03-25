@@ -4,12 +4,12 @@ import { adminbaseURL, userURL } from '../../Base/Constent'
 
 export const getProducts = createAsyncThunk('admin/products', async () => {
     const response = await axios.get(`${adminbaseURL}/allproducts`, { withCredentials: true });
-    console.log(response.data,"In productSlice");
+    // console.log(response.data,"In productSlice");
     return response.data;  // access the data property of the response
 });
 export const getProductsHome = createAsyncThunk('home/products', async () => {
     const response = await axios.get(`${userURL}/get/allproducts`, { withCredentials: true });
-    console.log(response.data,"In productSlice home");
+    // console.log(response.data,"In productSlice home");
     return response.data;  // access the data property of the response
 });
 

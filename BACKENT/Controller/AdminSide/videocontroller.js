@@ -19,18 +19,26 @@ module.exports.getVideos = async (req, res) => {
   
 exports.create = async (req, res) => {
     const bannerInfo = req.body; 
-      let videosPaths = [];
-      console.log(bannerInfo,"bannerInfo")
-      console.log(videosPaths,"videosPaths")
+      // let videosPaths = [];
+      // console.log(bannerInfo,"bannerInfo")
+      // console.log(videosPaths,"videosPaths")
   
     
-      if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
-        for (let video of req.files.videos) {
-          videosPaths.push("/" + video.path);
-        }
-      }
+      // if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
+      //   for (let video of req.files.videos) {
+      //     videosPaths.push("/" + video.path);
+      //   }
+      // }
     
       try {
+        let videosPaths = [];
+      
+        if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
+          for (let video of req.files.videos) {
+            videosPaths.push("/" + video.path);
+          }
+        }
+
           const newBanner = new videoCollection({
               videoName: bannerInfo.videoName, // Use bannerInfo to access the banner name
               videos:videosPaths

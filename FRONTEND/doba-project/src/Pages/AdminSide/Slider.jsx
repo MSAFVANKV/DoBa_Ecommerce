@@ -101,7 +101,7 @@ function Slider() {
         axios.get(`${adminbaseURL}/allslider`, { withCredentials: true })
             .then((response) => {
                 dispatch(setslider(response.data));
-                console.log(response.data);
+                // console.log(response.data);
             })
     }, [dispatch]);
 

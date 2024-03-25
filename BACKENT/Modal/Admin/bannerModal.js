@@ -4,9 +4,11 @@ const mongoose = require('mongoose');
 const bannerSchema = new mongoose.Schema({
     bannerName: String,
     subtitle: String,
-    // videoName: String,
     file: {
         type: String,
+    },
+    image: {
+        type: Object,
     },
     color: {
         type: String, // Assuming color is stored as a string (hex code)
@@ -16,8 +18,11 @@ const bannerSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-    },
-});
+    }
+    
+},{
+        timeStamps:true
+    });
 
 // Create a model based on the schema
 module.exports = mongoose.model('Banner', bannerSchema)

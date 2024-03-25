@@ -75,7 +75,7 @@ console.log("images")
         const productInfo = req.body;
 
         if (!req.files || !req.files['images'] || req.files['images'].length !== 2) {
-            return res.status(400).json({ error: 'Exactly 2 image files are required.' });
+            return res.json({ status: 400 , msg: 'Exactly 2 image files are required.' });
         }
 
         const productImages = [];

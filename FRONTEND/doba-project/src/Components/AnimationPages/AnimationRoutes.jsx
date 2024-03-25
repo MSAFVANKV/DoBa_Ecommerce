@@ -11,6 +11,9 @@ import { ProductDetail } from '../ProductDetails/ProductDetail'
 import Contact from '../../Pages/UserSide/Contact'
 
 import { AnimatePresence } from 'framer-motion'
+import Error from '../error/Error'
+import Careers from '../Careers/Careers'
+import CareerJobs from '../../Pages/UserSide/CareerJobs'
 
 function AnimationRoutes() {
     const location = useLocation()
@@ -22,13 +25,16 @@ function AnimationRoutes() {
       <Route path="/home" element={<Home />} />
       {/* <Route path="/login" element={<Login />} /> */}
       {/* <Route path="/register" element={<Register />} /> */}
-      <Route path="/products" element={<Products />} />
+      {/* <Route path="/products" element={<Products />} /> */}
       {/* <Route path="/products/search" element={<SearchBarPage />} /> */}
       <Route path="/aboutus" element={<AboutUs />} />
       <Route path="/sample" element={<Sample />} />
+      <Route path="/careers" element={<Careers />} />
+      <Route path="/careers/:jobId" element={<CareerJobs />} />
       <Route path="/product/:productId" element={<ProductDetail />} />
       <Route path="/search/products" element={<SearchBarPage />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="*" element={<Error />} />
 
     </Routes>
     </AnimatePresence>

@@ -12,12 +12,12 @@ function VideoBanner() {
     const dispatch = useDispatch();
     const getVideosSlice = useSelector((state) => state.video.video);
 
-console.log(getVideosSlice,'getVideosSlice')
+// console.log(getVideosSlice,'getVideosSlice')
 useEffect(() => {
     axios.get(`${adminbaseURL}/videos`, { withCredentials: true })
       .then((response) => {
         dispatch(setVideo(response.data));
-        console.log(response.data);
+        // console.log(response.data);
       })
   }, [dispatch]);
 

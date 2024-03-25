@@ -29,7 +29,7 @@ function ForgetPass({ openForgotPage, changeEmail }) {
         onSubmit: async (values) => {
             try {
                 const response = await axios.post(`${adminbaseURL}/forgot-password`, { email: values.email });
-                console.log(response.data, 'Password reset instructions sent successfully.');
+                // console.log(response.data, 'Password reset instructions sent successfully.');
 
                 if (response.data.Status === "Success token") {
                     openForgotPage()

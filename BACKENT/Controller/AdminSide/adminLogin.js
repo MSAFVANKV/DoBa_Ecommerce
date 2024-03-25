@@ -19,6 +19,8 @@ module.exports.getAllAdmins = async (req, res) => {
 
 
 module.exports.createAdmin = async (req, res) => {
+
+    console.log('create admin');
     const { email, password } = req.body;
     console.log(req.body, "signUpUser req.body");
     if (!email || !password) {
@@ -49,7 +51,12 @@ module.exports.createAdmin = async (req, res) => {
 
 
 module.exports.adminLogin = async (req, res) => {
+    
     const { email, password } = req.body;
+    if (email ==="" || password === "") {
+        // console.log('Please provide input fields !!');
+        return res.status(401).json({ msg: "Please provide input fields !!" });
+    }
 
     try {
         const admin = await adminUser.findOne({ email });
@@ -57,15 +64,15 @@ module.exports.adminLogin = async (req, res) => {
         // Check if the admin with the given email exists
         if (!admin) {
             console.log('No admin account found with this email.');
-            return res.status(401).send({ msg: "No admin account found with this email." });
+            return res.status(401).json({ msg: "No admin account found with this email." });
         }
 
         // Check if the provided password matches the one in the database
         const isValid = await bcrypt.compare(password, admin.password);
 
         if (!isValid) {
-            console.log('Incorrect password.');
-            return res.status(400).send({ msg: "Incorrect password." });
+            // console.log('Incorrect password.');
+            return res.status(400).json({ msg: "Incorrect password." });
         }
 
         // If everything's good, set session variables and return a success response

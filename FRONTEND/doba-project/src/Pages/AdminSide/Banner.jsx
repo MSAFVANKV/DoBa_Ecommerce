@@ -24,7 +24,7 @@ useEffect(() => {
     axios.get(`${adminbaseURL}/allbanner`, { withCredentials: true })
       .then((response) => {
         dispatch(setBanner(response.data));
-        console.log(response.data);
+        // console.log(response.data);
       })
   }, [dispatch]);
 

@@ -20,12 +20,12 @@ export const uploadVideo = createAsyncThunk('video/upload' ,async (formData) => 
 
 export const getVideos = createAsyncThunk('admin/video', async () => {
     const response = await axios.get(`${adminbaseURL}/videos`, { withCredentials: true });
-    console.log(response.data,"In videoSlice");
+    // console.log(response.data,"In videoSlice");
     return response.data;  // access the data property of the response
 });
 export const getVideosHome = createAsyncThunk('home/video', async () => {
     const response = await axios.get(`${userURL}/get/videos`, { withCredentials: true });
-    console.log(response.data,"In videoSlice home");
+    // console.log(response.data,"In videoSlice home");
     return response.data;  // access the data property of the response
 });
 

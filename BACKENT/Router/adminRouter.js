@@ -3,8 +3,9 @@ const { adminLogin,createAdmin, getAllAdmins, deleteAdmin, forgotPassword,resetP
 const {adminSessionCheck} = require('../Middleware/adminSession')
 const {uploadFile, getAllProducts, deleteFile, editFile} = require('../Controller/AdminSide/products');
 const {getAllslider, uploadSlider, deleteSlider} = require('../Controller/AdminSide/slider')
-const { uploadBanner, getAllbanner, deleteBanner, updateBanner } = require('../Controller/AdminSide/banner')
+const { uploadBanner, getAllbanner, deleteBanner, updateBanner, uploadBannerCloud, getCloudbanner } = require('../Controller/AdminSide/banner')
 const { getVideos, create, deleteVideos } = require('../Controller/AdminSide/videocontroller')
+const { uploadCareerJobs } = require('../Controller/AdminSide/careerJobsController');
 
 
 
@@ -98,7 +99,7 @@ router
     .route('/logout')
     .get(logout);
 
-// banner ===============================
+// banner ========== starts= locally====================
 
    router
    .route("/upload/banner")
@@ -117,6 +118,18 @@ router
     router
     .route("/banner/update/:_id")
     .put(adminSessionCheck, fileUpload.fields([{ name: "image", maxCount: 1 }]), updateBanner);
+    
+    
+    // banner ========== ends= locally====================
+
+    // banner ========== starts= cloudinary====================
+ router
+   .route("/upload/bannerCloud")
+   .post(adminSessionCheck,uploadBannerCloud)
+    // banner ========== ends= cloudinary====================
+
+
+
     // videoos
 
     router
@@ -137,5 +150,11 @@ router
 //     .route('/banner/delete/:_id')
 //     .delete(deleteBanner);
 
+
+// career jobs
+
+router
+    .route('/careers/jobs/upload')
+    .post(uploadCareerJobs)
 
 module.exports=router;

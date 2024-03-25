@@ -28,7 +28,7 @@ function Items() {
     dispatch(getProductsHome()); // Fetch products when the component mounts
   }, [dispatch]);
 
-  console.log(getProducts, 'getProducts')
+  // console.log(getProducts, 'getProducts')
 
   const [likedItems, setLikedItems] = useState([]);
 

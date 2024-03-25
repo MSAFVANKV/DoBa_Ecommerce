@@ -17,7 +17,7 @@ import logout from '../../../assets/images/logout.png';
 
 
 import { AiFillHome } from 'react-icons/ai';
-
+import { FaBriefcase } from 'react-icons/fa';
 import { adminbaseURL } from '../../Base/Constent';
 import { logoutAdmin } from '../../ReduxToolKit/Admin/AdminLoginSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,7 +28,7 @@ const navLinks = [
     id: 1,
     path: '/admin/dashboard',
     display: 'DASHBOARD',
-    icon: AiFillHome,
+    // icon: AiFillHome,
     src: dashboard,
   },
   {
@@ -55,6 +55,13 @@ const navLinks = [
     path: '/admin/messages',
     display: 'MESSAGES',
     src: sms,
+
+  },
+  {
+    id: 6,
+    path: '/admin/careers/jobs',
+    display: 'JOBFEED',
+    icon: FaBriefcase,
     gap:true,
 
   },
@@ -94,7 +101,7 @@ function AdminSideBar({ onLogout, open, setOpen }) {
 
   return (
     <>
-      <div className="flex gap-x-4 items-center">
+      <div className="flex gap-x-4 items-center ">
         <img src={logo} alt='' className={`cursor-pointer w-14 duration-500 rounded-full ${open && 'rotate-[360deg]'}`} />
         <h1 className={`text-white origin-left font-medium text-xl duration-300 ${!open && 'scale-0'}`}>DoBa </h1>
       </div>
@@ -104,7 +111,8 @@ function AdminSideBar({ onLogout, open, setOpen }) {
           cursor-pointer p-2 hover:bg-light-white rounded-md ${item.gap ? 'mb-9': 'mb-2'}`}
           onClick={() => handleImageClick(item.path)}>
            
-            <img src={item.src} alt={item.display} className="w-6 h-6 mr-2" />
+           {item.src && <img src={item.src} alt={item.display} className="w-6 h-6 mr-2" />}
+            {item.icon&&<item.icon className='w-6 h- '/>}
             <NavLink to={item.path} className="text-white" >
               <span className={`${!open && 'hidden'} origin-left duration-200 `} >{item.display}</span>
               {item.path === '/admin/messages' && open &&(

@@ -77,7 +77,7 @@ function Dashboard({ setIsAdminLoggedIn }) {
     axios.get(`${adminbaseURL}/allproducts`, { withCredentials: true })
       .then((response) => {
         dispatch(setProducts(response.data));
-        console.log(response.data);
+        // console.log(response.data);
       });
   }, [dispatch]);
 
@@ -111,7 +111,7 @@ function Dashboard({ setIsAdminLoggedIn }) {
     axios.get(`${userURL}/singleform/getall`, { withCredentials: true })
       .then((response) => {
         dispatch(formsingle(response.data));
-        console.log(response.data);
+        // console.log(response.data);
       })
   }, [dispatch]);
 
@@ -120,7 +120,7 @@ function Dashboard({ setIsAdminLoggedIn }) {
   };
 
 const openSignup = () => {
-  setCreateAdmin(!createAdmin)
+  setCreateAdmin(!createAdmin) 
 }
 const openForgotPage = (email) => {
   setEmail(email);

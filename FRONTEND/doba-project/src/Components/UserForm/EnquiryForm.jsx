@@ -8,11 +8,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useFormik } from 'formik';
 import { EnquiryFormSchema } from '../../ValidationSchema/SignUpSchema';
 import {
-  Button, FormControl,
-  FormLabel, Radio, MenuItem, Select, InputLabel,
-  RadioGroup, FormControlLabel,
-  TextField, Container, Box, TextareaAutosize
+  Button, FormControl, MenuItem, Select, InputLabel,
+  TextField
 } from '@mui/material';
+import { TextareaAutosize } from '@mui/base';
 
 
 
@@ -198,7 +197,7 @@ function EnquiryForm() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
+              helpertext={formik.touched.email && formik.errors.email}
             />
 
           </div>
@@ -370,7 +369,7 @@ function EnquiryForm() {
             name="commends"
             value={formik.values.commends}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            // onBlur={formik.handleBlur}
             // error={formik.touched.commends && Boolean(formik.errors.commends)}
             // helperText={formik.touched.commends && formik.errors.commends}
             className="p-2"

@@ -50,7 +50,7 @@ function Sample({ items }) {
           className="w-[80%]"
         >
           {getSliderSlice.map((item) => (
-            <SwiperSlide key={item.id}>
+            <SwiperSlide key={item._id}>
 
               <div className="flex flex-col gap-6 group sm:mb-20 relative  shadow-lg text-white hover:shadow-2xl
               rounded-xl   h-[260px] w-[215px] md:h-[380px] md:w-[300px] lg:h-[400px] lg:w-[320px] cursor-pointer ">

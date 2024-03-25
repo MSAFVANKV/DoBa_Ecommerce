@@ -1,6 +1,6 @@
 
 const bannerCollection = require('../../Modal/Admin/bannerModal'); // Import your Mongoose model
-
+const cloudinary = require("../../Utilities/cloudinary")
 const sharp = require('sharp')
 
 
@@ -14,6 +14,53 @@ module.exports.getAllbanner = async (req, res) => {
       res.status(500).send("Internal Server Error fetching banner");
     }
   }
+
+  module.exports.getCloudbanner = async (req, res) => {
+
+    try{
+      const banner = await bannerCollection.find({}).sort({_id:-1})
+      res.status(200).send(banner);
+    } catch (error){
+      console.error("Error getting banner:", error);
+      res.status(500).send("Internal Server Error fetching banner");
+    }
+
+  }
+  
+  module.exports.uploadBannerCloud = async (req, res) => {
+    console.log("uploadBannerCloud");
+    const { bannerName, subtitle, image, color } = req.body;
+    console.log("req.body");
+  
+    try {
+      if (image) {
+    console.log("if image");
+
+        const uploadRes = await cloudinary.uploader.upload(image, {
+          upload_preset: "Dobafoods",
+        });
+  
+        if (uploadRes) {
+    console.log("if uploadRes");
+
+          const banner = new bannerCollection({
+            bannerName,
+            subtitle,
+            image: uploadRes,
+            color,
+          });
+  
+          const newBanner = await banner.save();
+          res.status(200).json({ details: banner, newBanner });
+    console.log("banner.save");
+
+        }
+      }
+    } catch (error) {
+      console.log(error, "in catch");
+      res.status(500).send(error);
+    }
+  };
   
 
 module.exports.uploadBanner = async (req, res) => {

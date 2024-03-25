@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Header.css';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -20,11 +20,16 @@ const navLinks = [
     display: 'HOME',
     icon: AiFillHome,
   },
+  // {
+  //   id: 2,
+  //   path: '/products',
+  //   display: 'PRODUCTS',
+  // },
   {
-    id: 2,
-    path: '/products',
-    display: 'PRODUCTS',
-  },
+      id: 2,
+      path: '/careers',
+      display: 'CAREERS',
+    },
   {
     id: 3,
     path: '/aboutus',
@@ -41,6 +46,24 @@ function Header() {
   const [toggle, setToggle] = useState(false);
   // const [searchQuery, setSearchQuery] = useState('');
   const [activeSearch, setActiveSearch] = useState([]);
+  const [sticky,setSticky] = useState(false);
+  useEffect(() => {
+    const handleScroll =() => {
+      const offSet = window.scrollY;
+      if (offSet > 0){
+        setSticky(true);
+      } else{
+        setSticky(false);
+      }
+    }
+
+    window.addEventListener("scroll",handleScroll);
+
+    return () => {
+      window.addEventListener("scroll",handleScroll);
+    }
+
+  },[])
 
   const navigate = useNavigate();
   const toggleSidebar = () => {
@@ -95,8 +118,12 @@ function Header() {
 
   return (
     <>
-      <header className='bg-white sm:h-[90px] h-[70px] sticky_header shadow-md'>
-        <div className='flex justify-between items-center'>
+    {/* bg-white sm:h-[90px] h-[70px] sticky_header shadow-md */}
+    
+      <header className='bg-white max-w-screen-2xl container mx-auto sticky_header_sidebar top-0 transition-all ease-in-out duration-300 z-50'>
+        <div className={`flex justify-between items-center navbar   
+      ${sticky ? "transition-all ease-in-out duration-300 bg-base-100 shadow-lg" : ""}
+      `}>
           {/* logo start==================== */}
           <div className='sm:w-[90px] w-[70px] p-1 sm:ms-9 m-1'>
            <a href="/"> <img src={logo} alt='' /></a>
@@ -111,16 +138,16 @@ function Header() {
             </ul>
           </div>
             {/* Search input */}
-            <div className='sm:flex items-center hidden'>
-            <form onSubmit={handleSearchSubmit}>
+            <div >
+            <form onSubmit={handleSearchSubmit} className='sm:flex items-center hidden relative'>
               <input
                 type="text"
                 placeholder="Search..."
-                className='border relative border-gray-300 rounded-md p-1 mr-2'
+                className='border  border-gray-300 rounded-md p-1 w-full h-full mr-2'
                 onChange={(e)=> handleSearchChange(e)}
               />
                   {/* <Link to={`/search/products/${activeSearch}`}> */}
-              <button type="submit" className='text-gray-600 absolute right-1 -translate-x-1/2 translate-y-1/2'>
+              <button type="submit" className='text-gray-600 absolute right-3 top-1/3'>
                 <AiOutlineSearch />
               </button>
               {/* </Link> */}

@@ -41,8 +41,8 @@ export const about_Us = [
     id: 3,
     display: 'TEAM',
     image: inspiring,
-    manager1:"ABCD",
-    manager2:"ABCD",
+    manager1:"JASNA ASHRAF",
+    manager2:"ASHRAF",
     quote: [
       "",
       ""

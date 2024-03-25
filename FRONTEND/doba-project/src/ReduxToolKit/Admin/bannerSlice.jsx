@@ -22,7 +22,7 @@ export const uploadBanner = createAsyncThunk('banner/upload' ,async (formData) =
 
 export const getBanner = createAsyncThunk('admin/banner', async () => {
     const response = await axios.get(`${adminbaseURL}/allbanner`, { withCredentials: true });
-    console.log(response.data,"In bannerSlice");
+    // console.log(response.data,"In bannerSlice");
     return response.data;  // access the data property of the response
 });
 

@@ -11,7 +11,7 @@ function SpecialDay() {
   const [fileType, setFileType] = useState("image");
   const [passData, setPassData] = useState(null)
   const getData = (data) => {
-    console.log('Received bannerDetails in SpecialDay:', data);
+    // console.log('Received bannerDetails in SpecialDay:', data);
 
     setPassData(data)
   }

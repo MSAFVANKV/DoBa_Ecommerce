@@ -56,11 +56,11 @@ const ProductDetail = () => {
         <div className="sm:grid sm:grid-cols-4 grid-cols-4 sm:w-[55rem] w-[100%]lg:h-[600px]">
           {/* ====== */}
 
-          <div className='border sm:m-2 shadow-sm w-[100%] sm:h-[430px] h-[360px] col-span-2'>
+          <div className='border sm:m-2 shadow-sm sm:w-[430px] sm:h-[430px] h-[360px] col-span-2'>
             <img
               src={`${mainURL}/Public/ProductsImages/${product.file[selectedImage]}`}
               alt={product.productName}
-              className='p-3 object-cover w-full h-full'
+              className='p-5 h-full w-[100%]'
               // main  image
               // onClick={() => handleImageClick(0)}
             />

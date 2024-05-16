@@ -32,8 +32,8 @@ function Contact() {
     exit={{x: window.innerWidth, transition: { duration: 0.1 }}}
     >
           <div className=" sm:h-[50vh] h-[30vh] sm:mt-0 mt-10 flex flex-col justify-center items-center relative">
-          <span className='md:text-[3rem]  sm:text-[2.5rem] text-[2rem] font-comforter2 font-semibold '>CONTACT US </span>
-          <span className='md:text-[2rem] sm:text-[1.8rem] text-[1.5rem] sm:w-fit w-[90%] font-comforter2 sm:font-semibold '>
+          <span className=' sm:text-[2.5rem] text-[2rem] font-comforter2 font-semibold '>CONTACT US </span>
+          <span className='text-[1.5rem] sm:w-fit w-[90%] font-comforter2 sm:font-semibold '>
           "In the world of endless choices, choosing us is the best one you'll make today. Let's talk!"
           </span>
           {/* <span className='translate-x-3 transition-all'><IoIosCall /></span> */}

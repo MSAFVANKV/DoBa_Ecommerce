@@ -5,7 +5,7 @@ const {uploadFile, getAllProducts, deleteFile, editFile} = require('../Controlle
 const {getAllslider, uploadSlider, deleteSlider} = require('../Controller/AdminSide/slider')
 const { uploadBanner, getAllbanner, deleteBanner, updateBanner, uploadBannerCloud, getCloudbanner } = require('../Controller/AdminSide/banner')
 const { getVideos, create, deleteVideos } = require('../Controller/AdminSide/videocontroller')
-const { uploadCareerJobs } = require('../Controller/AdminSide/careerJobsController');
+const { uploadCareerJobs, deleteCareerJobs } = require('../Controller/AdminSide/careerJobsController');
 
 
 
@@ -155,6 +155,11 @@ router
 
 router
     .route('/careers/jobs/upload')
-    .post(uploadCareerJobs)
+    .post(uploadCareerJobs);
+
+    
+router
+.route('/careers/jobs/delete/:_id')
+.delete(adminSessionCheck,deleteCareerJobs);
 
 module.exports=router;

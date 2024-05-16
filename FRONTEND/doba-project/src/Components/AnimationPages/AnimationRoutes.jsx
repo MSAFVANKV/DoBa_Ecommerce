@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Home from '../../Pages/UserSide/Home'
 import Login from '../../Pages/UserSide/Login'
@@ -14,9 +14,26 @@ import { AnimatePresence } from 'framer-motion'
 import Error from '../error/Error'
 import Careers from '../Careers/Careers'
 import CareerJobs from '../../Pages/UserSide/CareerJobs'
+import Test from '../Careers/Test'
 
 function AnimationRoutes() {
     const location = useLocation()
+ 
+  useEffect(() => {
+    // Set document title based on conditions
+
+    const pathnames = ["/","/home", "/products", "/aboutus", "/contact" ,"/careers/:jobId/","/product/:productId",
+     '/search', "/search/products"]
+    
+    if (pathnames.includes(location.pathname)){
+        document.title = "Doba - "+document.title.split(" - ")[1]  
+    } else{
+      document.title = document.title.split(" - ")[0] +" - Doba"
+    }
+    
+      // document.title = `DoBa - ${location.pathname.slice(1)}`;
+    
+  }, [ location.pathname]);
   return (
     
     <AnimatePresence>
@@ -34,6 +51,7 @@ function AnimationRoutes() {
       <Route path="/product/:productId" element={<ProductDetail />} />
       <Route path="/search/products" element={<SearchBarPage />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/test" element={<Test />} />
       <Route path="*" element={<Error />} />
 
     </Routes>

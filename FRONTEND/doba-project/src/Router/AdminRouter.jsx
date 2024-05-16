@@ -29,6 +29,8 @@ import Error from '../Pages/UserSide/Error'
 import ForgetPass from '../Components/Passwords/ForgetPass'
 import ResetPass from '../Components/Passwords/ResetPass'
 import JobsFeedAdmin from '../Pages/AdminSide/JobsFeedAdmin'
+import CreateJobs from '../Pages/AdminSide/CreateJobs'
+import CareerJobs from '../Pages/UserSide/CareerJobs'
 
 
 function AdminRouter() {
@@ -128,7 +130,8 @@ function AdminRouter() {
         <Route path='/admin/products' element={isAdminLogin ?<Products/>: <Navigate to={'/admin'}/>} />
         <Route path='/admin/slider' element={isAdminLogin ?<Slider/>: <Navigate to={'/admin'}/>} />
         <Route path='/admin/messages' element={isAdminLogin ?<Messages/>: <Navigate to={'/admin'}/>} />
-        <Route path='/admin/careers/jobs' element={isAdminLogin ?<JobsFeedAdmin/>: <Navigate to={'/admin'}/>} />
+        <Route path='/admin/careers/jobs' element={isAdminLogin ?<CreateJobs/>: <Navigate to={'/admin'}/>} />
+        <Route path='/admin/careers/:jobId' element={isAdminLogin ?<CareerJobs/>: <Navigate to={'/admin'}/>} />
 
         <Route path='/admin/forgot-password' element={isAdminLogin ?<ForgetPass/> : <Navigate to={'/admin'}/>}/>
         <Route path='/admin/reset-password/:id/:token' element={<ResetPass/> }/>

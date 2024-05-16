@@ -70,3 +70,32 @@ export const EnquiryFormSchema = Yup.object().shape({
         .min(10, "Content should be at least 10 characters long")
         .required("Please Enter Commends"),
 });
+
+export const CareerJobsSchema = Yup.object().shape({
+    title: Yup.string()
+        .min(3, "Title should be at least 3 characters long")
+        .required("Please Enter Title"),
+
+    department: Yup.string()
+        .required('Department is required'),
+
+    location: Yup.string()
+        .required('Location is required'),
+
+    education: Yup.string()
+        .required('Education is required'),
+
+    experience: Yup.string()
+        .required('Experience is required'),
+
+    // skills: Yup.string()
+    //     .required('Skills are required'),
+
+    responsibilities: Yup.string()
+        // .min(10, "Responsibilities should be at least 10 characters long")
+        .required("Please Enter Responsibilities"),
+
+    additionalRequirements: Yup.string()
+        // .min(10, "Additional Requirements should be at least 10 characters long")
+        .required("Please Enter Additional Requirements"),
+});

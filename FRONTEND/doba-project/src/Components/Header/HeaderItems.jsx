@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 function HeaderItems({ items, index, Icon }) {
     return (
         <div className=''>
-            <li className='text-black font-bold flex items-center justify-center hover:underline underline-offset-4' key={index}>
+            <li className='text-black font-bold text-sm flex items-center justify-center hover:underline underline-offset-4' key={index}>
                 <NavLink
                     className={({ isActive }) => {
                         // isActive is accessible within this scope

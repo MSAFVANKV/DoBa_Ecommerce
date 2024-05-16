@@ -140,6 +140,8 @@ function SideBar({ }) {
             <form onSubmit={handleSearchSubmit} >
               <input
                 type="text"
+                name='search'
+                id='search'
                 placeholder="Search..."
                 className='border relative border-gray-300 rounded-md p-1 mr-2'
                 onChange={(e)=> handleSearchChange(e)}

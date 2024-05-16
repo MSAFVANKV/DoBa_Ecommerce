@@ -62,14 +62,14 @@ function AboutUs() {
         {/* Inside this div below is divided with two div */}
         <div className="sm:w-[70rem] w-[100%] bg-[white] md:flex">
           {/* First div */}
-          <div className="md:w-[30%] w-[100%] md:flex hidden justify-center">
-            <div className="w-[100%] h-[30px] bg-slate-300 mt-10 m-1">
+          <div className="md:w-[30%] w-[100%] md:flex hidden justify-center ">
+            <div className="w-[100%] h-[30px] bg-slate-300 mt-10 m-1 sticky top-32">
               <div className="h-[50px] bg-red-600 justify-center flex items-center">
                 <span className='text-white font-bold '>ABOUT</span>
               </div>
               <ul className='border'>
                 {about_Us.map((item, index) => (
-                  <div className="" key={item._id}>
+                  <div className="" key={item.id}>
                     <li className={`p-3 cursor-pointer hover:bg-slate-100 ${activeIndex === index ? 'bg-slate-400 hover:bg-slate-400 text-white' : ''}`} onClick={() => handleScrollTo(index)}>
                       {item.display}
                     </li>
@@ -88,7 +88,7 @@ function AboutUs() {
                 </div>
                 <ul className='border'>
                   {about_Us.map((item, index) => (
-                    <div className="" key={item._id}>
+                    <div className="" key={item.id}>
                       <li id='close' className={`p-3 cursor-pointer hover:bg-slate-100 ${activeIndex === index ? 'bg-slate-400 hover:bg-slate-400 text-white' : ''}`} onClick={() => handleScrollTo(index)}>
                         {item.display}
                       </li>
@@ -105,7 +105,7 @@ function AboutUs() {
 
             <div className="sm:w-[96%] w-[100%] max-h-[100%] flex overflow-x-hidden scroll-smooth bg-white rounded-xl scrollbar-none" ref={scrollRef}>
               {about_Us.map((item, index) => (
-                <div className="min-w-full " key={item._id}>
+                <div className="min-w-full " key={item.id}>
                   <img src={item.image} alt="" className='md:h-[400px] object-fill sm:w-[100%] p-3 rounded-3xl object-left-top' />
                   <div className="p-5">
                     <p className='text-red-600 uppercase font-bold text-[1.2rem] my-5'>{item.author}</p>
@@ -120,7 +120,7 @@ function AboutUs() {
                       <span className='text-gray-500'> (Manager)</span></span>
 
                       { item.quote1.map((quote1Item,index) => (
-                          <div className="" key={item._id}>
+                          <div className="">
                           <div className="">{quote1Item}</div>
                         </div>
                         ))
@@ -128,9 +128,9 @@ function AboutUs() {
                       </div>
                       <div className="md:w-[50%] mb-5">
                       <span className='text-red-600 uppercase font-bold text-[1.2rem] my-5'>{item.manager2}
-                          <span className='text-gray-500'> (Partner)</span> </span>
+                          <span className='text-gray-500'> (Manager)</span> </span>
                       { item.quote2.map((quote1Item,index) => (
-                          <div className="" key={item._id}>
+                          <div className="">
                           <div className="lg:text-[1rem] text-[0.8rem]">{quote1Item}</div>
                         </div>
                         ))
@@ -142,7 +142,7 @@ function AboutUs() {
                           {/* certification quality details show here */}
                           { item.quality &&
                             item.quality.map((qual,index) => (
-                              <div className="" key={item._id}>
+                              <div className="" key={index}>
                                 <p className='my-5'>{qual}</p>
                               </div>
                             ))
@@ -152,7 +152,7 @@ function AboutUs() {
                         }
                     {item.id === 1 || item.id === 2 ? (
                       item.quote.map((quoteItem, index) => (
-                        <div className="" key={item._id}>
+                        <div className="" key={index}>
                          
                           <p className="leading-6 lg:text-[1rem] text-[0.8rem]">{quoteItem}</p>
                         </div>
@@ -177,7 +177,7 @@ function AboutUs() {
           <div className="flex justify-center items-center h-12 bg-gray-700 text-white">
             <p className="font-bold">{media.videoName}</p>
           </div>
-          <div className="h-[90%] ">
+          {/* <div className="h-[90%] ">
             {media.videos.map((video, index) => (
               <video
                 key={index}
@@ -190,7 +190,7 @@ function AboutUs() {
                 <source src={`${mainURL}${video}`} type="video/mp4" />
               </video>
             ))}
-          </div>
+          </div> */}
         </div>
       ))
     )}

@@ -33,6 +33,8 @@ function SearchBar() {
         <div className="relative md:block flex justify-center">
           <input
             type="search"
+            name='search'
+            id='search'
             placeholder='Find here....'
             className='md:w-full w-[80%] sm:p-4 p-2 rounded-full bg-white'
             onChange={(e) => handleSearch(e)}

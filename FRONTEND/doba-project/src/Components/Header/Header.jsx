@@ -121,11 +121,11 @@ function Header() {
     {/* bg-white sm:h-[90px] h-[70px] sticky_header shadow-md */}
     
       <header className='bg-white max-w-screen-2xl container mx-auto sticky_header_sidebar top-0 transition-all ease-in-out duration-300 z-50'>
-        <div className={`flex justify-between items-center navbar   
+        <div className={`flex justify-between items-center    
       ${sticky ? "transition-all ease-in-out duration-300 bg-base-100 shadow-lg" : ""}
       `}>
           {/* logo start==================== */}
-          <div className='sm:w-[90px] w-[70px] p-1 sm:ms-9 m-1'>
+          <div className='sm:max-w-[10%] w-[70px] sm:ms-9 m-1'>
            <a href="/"> <img src={logo} alt='' /></a>
           </div>
           {/* log end==================== */}
@@ -142,6 +142,8 @@ function Header() {
             <form onSubmit={handleSearchSubmit} className='sm:flex items-center hidden relative'>
               <input
                 type="text"
+                name='search'
+                id='search'
                 placeholder="Search..."
                 className='border  border-gray-300 rounded-md p-1 w-full h-full mr-2'
                 onChange={(e)=> handleSearchChange(e)}

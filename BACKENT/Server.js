@@ -33,33 +33,33 @@ app.use('/Public', express.static(path.join(__dirname, 'Public')));
 
 
 // connecting to react 
-app.use(cors({
-    origin: 'http://localhost:5173', // This is the correct version
-    credentials: true
-}));
+// app.use(cors({
+//     origin: 'http://localhost:5173', // This is the correct version
+//     credentials: true
+// }));
 // app.use(cors({
 //     origin: 'https://doba-frondent.onrender.com', // This is the correct version
 //     credentials: true
 // }));
 
-// const buildpath = path.join(__dirname,"../FRONTEND/doba-project/dist")
-// app.use(express.static(buildpath))
+const buildpath = path.join(__dirname,"../FRONTEND/doba-project/dist")
+app.use(express.static(buildpath))
 
-// app.use(cors({
-//     origin: '*', 
-//     credentials: true
-// }));
+app.use(cors({
+    origin: '*', 
+    credentials: true
+}));
 
 
 app.use('/admin',adminRouter);
 app.use('/api',userRouter);
 
 
-// app.get("*", (req, res) => {
-//     res.sendFile(
-//       path.join(buildpath, "index.html")
-//     );
-//   });
+app.get("*", (req, res) => {
+    res.sendFile(
+      path.join(buildpath, "index.html")
+    );
+  });
 
 mongoose.connect(process.env.MONGO_DB_CONNECTION)
 .then(()=>{

@@ -9,7 +9,7 @@ const { getFeedbackForm, uploadFeedbackForm, markFeedMessageAsRead, deleteFeedba
 
 const {getAllslider} = require('../Controller/UserSide/slider')
 const {getVideos, getAllbanner} = require('../Controller/UserSide/bannersUser');
-const {getAlljobs,  getjobById } = require('../Controller/UserSide/career');
+const {getAlljobs,  getjobById, applyJobs } = require('../Controller/UserSide/career');
 
 
 router
@@ -116,7 +116,10 @@ router
     .route('/careers')
     .get(getAlljobs)
 
-router.route('/careers/:jobId').get(getjobById);
+router.route('/careers/:jobId').get(getjobById );
+
+router.route('/careers/apply').post(applyJobs );
+
 
 
 module.exports=router;
